@@ -98,15 +98,48 @@
     </div>
   </div>
 
-  <script>
-    // Mobil menü
-    document.querySelector(".menu-toggle").addEventListener("click", ()=>{
-      document.querySelector("nav ul").classList.toggle("show");
+<script>
+  // Mobil menü
+  document.querySelector(".menu-toggle").addEventListener("click", ()=>{
+    document.querySelector("nav ul").classList.toggle("show");
+  });
+
+  // Formatlama fonksiyonu
+  function money(num){
+    return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
+  }
+
+  const cart = JSON.parse(localStorage.getItem("mini_cart_v1") || "[]");
+  const cartItemsEl = document.getElementById("cartItems");
+  const cartTotalEl = document.getElementById("cartTotal");
+
+  // Sepet boşsa mesaj göster
+  if(cart.length === 0){
+    cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
+    cartTotalEl.textContent = "0.00 ₺";
+  } else {
+    cartItemsEl.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price * item.qty;
+
+      const div = document.createElement("div");
+      div.style = "display:flex;justify-content:space-between;margin-bottom:10px;border-bottom:1px dashed #ddd;padding-bottom:8px";
+      div.innerHTML = `
+        <div>
+          <b>${item.name}</b><br>
+          <small style="color:gray">${item.brand}</small>
+        </div>
+        <div>
+          ${money(item.price)} x ${item.qty}
+        </div>
+      `;
+      cartItemsEl.appendChild(div);
     });
 
-    const total = parseFloat(localStorage.getItem("cartTotal") || "0").toFixed(2);
-document.getElementById("cartTotal").textContent = total + " ₺";
+    cartTotalEl.textContent = money(total);
+  }
+</script>
 
-  </script>
 </body>
 </html>
