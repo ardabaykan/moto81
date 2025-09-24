@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern E-ticaret - Demo</title>
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text:#0a0a0a;
+      --muted:#6b6b6b;
+      --btn:#e6e6e6;
+      --btn-dark:#cfcfcf;
+      --accent:#f5f5f5;
+      --shadow: 0 6px 18px rgba(12,12,12,0.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
+
+    /* Header / Navbar */
+    .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
+    .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-weight:700;font-size:18px}
+    nav{display:flex;gap:12px;align-items:center}
+    .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+    .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
+    .menu li:hover{background:var(--accent)}
+
+    /* Mini cart */
+    .mini-cart{position:fixed;right:18px;top:18px;background:#fff;border:1px solid #eee;padding:8px;border-radius:10px;box-shadow:var(--shadow);z-index:60}
+    .cart-button{display:flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer}
+    .cart-count{background:#0a0a0a;color:#fff;padding:2px 6px;border-radius:999px;font-size:12px}
+    .cart-dropdown{position:absolute;right:0;top:56px;width:320px;max-height:420px;overflow:auto;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;box-shadow:var(--shadow);display:none}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed #f0f0f0}
+    .cart-item:last-child{border-bottom:0}
+    .cart-item img{width:48px;height:48px;object-fit:cover;border-radius:6px}
+    .cart-meta{flex:1}
+    .cart-meta b{display:block}
+    .cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+
+    /* Main content */
+    main{max-width:1200px;margin:22px auto;padding:0 20px}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+    .card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:12px;transition:transform .18s ease, box-shadow .18s ease;display:flex;flex-direction:column;gap:10px}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:#f6f6f6;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted)}
+    .meta{display:flex;flex-direction:column;gap:6px}
+    .meta .title{font-weight:600}
+    .meta .brand{font-size:13px;color:var(--muted)}
+    .meta .price{font-weight:700}
+    .actions{margin-top:auto;display:flex;align-items:center;gap:10px}
+    .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;background:var(--btn)}
+    .btn:active{transform:translateY(1px)}
+
+    /* Footer */
+    footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid #f0f0f0;margin-top:28px}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .grid{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width: 768px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .container{padding:8px 14px}
+    }
+    @media (max-width: 600px){
+      .grid{grid-template-columns:repeat(1,1fr)}
+      .menu{display:none}
+      .brand{font-size:16px}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="brand">Firma Adı</div>
+        <nav aria-label="Ürün Kategorileri">
+          <ul class="menu">
+            <li>Yedek Parça</li>
+            <li>Aksesuar</li>
+            <li>Manet Setleri CNC</li>
+            <li>Bakım Ürünleri</li>
+            <li>Egzoz</li>
+          </ul>
+        </nav>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <input aria-label="Ürün ara" placeholder="Ürün ara..." style="padding:8px;border-radius:8px;border:1px solid #eee;"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mini cart (fixed top-right) -->
+  <div class="mini-cart" id="miniCart">
+    <button class="cart-button" id="cartToggle" aria-expanded="false" aria-controls="cartDropdown">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <div class="cart-dropdown" id="cartDropdown" role="region" aria-label="Sepetiniz">
+      <div id="cartItems"></div>
+      <div class="cart-total">
+        <div class="muted">Toplam</div>
+        <div id="cartTotal">0 ₺</div>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn" id="clearCart">Temizle</button>
+        <button class="btn" id="checkout">Satın Al</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="grid" id="productGrid">
+      <!-- Ürün kartları JS ile gelecek -->
+    </section>
+
+    <footer>
+      © 2025 Firma Adı - Tüm Hakları Saklıdır
+    </footer>
+  </main>
+
+  <script>
+    const products = [
+      {id:1,name:'Fren Balatası',brand:'Marka A',price:199.90,img:''},
+      {id:2,name:'Karbon Manet Seti',brand:'Marka B',price:349.00,img:''},
+      {id:3,name:'Performans Egzoz',brand:'Marka C',price:1250.00,img:''},
+      {id:4,name:'Zincir Bakım Spreyi',brand:'Marka D',price:89.50,img:''},
+      {id:5,name:'LED Far',brand:'Marka E',price:299.00,img:''},
+      {id:6,name:'Radyatör Kapağı',brand:'Marka F',price:129.75,img:''},
+      {id:7,name:'Debriyaj Balata',brand:'Marka G',price:219.99,img:''},
+      {id:8,name:'Ayna Seti',brand:'Marka H',price:159.00,img:''}
+    ];
+
+    // Sepet yönetimi
+    const CART_KEY = 'mini_cart_v1';
+    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+
+    const productGrid = document.getElementById('productGrid');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartDropdown = document.getElementById('cartDropdown');
+    const cartToggle = document.getElementById('cartToggle');
+
+    function money(num){
+      return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
+    }
+
+    function renderProducts(){
+      productGrid.innerHTML = '';
+      products.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="thumb" aria-hidden="true">${p.img ? '<img src="'+p.img+'" alt="'+p.name+'">' : '<svg width=40 height=40 viewBox="0 0 24 24" fill="none"><path d="M3 6h18M6 6v14h12V6" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'}</div>
+          <div class="meta">
+            <div class="title">${p.name}</div>
+            <div class="brand">${p.brand}</div>
+            <div class="price">${money(p.price)}</div>
+          </div>
+          <div class="actions">
+            <button class="btn add" data-id="${p.id}">Sepete Ekle</button>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      });
+    }
+
+    function saveCart(){
+      localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function updateCartUI(){
+      cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
+      cartItemsEl.innerHTML = '';
+      if(cart.length === 0){
+        cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
+        cartTotalEl.textContent = money(0);
+        return;
+      }
+      cart.forEach(item =>{
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `
+          <img alt="${item.name}" src="">
+          <div class="cart-meta">
+            <b>${item.name}</b>
+            <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+            <button data-id="${item.id}" class="btn decrease">-</button>
+            <button data-id="${item.id}" class="btn remove">x</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(el);
+      });
+      const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+      cartTotalEl.textContent = money(total);
+    }
+
+    function addToCart(productId){
+      const p = products.find(x=>x.id===productId);
+      if(!p) return;
+      const existing = cart.find(c=>c.id===productId);
+      if(existing){ existing.qty +=1; }
+      else{ cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,qty:1}); }
+      saveCart();
+      updateCartUI();
+      // kısa bir animasyon / uyarı
+      cartToggle.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:260});
+    }
+
+    // Event delegation for add buttons
+    document.body.addEventListener('click', e=>{
+      const add = e.target.closest('.add');
+      if(add){ addToCart(parseInt(add.dataset.id)); }
+
+      const toggle = e.target.closest('#cartToggle');
+      if(toggle){
+        const expanded = cartDropdown.style.display === 'block';
+        cartDropdown.style.display = expanded ? 'none' : 'block';
+        cartToggle.setAttribute('aria-expanded', String(!expanded));
+      }
+
+      const clear = e.target.closest('#clearCart');
+      if(clear){ cart = []; saveCart(); updateCartUI(); }
+
+      const checkout = e.target.closest('#checkout');
+      if(checkout){ alert('Demo: Ödeme sayfasına yönlendirileceksiniz.'); }
+
+      const remove = e.target.closest('.remove');
+      if(remove){
+        const id = parseInt(remove.dataset.id);
+        cart = cart.filter(i=>i.id!==id);
+        saveCart(); updateCartUI();
+      }
+
+      const decrease = e.target.closest('.decrease');
+      if(decrease){
+        const id = parseInt(decrease.dataset.id);
+        const item = cart.find(i=>i.id===id);
+        if(item){ item.qty = Math.max(1, item.qty -1); saveCart(); updateCartUI(); }
+      }
+    });
+
+    // initial render
+    renderProducts();
+    updateCartUI();
+
+    // Close cart if clicked outside
+    document.addEventListener('click', (e)=>{
+      if(!document.getElementById('miniCart').contains(e.target) && !e.target.closest('#cartToggle')){
+        cartDropdown.style.display = 'none';
+        cartToggle.setAttribute('aria-expanded','false');
+      }
+    });
+
+    // keyboard accessibility: close on Esc
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ cartDropdown.style.display='none'; cartToggle.setAttribute('aria-expanded','false'); } });
+  </script>
+</body>
+</html>
