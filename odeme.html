@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moto 81 Ödeme</title>
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #f6f6f6;
+      --accent: #e63946;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg,#f6f6f6,#eaeaea);
+      color: #333;
+    }
+    header {
+      background: var(--primary); color: #fff;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px; position: sticky; top: 0; z-index: 1000;
+    }
+    header h1 { font-size: 20px; }
+    nav ul { display: flex; list-style: none; gap: 15px; }
+    nav ul li a { color: #fff; text-decoration: none; }
+    .menu-toggle { display: none; font-size: 24px; cursor: pointer; }
+
+    .container {
+      display: flex; justify-content: center; align-items: center;
+      height: calc(100vh - 60px); padding: 20px;
+    }
+    .card {
+      background: #fff; padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center; max-width: 600px; width: 100%;
+    }
+    .card h2 {
+      font-size: 22px; margin-bottom: 20px; color: var(--primary);
+    }
+    .iban {
+      font-size: 22px; font-weight: bold;
+      color: var(--accent); margin-bottom: 20px;
+      word-break: break-word;
+    }
+    .note {
+      font-size: 16px; line-height: 1.6; color: #444;
+    }
+
+    /* Responsive menü */
+    @media(max-width: 768px){
+      nav ul{ display:none; flex-direction: column; background: var(--primary); position:absolute; top:50px; right:20px; padding:10px; border-radius:8px; }
+      nav ul.show{ display:flex; }
+      .menu-toggle{ display:block; }
+      .iban{ font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Moto 81</h1>
+    <nav>
+      <span class="menu-toggle">☰</span>
+      <ul>
+        <li><a href="index.html">Ürünler</a></li>
+        <li><a href="odeme.html">Ödeme</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Ödeme Bilgileri</h2>
+      <div class="iban">TR80 0006 4000 0014 3210 5880 36</div>
+      <p class="note">
+        Lütfen ücretinizi yukarıdaki <strong>IBAN</strong>'a gönderiniz.<br><br>
+        Ödemenizi yaptıktan sonra dekontu<br>
+        <strong>+90 531 267 20 81</strong> numarasına WhatsApp üzerinden iletiniz.<br><br>
+        Teşekkürler.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", ()=>{
+      document.querySelector("nav ul").classList.toggle("show");
+    });
+  </script>
+</body>
+</html>
