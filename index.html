@@ -181,33 +181,39 @@
 
     function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
-    function updateCartUI(){
-      cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
-      cartItemsEl.innerHTML = '';
-      if(cart.length === 0){
-        cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
-        cartTotalEl.textContent = money(0);
-        return;
-      }
-      cart.forEach(item =>{
-        const el = document.createElement('div');
-        el.className = 'cart-item';
-        el.innerHTML = `
-          <img alt="${item.name}" src="${item.img}">
-          <div class="cart-meta">
-            <b>${item.name}</b>
-            <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-            <button data-id="${item.id}" class="btn decrease">-</button>
-            <button data-id="${item.id}" class="btn remove">x</button>
-          </div>
-        `;
-        cartItemsEl.appendChild(el);
-      });
-      const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
-      cartTotalEl.textContent = money(total);
-    }
+   function updateCartUI(){
+  cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
+  cartItemsEl.innerHTML = '';
+  
+  if(cart.length === 0){
+    cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
+    cartTotalEl.textContent = money(0);
+    localStorage.setItem("cartTotal", "0.00");
+    return;
+  }
+
+  cart.forEach(item =>{
+    const el = document.createElement('div');
+    el.className = 'cart-item';
+    el.innerHTML = `
+      <img alt="${item.name}" src="${item.img}">
+      <div class="cart-meta">
+        <b>${item.name}</b>
+        <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+        <button data-id="${item.id}" class="btn decrease">-</button>
+        <button data-id="${item.id}" class="btn remove">x</button>
+      </div>
+    `;
+    cartItemsEl.appendChild(el);
+  });
+
+  const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+  cartTotalEl.textContent = money(total);
+  localStorage.setItem("cartTotal", total.toFixed(2)); // 🔁 Ödeme sayfasında kullanılacak
+}
+
 
     function addToCart(productId){
       const p = products.find(x=>x.id===productId);
