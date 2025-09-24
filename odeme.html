@@ -28,24 +28,38 @@
 
     .container {
       display: flex; justify-content: center; align-items: center;
-      height: calc(100vh - 60px); padding: 20px;
+      min-height: calc(100vh - 60px); padding: 20px;
     }
     .card {
-      background: #fff; padding: 30px 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      text-align: center; max-width: 600px; width: 100%;
+      background: #fff; padding: 30px 25px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      text-align: center; max-width: 650px; width: 100%;
+      animation: fadeIn 0.6s ease-in-out;
     }
     .card h2 {
-      font-size: 22px; margin-bottom: 20px; color: var(--primary);
+      font-size: 24px; margin-bottom: 20px; color: var(--primary);
+    }
+    .total {
+      font-size: 20px; margin-bottom: 25px;
+      font-weight: bold; color: #444;
     }
     .iban {
       font-size: 22px; font-weight: bold;
       color: var(--accent); margin-bottom: 20px;
       word-break: break-word;
+      background: #fef2f2;
+      padding: 10px 15px;
+      border-radius: 8px;
     }
     .note {
       font-size: 16px; line-height: 1.6; color: #444;
+    }
+
+    /* Animasyon */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Responsive menü */
@@ -72,21 +86,27 @@
   <div class="container">
     <div class="card">
       <h2>Ödeme Bilgileri</h2>
+      <div class="total">Sepet Tutarı: <span id="cartTotal">0 ₺</span></div>
       <div class="iban">TR80 0006 4000 0014 3210 5880 36</div>
       <p class="note">
         Lütfen ücretinizi yukarıdaki <strong>IBAN</strong>'a gönderiniz.<br><br>
         Ödemenizi yaptıktan sonra dekontu<br>
         <strong>+90 531 267 20 81</strong> numarasına WhatsApp üzerinden iletiniz.<br><br>
-        Ürünlerimiz üretim aşamasındadır yaklaşık 1.5 hafta 2 hafta sonra elinizde olucaktır<br><br>
-        Teşekkürler.
+        Ürünlerimiz üretim aşamasındadır, yaklaşık <strong>1.5 - 2 hafta</strong> içinde elinizde olacaktır.<br><br>
+        Teşekkürler 🙏
       </p>
     </div>
   </div>
 
   <script>
+    // Mobil menü
     document.querySelector(".menu-toggle").addEventListener("click", ()=>{
       document.querySelector("nav ul").classList.toggle("show");
     });
+
+    // Sepet tutarını localStorage'dan çekelim
+    const total = localStorage.getItem("cartTotal") || 0;
+    document.getElementById("cartTotal").textContent = total + " ₺";
   </script>
 </body>
 </html>
