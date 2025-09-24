@@ -262,6 +262,10 @@
       }
     });
 
+    // updateCartUI() fonksiyonunun içine veya sonuna ekle
+const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+localStorage.setItem("cartTotal", total.toFixed(2)); // bu satır çok önemli
+
     document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ cartDropdown.style.display='none'; cartToggle.setAttribute('aria-expanded','false'); } });
 
     // ✅ Arama filtresi
