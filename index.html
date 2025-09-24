@@ -211,8 +211,11 @@
 
   const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
   cartTotalEl.textContent = money(total);
-  localStorage.setItem("cartTotal", total.toFixed(2)); // 🔁 Ödeme sayfasında kullanılacak
+
+  // 🔁 Bu çok önemli: localStorage'e mutlaka yaz
+  localStorage.setItem("cartTotal", total.toFixed(2));
 }
+
 
 
     function addToCart(productId){
