@@ -104,9 +104,9 @@
       document.querySelector("nav ul").classList.toggle("show");
     });
 
-    // Sepet tutarını localStorage'dan çekelim
-    const total = localStorage.getItem("cartTotal") || 0;
-    document.getElementById("cartTotal").textContent = total + " ₺";
+    const total = parseFloat(localStorage.getItem("cartTotal") || "0").toFixed(2);
+document.getElementById("cartTotal").textContent = total + " ₺";
+
   </script>
 </body>
 </html>
