@@ -1,192 +1,218 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moto 81 Ödeme</title>
-  <style>
-    :root{
-      --bg: #ffffff;
-      --text:#0a0a0a;
-      --muted:#6b6b6b;
-      --btn:#e6e6e6;
-      --btn-dark:#cfcfcf;
-      --accent:#f5f5f5;
-      --shadow: 0 6px 18px rgba(12,12,12,0.08);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moto 81 Ödeme</title>
+    <style>
+        :root{
+            --bg: #ffffff;
+            --text:#0a0a0a;
+            --muted:#6b6b6b;
+            --btn:#e6e6e6;
+            --btn-dark:#cfcfcf;
+            --accent:#f5f5f5;
+            --shadow: 0 6px 18px rgba(12,12,12,0.08);
+        }
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
 
-    /* Header / Navbar */
-    .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
-    .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{font-weight:700;font-size:18px}
-    nav{display:flex;gap:12px;align-items:center}
-    .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
-    .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
-    .menu li:hover{background:var(--accent)}
+        /* Header / Navbar */
+        .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
+        .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand{font-weight:700;font-size:18px}
+        nav{display:flex;gap:12px;align-items:center}
+        .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+        .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
+        .menu li:hover{background:var(--accent)}
+        .menu li a { text-decoration: none; color: inherit; display: block; }
+        
+        /* Aktif menü öğesi stili (İsteğe bağlı, bu sayfada aktif menü yok) */
+        .menu li.active {
+            background: var(--accent);
+            font-weight: 600;
+        }
 
-    /* Hamburger */
-    .menu-toggle{display:none;cursor:pointer;font-size:22px;background:none;border:none}
+        /* Hamburger */
+        .menu-toggle{display:none;cursor:pointer;font-size:22px;background:none;border:none}
 
-    /* Main content */
-    main{max-width:1200px;margin:22px auto;padding:0 20px}
-    .muted{color:var(--muted);font-size:13px}
-    .card {
-      background: #fff; padding: 30px 25px;
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      text-align: center; max-width: 650px; width: 100%;
-      margin: 40px auto;
-      animation: fadeIn 0.6s ease-in-out;
-    }
-    .card h2 {
-      font-size: 24px; margin-bottom: 20px; color: var(--text);
-    }
-    .cart-summary {
-      text-align: left;
-      margin-bottom: 25px;
-      border-top: 1px dashed #ddd;
-      padding-top: 15px;
-    }
-    .cart-summary h3 {
-      font-size: 18px;
-      margin-bottom: 15px;
-      color: #333;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px dashed #f0f0f0;
-    }
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-    .total {
-      font-size: 20px;
-      font-weight: bold;
-      color: #444;
-      margin-top: 15px;
-      text-align: right;
-    }
-    .iban {
-      font-size: 22px; font-weight: bold;
-      color: var(--text); margin-bottom: 20px;
-      word-break: break-word;
-      background: var(--accent);
-      padding: 10px 15px;
-      border-radius: 8px;
-    }
-    .note {
-      font-size: 16px; line-height: 1.6; color: #444;
-    }
-    .muted {
-      color: var(--muted);
-      font-size: 13px;
-    }
+        /* Main content */
+        main{max-width:1200px;margin:22px auto;padding:0 20px}
+        .muted{color:var(--muted);font-size:13px}
+        .card {
+            background: #fff; padding: 30px 25px;
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            text-align: center; max-width: 650px; width: 100%;
+            margin: 40px auto;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        .card h2 {
+            font-size: 24px; margin-bottom: 20px; color: var(--text);
+        }
+        .cart-summary {
+            text-align: left;
+            margin-bottom: 25px;
+            border-top: 1px dashed #ddd;
+            padding-top: 15px;
+        }
+        .cart-summary h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #f0f0f0;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .total {
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+            margin-top: 15px;
+            text-align: right;
+        }
+        .iban {
+            font-size: 22px; font-weight: bold;
+            color: var(--text); margin-bottom: 20px;
+            word-break: break-word;
+            background: var(--accent);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        .note {
+            font-size: 16px; line-height: 1.6; color: #444;
+        }
+        .muted {
+            color: var(--muted);
+            font-size: 13px;
+        }
+        footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid #f0f0f0;margin-top:28px}
 
-    /* Animasyon */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* Responsive */
-    @media (max-width: 900px){
-    }
-    @media (max-width: 768px){
-      .container{padding:8px 14px}
-      .iban{ font-size: 20px; }
-    }
-    @media (max-width: 600px){
-      .menu{display:none;flex-direction:column;background:#fff;position:absolute;top:60px;left:0;width:100%;padding:10px;border-top:1px solid #eee}
-      .menu.show{display:flex}
-      .menu-toggle{display:block}
-      .brand{font-size:16px}
-      .topbar nav { display: none; }
-    }
-  </style>
+        /* Animasyon */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px){
+            .container{padding:8px 14px}
+            .iban{ font-size: 20px; }
+        }
+        @media (max-width: 600px){
+            /* Mobil menü: Hamburger tıklandığında görünür */
+            .menu{
+                display:none;
+                flex-direction:column;
+                background:#fff;
+                position:absolute;
+                top:60px;
+                left:0;
+                width:100%;
+                padding:10px;
+                border-top:1px solid #eee;
+            }
+            .menu.show{display:flex}
+            .menu-toggle{display:block}
+            .brand{font-size:16px}
+            /* Menü öğelerini tam genişlikte yap */
+            .menu li {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="brand">Moto 81</div>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav aria-label="Ürün Kategorileri">
-          <ul class="menu" id="menu">
-            <li><a href="index.html">Ürünler</a></li>
-            <li><a href="odeme.html">Ödeme</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
+    <header class="topbar">
+        <div class="container">
+            <div style="display:flex;align-items:center;gap:12px">
+                <div class="brand">Moto 81</div>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <nav aria-label="Sayfa Navigasyonu">
+                    <ul class="menu" id="menu">
+                        <li><a href="index.html">Ürünler (Anasayfa)</a></li>
+                        <li><a href="odeme.html">Ödeme</a></li>
+                        </ul>
+                </nav>
+            </div>
+            </div>
+    </header>
 
-  <main>
-    <div class="card">
-      <h2>Ödeme Bilgileri</h2>
+    <main>
+        <div class="card">
+            <h2>Ödeme Bilgileri</h2>
 
-      <div class="cart-summary">
-        <h3>Sipariş Özeti</h3>
-        <div id="cartItems"></div>
-        <div class="total">Toplam: <span id="cartTotal">0 ₺</span></div>
-      </div>
+            <div class="cart-summary">
+                <h3>Sipariş Özeti</h3>
+                <div id="cartItems"></div>
+                <div class="total">Toplam: <span id="cartTotal">0 ₺</span></div>
+            </div>
 
-      <div class="iban">TR80 0006 4000 0014 3210 5880 36</div>
-      <p class="note">
-        <strong>IBAN</strong><br><br>
-        Ödemenizi yaptıktan sonra dekontu ve hangi ürünü aldığınızı<br>
-        <strong>+90 531 267 20 81</strong> numarasına WhatsApp üzerinden iletiniz.<br><br>
-        Ürünlerimiz üretim aşamasındadır, yaklaşık <strong>1.5 - 2 hafta</strong> içinde elinizde olacaktır.<br><br>
-        Teşekkürler 🙏
-      </p>
-    </div>
-  </main>
+            <div class="iban">TR80 0006 4000 0014 3210 5880 36</div>
+            <p class="note">
+                <strong>IBAN</strong><br><br>
+                Ödemenizi yaptıktan sonra dekontu ve hangi ürünü aldığınızı<br>
+                <strong>+90 531 267 20 81</strong> numarasına WhatsApp üzerinden iletiniz.<br><br>
+                Ürünlerimiz üretim aşamasındadır, yaklaşık <strong>1.5 - 2 hafta</strong> içinde elinizde olacaktır.<br><br>
+                Teşekkürler 🙏
+            </p>
+        </div>
+    </main>
 
-  <footer>
-    © 2025 Moto 81 - Tüm Hakları Saklıdır
-  </footer>
+    <footer>
+        © 2025 Moto 81 - Tüm Hakları Saklıdır
+    </footer>
 
-  <script>
-    // Mobil menü
-    document.querySelector(".menu-toggle").addEventListener("click", ()=>{
-      document.querySelector("nav ul").classList.toggle("show");
-    });
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const menu = document.getElementById("menu");
 
-    // Formatlama fonksiyonu
-    function money(num){
-      return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
-    }
+        // Mobil menü
+        menuToggle.addEventListener("click", ()=>{
+            menu.classList.toggle("show");
+        });
 
-    const cartItemsEl = document.getElementById("cartItems");
-    const cartTotalEl = document.getElementById("cartTotal");
+        // Formatlama fonksiyonu
+        function money(num){
+            return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
+        }
 
-    // localStorage'dan sepet verisini al
-    const CART_KEY = 'mini_cart_v1';
-    const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        const cartItemsEl = document.getElementById("cartItems");
+        const cartTotalEl = document.getElementById("cartTotal");
 
-    let total = 0;
+        // localStorage'dan sepet verisini al
+        const CART_KEY = 'mini_cart_v1';
+        const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 
-    if(cart.length === 0){
-      cartItemsEl.innerHTML = '<div style="text-align: center; color: gray;">Sepetiniz boş.</div>';
-    } else {
-      cart.forEach(item => {
-        total += item.price * item.qty;
+        let total = 0;
 
-        const el = document.createElement('div');
-        el.className = 'cart-item';
-        el.innerHTML = `
-          <div>${item.name} (${item.qty} adet)</div>
-          <div>${money(item.price * item.qty)}</div>
-        `;
-        cartItemsEl.appendChild(el);
-      });
-    }
+        if(cart.length === 0){
+            cartItemsEl.innerHTML = '<div style="text-align: center; color: gray; padding: 10px 0;">Sepetiniz boş. Anasayfadan ürün ekleyebilirsiniz.</div>';
+        } else {
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
 
-    cartTotalEl.textContent = money(total);
-  </script>
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                    <div>${item.name} <span class="muted">(${item.qty} adet)</span></div>
+                    <div>${money(itemTotal)}</div>
+                `;
+                cartItemsEl.appendChild(el);
+            });
+        }
+
+        cartTotalEl.textContent = money(total);
+    </script>
 
 </body>
 </html>
