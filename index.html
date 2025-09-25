@@ -1,314 +1,343 @@
-
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moto 81 </title>
-  <style>
-    :root{
-      --bg: #ffffff;
-      --text:#0a0a0a;
-      --muted:#6b6b6b;
-      --btn:#e6e6e6;
-      --btn-dark:#cfcfcf;
-      --accent:#f5f5f5;
-      --shadow: 0 6px 18px rgba(12,12,12,0.08);
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moto 81</title>
+    <style>
+        :root{
+            --bg: #ffffff;
+            --text:#0a0a0a;
+            --muted:#6b6b6b;
+            --btn:#e6e6e6;
+            --btn-dark:#cfcfcf;
+            --accent:#f5f5f5;
+            --shadow: 0 6px 18px rgba(12,12,12,0.08);
+        }
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
 
-    /* Header / Navbar */
-    .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
-    .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{font-weight:700;font-size:18px}
-    nav{display:flex;gap:12px;align-items:center}
-    .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
-    .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
-    .menu li:hover{background:var(--accent)}
+        /* Header / Navbar */
+        .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
+        .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .brand{font-weight:700;font-size:18px}
+        nav{display:flex;gap:12px;align-items:center}
+        .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
+        .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
+        .menu li:hover{background:var(--accent)}
 
-    /* Hamburger */
-    .menu-toggle{display:none;cursor:pointer;font-size:22px;background:none;border:none}
+        /* Aktif menü öğesi için stil */
+        .menu li.active {
+            background: var(--accent);
+            font-weight: 600;
+        }
 
-    /* Mini cart */
-    .mini-cart{position:fixed;right:18px;top:18px;background:#fff;border:1px solid #eee;padding:8px;border-radius:10px;box-shadow:var(--shadow);z-index:60}
-    .cart-button{display:flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer}
-    .cart-count{background:#0a0a0a;color:#fff;padding:2px 6px;border-radius:999px;font-size:12px}
-    .cart-dropdown{position:absolute;right:0;top:56px;width:320px;max-height:420px;overflow:auto;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;box-shadow:var(--shadow);display:none}
-    .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed #f0f0f0}
-    .cart-item:last-child{border-bottom:0}
-    .cart-item img{width:48px;height:48px;object-fit:cover;border-radius:6px}
-    .cart-meta{flex:1}
-    .cart-meta b{display:block}
-    .cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
+        /* Hamburger */
+        .menu-toggle{display:none;cursor:pointer;font-size:22px;background:none;border:none}
 
-    /* Main content */
-    main{max-width:1200px;margin:22px auto;padding:0 20px}
-    .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+        /* Mini cart */
+        .mini-cart{position:fixed;right:18px;top:18px;background:#fff;border:1px solid #eee;padding:8px;border-radius:10px;box-shadow:var(--shadow);z-index:60}
+        .cart-button{display:flex;align-items:center;gap:8px;border:0;background:transparent;cursor:pointer}
+        .cart-count{background:#0a0a0a;color:#fff;padding:2px 6px;border-radius:999px;font-size:12px}
+        .cart-dropdown{position:absolute;right:0;top:56px;width:320px;max-height:420px;overflow:auto;background:#fff;border:1px solid #eee;border-radius:10px;padding:12px;box-shadow:var(--shadow);display:none}
+        .cart-item{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px dashed #f0f0f0}
+        .cart-item:last-child{border-bottom:0}
+        .cart-item img{width:48px;height:48px;object-fit:cover;border-radius:6px}
+        .cart-meta{flex:1}
+        .cart-meta b{display:block}
+        .cart-total{display:flex;justify-content:space-between;align-items:center;padding-top:8px}
 
-    .card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:12px;transition:transform .18s ease, box-shadow .18s ease;display:flex;flex-direction:column;gap:10px}
-    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-    .thumb{width:100%;max-height:180px;border-radius:8px;background:#f6f6f6;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .thumb img{width:100%;height:100%;object-fit: cover;} /* Değişiklik burada */
-    .meta{display:flex;flex-direction:column;gap:6px}
-    .meta .title{font-weight:600}
-    .meta .brand{font-size:13px;color:var(--muted)}
-    .meta .price{font-weight:700}
-    .actions{margin-top:auto;display:flex;align-items:center;gap:10px}
-    .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;background:var(--btn)}
-    .btn:active{transform:translateY(1px)}
+        /* Main content */
+        main{max-width:1200px;margin:22px auto;padding:0 20px}
+        .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
 
-    /* Footer */
-    footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid #f0f0f0;margin-top:28px}
+        .card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:12px;transition:transform .18s ease, box-shadow .18s ease;display:flex;flex-direction:column;gap:10px}
+        .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+        .thumb{width:100%;max-height:180px;border-radius:8px;background:#f6f6f6;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .thumb img{width:100%;height:100%;object-fit: cover;} /* Değişiklik burada */
+        .meta{display:flex;flex-direction:column;gap:6px}
+        .meta .title{font-weight:600}
+        .meta .brand{font-size:13px;color:var(--muted)}
+        .meta .price{font-weight:700}
+        .actions{margin-top:auto;display:flex;align-items:center;gap:10px}
+        .btn{padding:8px 12px;border-radius:8px;border:0;cursor:pointer;background:var(--btn)}
+        .btn:active{transform:translateY(1px)}
 
-    /* Responsive */
-    @media (max-width: 900px){
-      .grid{grid-template-columns:repeat(3,1fr)}
-    }
-    @media (max-width: 768px){
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .container{padding:8px 14px}
-    }
-    @media (max-width: 600px){
-      .grid{grid-template-columns:repeat(1,1fr)}
-      .menu{display:none;flex-direction:column;background:#fff;position:absolute;top:60px;left:0;width:100%;padding:10px;border-top:1px solid #eee}
-      .menu.show{display:flex}
-      .menu-toggle{display:block}
-      .brand{font-size:16px}
-    }
+        /* Footer */
+        footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid #f0f0f0;margin-top:28px}
 
-    /* Ana içerik alanını daha dar yapmak için */
-main section:first-of-type {
-  padding: 10px;
-}
+        /* Responsive */
+        @media (max-width: 900px){
+            .grid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media (max-width: 768px){
+            .grid{grid-template-columns:repeat(2,1fr)}
+            .container{padding:8px 14px}
+        }
+        @media (max-width: 600px){
+            .grid{grid-template-columns:repeat(1,1fr)}
+            .menu{display:none;flex-direction:column;background:#fff;position:absolute;top:60px;left:0;width:100%;padding:10px;border-top:1px solid #eee}
+            .menu.show{display:flex}
+            .menu-toggle{display:block}
+            .brand{font-size:16px}
+        }
 
-/* Logo ile başlık arasındaki boşluğu kaldırmak için */
-main section h1 {
-  margin-top: 0;
-}
-    .muted{color:var(--muted);font-size:13px}
-  </style>
+        /* Ana içerik alanını daha dar yapmak için */
+        main section:first-of-type {
+            padding: 10px;
+        }
+
+        /* Logo ile başlık arasındaki boşluğu kaldırmak için */
+        main section h1 {
+            margin-top: 0;
+        }
+        .muted{color:var(--muted);font-size:13px}
+    </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="brand">Moto 81</div>
-        <button class="menu-toggle" id="menuToggle">☰</button>
-        <nav aria-label="Ürün Kategorileri">
-          <ul class="menu" id="menu">
-            <li>Yedek Parça</li>
-            <li>Aksesuar</li>
-            <li>Nmax Aksesuar</li>
-            <li>Pcx Aksesuar</li>
-            <li id="checkout">Ödeme</li>
-          </ul>
-        </nav>
-      </div>
-      <div style="display:flex;align-items:center;gap:12px">
-        <input id="searchInput" aria-label="Ürün ara" placeholder="Ürün ara..." style="padding:8px;border-radius:8px;border:1px solid #eee;"/>
-      </div>
+    <header class="topbar">
+        <div class="container">
+            <div style="display:flex;align-items:center;gap:12px">
+                <div class="brand">Moto 81</div>
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <nav aria-label="Ürün Kategorileri">
+                    <ul class="menu" id="menu">
+                        <li data-category="all" class="active">Tüm Ürünler</li>
+                        <li data-category="pcx">PCX Aksesuarları</li>
+                        <li data-category="nmax">NMAX Aksesuarları</li>
+                        <li id="checkout">Ödeme</li>
+                    </ul>
+                </nav>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+                <input id="searchInput" aria-label="Ürün ara" placeholder="Ürün ara..." style="padding:8px;border-radius:8px;border:1px solid #eee;"/>
+            </div>
+        </div>
+    </header>
+
+    <div class="mini-cart" id="miniCart">
+        <button class="cart-button" id="cartToggle" aria-expanded="false" aria-controls="cartDropdown">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <div class="cart-dropdown" id="cartDropdown" role="region" aria-label="Sepetiniz">
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                <div class="muted">Toplam</div>
+                <div id="cartTotal">0 ₺</div>
+            </div>
+            <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+                <button class="btn" id="clearCart">Temizle</button>
+                <button class="btn" id="checkout">Satın Al</button>
+            </div>
+        </div>
     </div>
-  </header>
 
-  <div class="mini-cart" id="miniCart">
-    <button class="cart-button" id="cartToggle" aria-expanded="false" aria-controls="cartDropdown">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
-    <div class="cart-dropdown" id="cartDropdown" role="region" aria-label="Sepetiniz">
-      <div id="cartItems"></div>
-      <div class="cart-total">
-        <div class="muted">Toplam</div>
-        <div id="cartTotal">0 ₺</div>
-      </div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
-        <button class="btn" id="clearCart">Temizle</button>
-        <button class="btn" id="checkout">Satın Al</button>
-      </div>
-    </div>
-  </div>
+    <main>
+        <section style="text-align:center; padding: 0px; background-color: #f8f8f8; border-radius: 12px; margin-bottom: 0px;">
+            <img src="logo.png" alt="Moto 81 Logo" style="max-width: 300px; height: auto; margin-bottom: 1px; margin-top: 10px;">
+            <h1>Moto 81'e,Hoş Geldiniz </h1>
+            <p style="color:var(--muted)">Motor aksesuarları ve yedek parçalarda aradığınız her şey burada!</p>
+        </section>
 
-  <main>
-    <section style="text-align:center; padding: 0px; background-color: #f8f8f8; border-radius: 12px; margin-bottom: 0px;">
-      <img src="logo.png" alt="Moto 81 Logo" style="max-width: 300px; height: auto; margin-bottom: 1px; margin-top: 10px;">
-      <h1>Moto 81'e,Hoş Geldiniz </h1>
-      <p style="color:var(--muted)">Motor aksesuarları ve yedek parçalarda aradığınız her şey burada!</p>
-    </section>
+        <section class="grid" id="productGrid"></section>
+        <footer>
+            © 2025 Moto 81 - Tüm Hakları Saklıdır
+        </footer>
+    </main>
 
-    <section class="grid" id="productGrid"></section>
-    <footer>
-      © 2025 Moto 81 - Tüm Hakları Saklıdır
-    </footer>
-  </main>
+    <script>
+        const products = [
+            {id:1, name:'Artçı Demir', brand:'Moto 81', price:1600.00, img:'nmaxdemir.jpg', category:'nmax'},
+            {id:2, name:'Depo Kapağı', brand:'Moto 81', price:800.00, img:'nmaxdepo.jpg', category:'nmax'},
+            {id:3, name:'Şeffaf Filtre Kapağı', brand:'Moto 81', price:2700.00, img:'nmaxfiltre.jpg', category:'nmax'},
+            {id:4, name:'Karbon Filtre Kapağı', brand:'Moto 81', price:2500.00, img:'nmaxfiltrekarbon.jpg', category:'nmax'},
+            {id:5, name:'Gidon Kapağı', brand:'Moto 81', price:1400.00, img:'nmaxgidon.jpg', category:'nmax'},
+            {id:6, name:'Kontak Kapağı', brand:'Moto 81', price:1600.00, img:'nmaxkontak.jpg', category:'nmax'},
+            {id:7, name:'Radyatör Kapağı', brand:'Moto 81', price:1800.00, img:'nmaxradyaör.jpg', category:'nmax'},
+            {id:8, name:'Sinyal Üstü Kapağı', brand:'Moto 81', price:1800.00, img:'nmaxsinyalustu.jpg', category:'nmax'},
+            {id:9, name:'Stop Altı Kapağı', brand:'Moto 81', price:900.00, img:'nmaxstopaltı.jpg', category:'nmax'},
+            {id:10, name:'Varyatör Kapağı', brand:'Moto 81', price:2500.00, img:'nmaxvaryaötr.jpg', category:'nmax'},
+            {id:11, name:'PCX Headers', brand:'Moto 81', price:3000.00, img:'pcxheaders.jpg', category:'pcx'},
+            {id:12, name:'Pcx 2025 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2025onv.jpg', category:'pcx'},
+            {id:13, name:'Pcx Karbon Egzoz', brand:'Moto 81', price:1200.00, img:'pcxegzozset.jpg', category:'pcx'},
+            {id:14, name:'Pcx Çamurluk', brand:'Moto 81', price:2250.00, img:'pcxöncamurluk.jpg', category:'pcx'},
+            {id:15, name:'Pcx Füme Filtre', brand:'Moto 81', price:1650.00, img:'pcxfümefiltre.jpg', category:'pcx'},
+            {id:16, name:'Pcx Şeffaf Filtre', brand:'Moto 81', price:1650.00, img:'pcxşeffaffiltre.jpg', category:'pcx'},
+            {id:17, name:'Pcx Şeffaf Radyatör', brand:'Moto 81', price:1550.00, img:'pcxkarbonradyatör.jpg', category:'pcx'},
+            {id:18, name:'Pcx Karbon Varyatör', brand:'Moto 81', price:1650.00, img:'pcxkarbonvaryatör.jpg', category:'pcx'},
+            {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxşeffafvaryatör.jpg', category:'pcx'},
+            {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg', category:'pcx'},
+            {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
+        ];
 
-  <script>
-    const products = [
-  {id:1, name:'Artçı Demir', brand:'Moto 81', price:1600.00, img:'nmaxdemir.jpg'},
-  {id:2, name:'Depo Kapağı', brand:'Moto 81', price:800.00, img:'nmaxdepo.jpg'},
-  {id:3, name:'Şeffaf Filtre Kapağı', brand:'Moto 81', price:2700.00, img:'nmaxfiltre.jpg'},
-  {id:4, name:'Karbon Filtre Kapağı', brand:'Moto 81', price:2500.00, img:'nmaxfiltrekarbon.jpg'},
-  {id:5, name:'Gidon Kapağı', brand:'Moto 81', price:1400.00, img:'nmaxgidon.jpg'},
-  {id:6, name:'Kontak Kapağı', brand:'Moto 81', price:1600.00, img:'nmaxkontak.jpg'},
-  {id:7, name:'Radyatör Kapağı', brand:'Moto 81', price:1800.00, img:'nmaxradyaör.jpg'},
-  {id:8, name:'Sinyal Üstü Kapağı', brand:'Moto 81', price:1800.00, img:'nmaxsinyalustu.jpg'},
-  {id:9, name:'Stop Altı Kapağı', brand:'Moto 81', price:900.00, img:'nmaxstopaltı.jpg'},
-  {id:10, name:'Varyatör Kapağı', brand:'Moto 81', price:2500.00, img:'nmaxvaryaötr.jpg'},
-  {id:11, name:'PCX Headers', brand:'Moto 81', price:3000.00, img:'pcxheaders.jpg'},
-  // Yeni eklenen PCX ürünleri
-  {id:12, name:'Pcx 2025 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2025onv.jpg'},
-  {id:13, name:'Pcx Karbon Egzoz', brand:'Moto 81', price:1200.00, img:'pcxegzozset.jpg'},
-  {id:14, name:'Pcx Çamurluk', brand:'Moto 81', price:2250.00, img:'pcxöncamurluk.jpg'},
-  {id:15, name:'Pcx Füme Filtre', brand:'Moto 81', price:1650.00, img:'pcxfümefiltre.jpg'},
-  {id:16, name:'Pcx Şeffaf Filtre', brand:'Moto 81', price:1650.00, img:'pcxşeffaffiltre.jpg'},
-  {id:17, name:'Pcx Şeffaf Radyatör', brand:'Moto 81', price:1550.00, img:'pcxkarbonradyatör.jpg'},
-  {id:18, name:'Pcx Karbon Varyatör', brand:'Moto 81', price:1650.00, img:'pcxkarbonvaryatör.jpg'},
-  {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxşeffafvaryatör.jpg'},
-  {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg'},
-  {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg'}
-];
- 
+        const CART_KEY = 'mini_cart_v1';
+        let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 
-    const CART_KEY = 'mini_cart_v1';
-    let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        const productGrid = document.getElementById('productGrid');
+        const cartCount = document.getElementById('cartCount');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const cartDropdown = document.getElementById('cartDropdown');
+        const cartToggle = document.getElementById('cartToggle');
+        const searchInput = document.getElementById('searchInput');
+        const menuToggle = document.getElementById('menuToggle');
+        const menu = document.getElementById('menu');
 
-    const productGrid = document.getElementById('productGrid');
-    const cartCount = document.getElementById('cartCount');
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartTotalEl = document.getElementById('cartTotal');
-    const cartDropdown = document.getElementById('cartDropdown');
-    const cartToggle = document.getElementById('cartToggle');
-    const searchInput = document.getElementById('searchInput');
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
+        function money(num){
+            return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
+        }
 
-    function money(num){
-      return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
-    }
+        function renderProducts(list = products){
+            productGrid.innerHTML = '';
+            list.forEach(p => {
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
+                    <div class="meta">
+                        <div class="title">${p.name}</div>
+                        <div class="brand">${p.brand}</div>
+                        <div class="price">${money(p.price)}</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn add" data-id="${p.id}">Sepete Ekle</button>
+                    </div>
+                `;
+                productGrid.appendChild(card);
+            });
+        }
 
-    function renderProducts(list = products){
-      productGrid.innerHTML = '';
-      list.forEach(p => {
-        const card = document.createElement('article');
-        card.className = 'card';
-        card.innerHTML = `
-          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
-          <div class="meta">
-            <div class="title">${p.name}</div>
-            <div class="brand">${p.brand}</div>
-            <div class="price">${money(p.price)}</div>
-          </div>
-          <div class="actions">
-            <button class="btn add" data-id="${p.id}">Sepete Ekle</button>
-          </div>
-        `;
-        productGrid.appendChild(card);
-      });
-    }
+        function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
 
-    function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+        function updateCartUI(){
+            cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
+            cartItemsEl.innerHTML = '';
+            
+            if(cart.length === 0){
+                cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
+                cartTotalEl.textContent = money(0);
+                localStorage.setItem("cartTotal", "0.00");
+                return;
+            }
 
-   function updateCartUI(){
-  cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
-  cartItemsEl.innerHTML = '';
-  
-  if(cart.length === 0){
-    cartItemsEl.innerHTML = '<div class="muted">Sepetiniz boş</div>';
-    cartTotalEl.textContent = money(0);
-    localStorage.setItem("cartTotal", "0.00");
-    return;
-  }
+            cart.forEach(item =>{
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                    <img alt="${item.name}" src="${item.img}">
+                    <div class="cart-meta">
+                        <b>${item.name}</b>
+                        <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+                        <button data-id="${item.id}" class="btn decrease">-</button>
+                        <button data-id="${item.id}" class="btn remove">x</button>
+                    </div>
+                `;
+                cartItemsEl.appendChild(el);
+            });
 
-  cart.forEach(item =>{
-    const el = document.createElement('div');
-    el.className = 'cart-item';
-    el.innerHTML = `
-      <img alt="${item.name}" src="${item.img}">
-      <div class="cart-meta">
-        <b>${item.name}</b>
-        <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-        <button data-id="${item.id}" class="btn decrease">-</button>
-        <button data-id="${item.id}" class="btn remove">x</button>
-      </div>
-    `;
-    cartItemsEl.appendChild(el);
-  });
+            const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+            cartTotalEl.textContent = money(total);
+            saveCart();
+        }
 
-  const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
-  cartTotalEl.textContent = money(total);
-saveCart()
-  
-}
+        function addToCart(productId){
+            const p = products.find(x=>x.id===productId);
+            if(!p) return;
+            const existing = cart.find(c=>c.id===productId);
+            if(existing){ existing.qty +=1; }
+            else{ cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,qty:1,img:p.img}); }
+            saveCart();
+            updateCartUI();
+            cartToggle.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:260});
+        }
 
-    function addToCart(productId){
-      const p = products.find(x=>x.id===productId);
-      if(!p) return;
-      const existing = cart.find(c=>c.id===productId);
-      if(existing){ existing.qty +=1; }
-      else{ cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,qty:1,img:p.img}); }
-      saveCart();
-      updateCartUI();
-      cartToggle.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:260});
-    }
+        document.body.addEventListener('click', e=>{
+            const add = e.target.closest('.add');
+            if(add){ addToCart(parseInt(add.dataset.id)); }
 
-    document.body.addEventListener('click', e=>{
-      const add = e.target.closest('.add');
-      if(add){ addToCart(parseInt(add.dataset.id)); }
+            const toggle = e.target.closest('#cartToggle');
+            if(toggle){
+                const expanded = cartDropdown.style.display === 'block';
+                cartDropdown.style.display = expanded ? 'none' : 'block';
+                cartToggle.setAttribute('aria-expanded', String(!expanded));
+            }
 
-      const toggle = e.target.closest('#cartToggle');
-      if(toggle){
-        const expanded = cartDropdown.style.display === 'block';
-        cartDropdown.style.display = expanded ? 'none' : 'block';
-        cartToggle.setAttribute('aria-expanded', String(!expanded));
-      }
+            const clear = e.target.closest('#clearCart');
+            if(clear){ cart = []; saveCart(); updateCartUI(); }
 
-      const clear = e.target.closest('#clearCart');
-      if(clear){ cart = []; saveCart(); updateCartUI(); }
+            const checkout = e.target.closest('#checkout');
+            if(checkout){ window.location.href = "odeme.html"; }
 
-      const checkout = e.target.closest('#checkout');
-      if(checkout){ window.location.href = "odeme.html"; }
+            const remove = e.target.closest('.remove');
+            if(remove){
+                const id = parseInt(remove.dataset.id);
+                cart = cart.filter(i=>i.id!==id);
+                saveCart(); updateCartUI();
+            }
 
-      const remove = e.target.closest('.remove');
-      if(remove){
-        const id = parseInt(remove.dataset.id);
-        cart = cart.filter(i=>i.id!==id);
-        saveCart(); updateCartUI();
-      }
+            const decrease = e.target.closest('.decrease');
+            if(decrease){
+                const id = parseInt(decrease.dataset.id);
+                const item = cart.find(i=>i.id===id);
+                if(item){ item.qty = Math.max(1, item.qty -1); saveCart(); updateCartUI(); }
+            }
+        });
 
-      const decrease = e.target.closest('.decrease');
-      if(decrease){
-        const id = parseInt(decrease.dataset.id);
-        const item = cart.find(i=>i.id===id);
-        if(item){ item.qty = Math.max(1, item.qty -1); saveCart(); updateCartUI(); }
-      }
-    });
+        document.addEventListener('click', (e)=>{
+            if(!document.getElementById('miniCart').contains(e.target) && !e.target.closest('#cartToggle')){
+                cartDropdown.style.display = 'none';
+                cartToggle.setAttribute('aria-expanded','false');
+            }
+        });
 
-    renderProducts();
-    updateCartUI();
+        const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+        localStorage.setItem("cartTotal", total.toFixed(2));
 
-    document.addEventListener('click', (e)=>{
-      if(!document.getElementById('miniCart').contains(e.target) && !e.target.closest('#cartToggle')){
-        cartDropdown.style.display = 'none';
-        cartToggle.setAttribute('aria-expanded','false');
-      }
-    });
+        document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ cartDropdown.style.display='none'; cartToggle.setAttribute('aria-expanded','false'); } });
 
-    const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
-    localStorage.setItem("cartTotal", total.toFixed(2));
+        // Kategori filtreleme işlevselliği
+        document.querySelectorAll('#menu li').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const category = e.target.dataset.category;
+                if (category) {
+                    // Aktif sınıfını yönetme
+                    document.querySelectorAll('#menu li').forEach(li => li.classList.remove('active'));
+                    e.target.classList.add('active');
 
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape'){ cartDropdown.style.display='none'; cartToggle.setAttribute('aria-expanded','false'); } });
+                    let filteredProducts = products;
+                    if (category !== 'all') {
+                        filteredProducts = products.filter(p => p.category === category);
+                    }
+                    
+                    // Filtrelenmiş ürünleri ekrana bas
+                    renderProducts(filteredProducts);
+                    
+                    // Arama kutusunu temizle ve odağı kaldır
+                    searchInput.value = '';
+                }
+            });
+        });
 
-    // Arama filtresi
-    searchInput.addEventListener("input", ()=>{
-      const val = searchInput.value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(val) || p.brand.toLowerCase().includes(val));
-      renderProducts(filtered);
-    });
+        // Arama filtresi
+        searchInput.addEventListener("input", ()=>{
+            const val = searchInput.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(val) || p.brand.toLowerCase().includes(val));
+            renderProducts(filtered);
+            
+            // Arama yapıldığında menü aktifliğini kaldır
+            document.querySelectorAll('#menu li').forEach(li => li.classList.remove('active'));
+        });
 
-    // Menü toggle
-    menuToggle.addEventListener("click", ()=>{ menu.classList.toggle("show"); });
-  </script>
+        // Menü toggle
+        menuToggle.addEventListener("click", ()=>{ menu.classList.toggle("show"); });
+        
+        // Sayfa yüklendiğinde varsayılan filtreyi uygula ve menüyü aktif et
+        document.querySelector('#menu li[data-category="all"]').click();
+
+        updateCartUI();
+    </script>
 </body>
 </html>
