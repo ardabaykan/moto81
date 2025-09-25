@@ -226,8 +226,8 @@ main section h1 {
 
   const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
   cartTotalEl.textContent = money(total);
-
-  localStorage.setItem("cartTotal", total.toFixed(2));
+saveCart()
+  
 }
 
     function addToCart(productId){
