@@ -125,15 +125,77 @@ main{
 .btn-outline-primary:hover{background-color: var(--primary); color: var(--white);}
 footer{padding: 2.5rem 0; text-align: center; color: var(--gray-text); border-top: 1px solid var(--border-color); background-color: var(--white);}
 footer p{margin-bottom:0;}
-.social-icons a {
-    font-size: 1.5rem;
+
+/* Instagram Profil Kutucuğu Stilleri */
+.instagram-profile-widget {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-light);
+    padding: 1.5rem;
+    text-align: center;
+    margin-top: 1.5rem; /* Üstteki elemanlardan boşluk bırakır */
+    text-decoration: none; /* Link olduğu için alt çizgiyi kaldırır */
+    color: var(--secondary); /* Varsayılan link rengini engeller */
+    display: block; /* Tam genişlik kaplaması için */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.instagram-profile-widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    color: var(--primary); /* Hover'da renk değişimi */
+}
+.instagram-profile-widget .profile-picture {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--primary); /* Profil fotoğrafına belirgin çerçeve */
+}
+.instagram-profile-widget h5 {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+.instagram-profile-widget p {
+    font-size: 0.9rem;
     color: var(--gray-text);
-    margin: 0 0.5rem;
+    margin-bottom: 0;
+}
+.instagram-profile-widget .btn-follow {
+    margin-top: 1rem;
+    background-color: #E1306C; /* Instagram'ın pembe tonu */
+    border-color: #E1306C;
+    color: var(--white);
+    font-weight: 500;
+}
+.instagram-profile-widget .btn-follow:hover {
+    background-color: #c1205c;
+    border-color: #c1205c;
+}
+
+/* Footer Sosyal Medya için */
+.footer-social-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+.footer-social-section h5 {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+.footer-social-section .social-links a {
+    font-size: 1.8rem;
+    color: var(--gray-text);
+    margin: 0 0.8rem;
     transition: color 0.3s ease;
 }
-.social-icons a:hover {
+.footer-social-section .social-links a:hover {
     color: var(--primary);
 }
+
 </style>
 </head>
 <body>
@@ -228,15 +290,22 @@ footer p{margin-bottom:0;}
 Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
 </p>
 <div class="d-grid gap-2">
-<button type="button" id="whatsappPayButton" class="btn btn-success btn-lg">
+<button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
 <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
 </button>
-<a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
-<i class="bi bi-instagram me-2"></i> Instagram: @ard4_fr
-</a>
 </div>
 <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
 </div>
+
+<!-- Yeni Instagram Profil Kutucuğu -->
+<a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-profile-widget">
+    <img src="https://via.placeholder.com/80" class="profile-picture" alt="Instagram Profil Fotoğrafı">
+    <h5>@ard4_fr</h5>
+    <p>En yeni ürünler ve kampanyalar için bizi takip edin!</p>
+    <span class="btn btn-sm btn-follow"><i class="bi bi-instagram me-2"></i>Takip Et</span>
+</a>
+<!-- Instagram Profil Kutucuğu Bitişi -->
+
 
 <div class="checkout-summary-card mt-4">
 <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -258,14 +327,18 @@ footer p{margin-bottom:0;}
 <footer>
 <div class="container">
 <p class="mb-2">&copy; 2025 Moto 81 - Tüm Hakları Saklıdır</p>
-<div class="social-icons">
-    <a href="https://www.instagram.com/ard4_fr" target="_blank" aria-label="Instagram Profilimiz">
-        <i class="bi bi-instagram"></i>
-    </a>
-    <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp Hattımız">
-        <i class="bi bi-whatsapp"></i>
-    </a>
-    <!-- İsterseniz buraya başka sosyal medya linkleri de ekleyebilirsiniz -->
+
+<div class="footer-social-section">
+    <h5>Bizi Takip Edin ve İletişime Geçin!</h5>
+    <div class="social-links">
+        <a href="https://www.instagram.com/ard4_fr" target="_blank" aria-label="Instagram Profilimiz">
+            <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp Hattımız">
+            <i class="bi bi-whatsapp"></i>
+        </a>
+        <!-- İsterseniz buraya başka sosyal medya linkleri de ekleyebilirsiniz -->
+    </div>
 </div>
 </div>
 </footer>
