@@ -147,42 +147,10 @@ footer p{margin-bottom:0;}
 <main class="container my-5">
 <h1 class="mb-5 text-center" style="font-weight:700;color:var(--primary)">Ödeme İşlemleri</h1>
 <div class="row g-5">
-<div class="col-md-5 col-lg-4 order-md-1">
-<div class="checkout-summary-card">
-<h4>Ödeme Nasıl Yapılır?</h4>
-<p class="text-muted mb-4">
-Ödeme için lütfen aşağıdaki kanallardan iletişime geçin.
-</p>
-<div class="d-grid gap-2">
-<a href="https://wa.me/905312672081" target="_blank" class="btn btn-success btn-lg">
-<i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
-</a>
-<a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
-<i class="bi bi-instagram me-2"></i> Instagram: @ard4_fr
-</a>
-</div>
-<p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
-</div>
-
-<div class="checkout-summary-card mt-4">
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-<span class="text-primary">Sepetiniz</span>
-<span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
-</h4>
-<ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
-<li class="list-group-item text-muted text-center">Sepetiniz boş</li>
-</ul>
-<div class="d-flex justify-content-between align-items-center checkout-total">
-<strong>Toplam</strong>
-<span id="summaryCartTotal">0.00 ₺</span>
-</div>
-</div>
-</div>
-
-<div class="col-md-7 col-lg-8 order-md-2">
+<div class="col-md-7 col-lg-8 order-md-1">
 <div class="checkout-summary-card">
 <h4>Teslimat Bilgileri</h4>
-<form class="needs-validation" novalidate>
+<form class="needs-validation" id="deliveryForm" novalidate>
 <div class="row g-3">
 <div class="col-sm-6">
 <label for="firstName" class="form-label">Adınız</label>
@@ -231,7 +199,7 @@ footer p{margin-bottom:0;}
 <hr class="my-4">
 <div class="form-check">
 <input type="checkbox" class="form-check-input" id="same-address">
-<label class="form-check-label" for="same-address">Teslimat ve fatura aynı</label>
+<label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
 </div>
 <div class="form-check">
 <input type="checkbox" class="form-check-input" id="save-info">
@@ -241,6 +209,38 @@ footer p{margin-bottom:0;}
 <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
 </div>
 </form>
+</div>
+</div>
+
+<div class="col-md-5 col-lg-4 order-md-2">
+<div class="checkout-summary-card">
+<h4>Ödeme Nasıl Yapılır?</h4>
+<p class="text-muted mb-4">
+Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
+</p>
+<div class="d-grid gap-2">
+<button type="button" id="whatsappPayButton" class="btn btn-success btn-lg">
+<i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
+</button>
+<a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
+<i class="bi bi-instagram me-2"></i> Instagram: @ard4_fr
+</a>
+</div>
+<p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
+</div>
+
+<div class="checkout-summary-card mt-4">
+<h4 class="d-flex justify-content-between align-items-center mb-3">
+<span class="text-primary">Sepetiniz</span>
+<span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+</h4>
+<ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
+<li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+</ul>
+<div class="d-flex justify-content-between align-items-center checkout-total">
+<strong>Toplam</strong>
+<span id="summaryCartTotal">0.00 ₺</span>
+</div>
 </div>
 </div>
 </div>
@@ -267,25 +267,59 @@ let cart=JSON.parse(localStorage.getItem(CART_KEY)||'[]');
 const summaryCartCount=document.getElementById('summaryCartCount');
 const cartSummaryItems=document.getElementById('cartSummaryItems');
 const summaryCartTotal=document.getElementById('summaryCartTotal');
+const whatsappPayButton = document.getElementById('whatsappPayButton');
+const deliveryForm = document.getElementById('deliveryForm');
+
 function money(num){return Number(num).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₺';}
+
 function renderCartSummary(){
-summaryCartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
-cartSummaryItems.innerHTML='';
-if(cart.length===0){
-cartSummaryItems.innerHTML='<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
-summaryCartTotal.textContent=money(0);
-return;
+    summaryCartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
+    cartSummaryItems.innerHTML='';
+    if(cart.length===0){
+        cartSummaryItems.innerHTML='<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
+        summaryCartTotal.textContent=money(0);
+        return;
+    }
+    cart.forEach(item=>{
+        const li=document.createElement('li');
+        li.className='list-group-item d-flex justify-content-between lh-sm';
+        li.innerHTML=`<img src="${item.img}" alt="${item.name}" class="me-3">
+        <div class="product-info"><h6>${item.name}</h6><small class="text-muted">${item.brand} · Adet: ${item.qty}</small></div>
+        <span class="item-price">${money(item.price*item.qty)}</span>`;
+        cartSummaryItems.appendChild(li);
+    });
+    summaryCartTotal.textContent=money(cart.reduce((s,i)=>s+i.price*i.qty,0));
 }
-cart.forEach(item=>{
-const li=document.createElement('li');
-li.className='list-group-item d-flex justify-content-between lh-sm';
-li.innerHTML=`<img src="${item.img}" alt="${item.name}" class="me-3">
-<div class="product-info"><h6>${item.name}</h6><small class="text-muted">${item.brand} · Adet: ${item.qty}</small></div>
-<span class="item-price">${money(item.price*item.qty)}</span>`;
-cartSummaryItems.appendChild(li);
+
+whatsappPayButton.addEventListener('click', function() {
+    if (!deliveryForm.checkValidity()) {
+        deliveryForm.classList.add('was-validated');
+        alert('Lütfen teslimat bilgilerini eksiksiz ve doğru doldurunuz.');
+        return;
+    }
+
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const address = document.getElementById('address').value;
+    const country = document.getElementById('country').value;
+    const city = document.getElementById('city').value;
+    const zip = document.getElementById('zip').value;
+
+    let cartDetails = '';
+    cart.forEach(item => {
+        cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.price * item.qty)}\n`;
+    });
+    const totalAmount = summaryCartTotal.textContent;
+
+    const message = `Merhaba Moto 81,\n\nYeni bir sipariş talebim var:\n\n*Teslimat Bilgileri:*\nAdı Soyadı: ${firstName} ${lastName}\nTelefon: ${phone}\nE-posta: ${email ? email : 'Belirtilmedi'}\nAdres: ${address}\nÜlke: ${country}\nŞehir: ${city}\nPosta Kodu: ${zip}\n\n*Sepet İçeriği:*\n${cartDetails}\n*Toplam Tutar: ${totalAmount}*\n\nÖdeme seçenekleri hakkında bilgi almak istiyorum. Teşekkürler.`;
+
+    const whatsappURL = `https://wa.me/905312672081?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
 });
-summaryCartTotal.textContent=money(cart.reduce((s,i)=>s+i.price*i.qty,0));
-}
+
+
 document.addEventListener('DOMContentLoaded',renderCartSummary);
 </script>
 </body>
