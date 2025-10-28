@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Moto 81</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VV359BDQY"></script>
     <script>
@@ -17,232 +22,356 @@
     <!-- Custom CSS -->
     <style>
         :root{
-            --bg: #ffffff;
-            --text:#0a0a0a;
-            --muted:#6c757d; /* Bootstrap muted color */
-            --btn-bg:#e6e6e6;
-            --btn-dark:#cfcfcf;
-            --accent:#f8f9fa; /* Bootstrap light gray */
-            --shadow: 0 6px 18px rgba(12,12,12,0.08);
+            --primary: #0a0a0a; /* Koyu gri/Siyah */
+            --secondary: #212529; /* Daha koyu gri */
+            --light-bg: #f8f9fa; /* Hafif gri arka plan */
+            --white: #ffffff;
+            --gray-text: #6c757d; /* Muted text */
+            --border-color: #dee2e6; /* Hafif border */
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-strong: 0 8px 24px rgba(0,0,0,0.1);
         }
         body{
             font-family: 'Inter', sans-serif;
-            background:var(--bg);
-            color:var(--text);
-            line-height:1.45;
+            background-color: var(--light-bg);
+            color: var(--secondary);
+            line-height:1.6;
         }
 
-        /* Header / Navbar Customizations */
+        /* Navbar Customizations */
         .navbar{
-            position:sticky;
-            top:0;
-            z-index:1030; /* Bootstrap navbar z-index */
-            background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-            backdrop-filter:blur(4px);
-            border-bottom:1px solid #eee;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
         }
         .navbar-brand{
-            font-weight:700;
-            font-size:1.25rem; /* Bootstrap default */
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary) !important;
         }
-        .nav-link{
-            padding:8px 12px;
-            border-radius:8px;
-            cursor:pointer;
+        .navbar-nav .nav-link{
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease-in-out;
         }
-        .nav-link:hover{
-            background:var(--accent);
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background-color: var(--light-bg);
+            color: var(--primary) !important;
+            font-weight: 500;
         }
-        .nav-item .nav-link.active {
-            background: var(--accent);
-            font-weight: 600;
+        .navbar-toggler{
+            border-color: var(--border-color);
+        }
+        .navbar-toggler-icon{
+            filter: grayscale(100%); /* Hamburger iconu siyah beyaz */
+        }
+        .form-control{
+            border-color: var(--border-color);
+        }
+        .form-control:focus{
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);
         }
 
-        /* Mini cart */
+        /* Mini Cart */
         .mini-cart{
-            position:fixed;
-            right:1rem;
-            top:1rem;
-            z-index:1050; /* Higher than Bootstrap dropdown default */
+            position: fixed;
+            right: 1.5rem;
+            top: 1.5rem;
+            z-index: 1050;
         }
         .cart-button{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            border:0;
-            background:transparent;
-            cursor:pointer;
-            padding: .375rem .75rem; /* Bootstrap btn padding */
-            border-radius: .375rem; /* Bootstrap btn border-radius */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-light);
+            transition: all 0.2s ease-in-out;
         }
         .cart-button:hover{
-            background-color: var(--accent);
+            background-color: var(--light-bg);
+            border-color: var(--primary);
+        }
+        .cart-button svg{
+            stroke: var(--primary);
         }
         .cart-count{
-            background:#0a0a0a;
-            color:#fff;
-            padding:2px 6px;
-            border-radius:999px;
-            font-size:12px;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.125rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
         .cart-dropdown{
-            width:320px;
-            max-height:420px;
-            overflow-y:auto;
-            /* Bootstrap dropdown-menu styling handles most of this */
+            width: 340px; /* Slightly wider for better readability */
+            max-height: 450px;
+            overflow-y: auto;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-strong);
+            padding: 1rem;
         }
         .cart-item{
-            display:flex;
-            gap:10px;
-            align-items:center;
-            padding:8px 0;
-            border-bottom:1px dashed #f0f0f0;
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px dashed var(--border-color);
         }
         .cart-item:last-child{
-            border-bottom:0;
+            border-bottom: 0;
         }
         .cart-item img{
-            width:48px;
-            height:48px;
-            object-fit:cover;
-            border-radius:6px;
+            width: 64px; /* Slightly larger image */
+            height: 64px;
+            object-fit: contain; /* Görselin tamamının görünmesini sağlar */
+            border-radius: 0.375rem;
+            background-color: var(--white); /* Ensure white background for images */
+            border: 1px solid var(--border-color);
         }
         .cart-meta{
-            flex:1;
+            flex: 1;
         }
         .cart-meta b{
-            display:block;
+            font-size: 1rem;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+        }
+        .cart-meta .text-muted{
+            font-size: 0.875rem;
         }
         .cart-total{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding-top:8px;
-            margin-top: 10px;
-            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
         }
-        .cart-dropdown .btn {
-            font-size: 0.875rem; /* Smaller buttons in cart */
-            padding: .25rem .5rem;
+        .cart-dropdown .btn-primary{
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        .cart-dropdown .btn-outline-secondary{
+            color: var(--secondary);
+            border-color: var(--gray-text);
+        }
+        .cart-dropdown .btn-outline-danger{
+            color: #dc3545; /* Bootstrap danger color */
+            border-color: #dc3545;
+        }
+        .cart-dropdown .btn-sm{
+            padding: 0.125rem 0.375rem;
+            font-size: 0.75rem;
         }
 
-
-        /* Main content */
-        main{
-            margin-top:22px;
-        }
-
+        /* Hero Section */
         .hero-section{
-            text-align:center;
-            padding: 20px 0; /* Adjusted padding */
-            background-color: #f8f8f8;
-            border-radius: 12px;
-            margin-bottom: 22px;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-light);
+            border: 1px solid var(--border-color);
         }
         .hero-section img{
-            max-width: 300px;
+            max-width: 350px; /* Slightly larger logo */
             height: auto;
-            margin-bottom: 5px;
-            margin-top: 10px;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
         }
         .hero-section h1{
-            margin-top: 0;
-            font-size: 2rem; /* Bootstrap h1 default */
-            margin-bottom: .5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
         .hero-section p{
-            color:var(--muted);
-            font-size:1rem;
+            color: var(--gray-text);
+            font-size: 1.1rem;
         }
 
         /* Product Cards */
         .card{
-            transition:transform .18s ease, box-shadow .18s ease;
-            display:flex;
-            flex-direction:column;
-            gap:10px;
-            border-radius: 12px;
-            border: 1px solid #f0f0f0;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            background-color: var(--white);
+            overflow: hidden; /* Ensure rounded corners for thumb */
         }
         .card:hover{
-            transform:translateY(-6px);
-            box-shadow:var(--shadow);
+            transform: translateY(-0.5rem);
+            box-shadow: var(--shadow-strong);
         }
 
         .thumb {
             width: 100%;
-            height: 180px;
-            border-top-left-radius: calc(12px - 1px); /* Match card border-radius */
-            border-top-right-radius: calc(12px - 1px);
-            background: #fff;
+            height: 200px; /* Slightly taller for better visuals */
+            background-color: var(--white);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 1rem; /* İç boşluk ekleyerek ürünün nefes almasını sağlar */
         }
 
         .thumb img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            background-color: #fff;
+            background-color: var(--white); /* Ensure white background for images */
         }
         .card-body{
+            padding: 1rem 1.25rem;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            padding-top: 0.75rem; /* Bootstrap default card-body padding */
+            gap: 0.25rem;
         }
         .card-title{
-            font-weight:600;
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: var(--secondary);
             margin-bottom: 0;
         }
         .card-text.brand-text{
-            font-size:13px;
-            color:var(--muted);
+            font-size: 0.875rem;
+            color: var(--gray-text);
         }
         .card-text.price-text{
-            font-weight:700;
-            font-size: 1.1rem;
-            margin-top: 5px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-top: 0.5rem;
         }
         .actions{
-            margin-top:auto;
-            display:flex;
-            align-items:center;
-            gap:10px;
-            padding: 0 1.25rem 1.25rem 1.25rem; /* Adjust to match card-body horizontal padding */
+            padding: 0 1.25rem 1.25rem 1.25rem;
+            margin-top: auto; /* Push button to the bottom */
         }
-        .actions .btn{
+        .actions .btn-primary{
+            background-color: var(--primary);
+            border-color: var(--primary);
             width: 100%;
+            padding: 0.6rem 1rem;
+            font-weight: 500;
         }
-
+        .actions .btn-primary:hover{
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
 
         /* Footer */
         footer{
-            padding:24px 0;
-            text-align:center;
-            color:var(--muted);
-            border-top:1px solid #f0f0f0;
-            margin-top:28px;
+            padding: 2.5rem 0;
+            text-align: center;
+            color: var(--gray-text);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            background-color: var(--white);
+        }
+        footer p{
+            margin-bottom: 0;
         }
 
         /* Responsive Adjustments */
-        @media (max-width: 600px) {
-            .hero-section h1 {
+        @media (max-width: 991.98px) { /* Medium devices (tablets) and down */
+            .navbar-collapse{
+                background-color: var(--white);
+                border-top: 1px solid var(--border-color);
+                margin-top: 0.5rem;
+                padding: 1rem 0;
+                box-shadow: var(--shadow-light);
+            }
+            .navbar-nav{
+                width: 100%;
+                margin-bottom: 1rem !important; /* Fix for mb-2 */
+            }
+            .navbar-nav .nav-link{
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .d-flex.w-100.w-lg-auto { /* Search bar container on mobile */
+                width: 100% !important;
+            }
+            .form-control{
+                width: calc(100% - 1.5rem); /* Adjust width within collapsed menu */
+                margin: 0 0.75rem;
+            }
+            .mini-cart{
+                right: 0.75rem;
+                top: 0.75rem;
+            }
+            .hero-section{
+                padding: 2rem 1rem;
+            }
+            .hero-section h1{
+                font-size: 2rem;
+            }
+            .hero-section img{
+                max-width: 250px;
+            }
+        }
+        @media (max-width: 767.98px) { /* Small devices (landscape phones) and down */
+            .card .thumb{
+                height: 180px;
+            }
+            .hero-section h1{
+                font-size: 1.8rem;
+            }
+            .hero-section p{
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 575.98px) { /* Extra small devices (portrait phones) and down */
+            .mini-cart{
+                right: 0.5rem;
+                top: 0.5rem;
+            }
+            .cart-dropdown{
+                width: calc(100vw - 2rem); /* Full width minus margins */
+                left: 1rem;
+                right: 1rem;
+            }
+            .hero-section{
+                padding: 1.5rem 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+            .hero-section h1{
                 font-size: 1.5rem;
             }
-            .hero-section img {
+            .hero-section img{
                 max-width: 200px;
+            }
+            .card .thumb{
+                height: 160px;
+            }
+            .card-title{
+                font-size: 1.05rem;
+            }
+            .card-text.price-text{
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid container">
-                <a class="navbar-brand" href="#">Moto 81</a>
+                <a class="navbar-brand" href="index.html">Moto 81</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -253,27 +382,27 @@
                         <a class="nav-link" href="#" data-category="nmax">NMAX Aksesuarları</a>
                         <a class="nav-link" href="odeme.html">Ödeme</a>
                     </div>
-                    <form class="d-flex" role="search">
+                    <div class="d-flex w-100 w-lg-auto"> <!-- Added w-100 for mobile search bar -->
                         <input class="form-control me-2" type="search" placeholder="Ürün ara..." aria-label="Ürün ara" id="searchInput">
-                    </form>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
     <div class="mini-cart dropdown">
-        <button class="cart-button btn btn-light dropdown-toggle" type="button" id="cartToggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="cart-button btn dropdown-toggle" type="button" id="cartToggle" data-bs-toggle="dropdown" aria-expanded="false">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span class="cart-count" id="cartCount">0</span>
         </button>
         <div class="dropdown-menu dropdown-menu-end cart-dropdown" aria-labelledby="cartToggle">
-            <div class="px-3 py-2" id="cartItems">
+            <div class="p-3" id="cartItems">
                 <!-- Cart items will be rendered here by JS -->
-                <div class="muted text-center py-2">Sepetiniz boş</div>
+                <div class="text-muted text-center py-2">Sepetiniz boş</div>
             </div>
-            <div class="px-3 py-2">
+            <div class="p-3 pt-0">
                 <div class="cart-total">
-                    <div class="muted">Toplam</div>
+                    <div class="text-muted">Toplam</div>
                     <div id="cartTotal">0.00 ₺</div>
                 </div>
                 <div class="d-flex justify-content-end gap-2 mt-3">
@@ -284,19 +413,20 @@
         </div>
     </div>
 
-    <main class="container">
+    <main class="container my-5">
         <section class="hero-section">
             <img src="logo.png" alt="Moto 81 Logo">
             <h1>Moto 81'e Hoş Geldiniz</h1>
             <p>Motor aksesuarları ve yedek parçalarda aradığınız her şey burada!</p>
         </section>
 
+        <!-- Grid for products, using responsive columns -->
         <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="productGrid"></section>
     </main>
 
-    <footer class="mt-5 py-4 bg-light">
-        <div class="container text-center text-muted">
-            © 2025 Moto 81 - Tüm Hakları Saklıdır
+    <footer class="mt-5">
+        <div class="container text-center">
+            <p>© 2025 Moto 81 - Tüm Hakları Saklıdır</p>
         </div>
     </footer>
 
@@ -353,7 +483,7 @@
         const searchInput = document.getElementById('searchInput');
         const categoryLinks = document.querySelectorAll('.navbar-nav .nav-link[data-category]');
         const clearCartBtn = document.getElementById('clearCart');
-        const checkoutBtn = document.getElementById('checkoutBtn'); // Yeni checkout butonu
+        const checkoutBtn = document.getElementById('checkoutBtn');
 
         function money(num){
             return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
@@ -361,6 +491,11 @@
 
         function renderProducts(list = products){
             productGrid.innerHTML = '';
+            if (list.length === 0) {
+                productGrid.innerHTML = '<div class="col-12 text-center text-muted py-5">Üzgünüz, aradığınız kriterlere uygun ürün bulunamadı.</div>';
+                return;
+            }
+
             list.forEach(p => {
                 const col = document.createElement('div');
                 col.className = 'col'; // Bootstrap grid column
@@ -390,7 +525,7 @@
             cartItemsEl.innerHTML = '';
             
             if(cart.length === 0){
-                cartItemsEl.innerHTML = '<div class="muted text-center py-2">Sepetiniz boş</div>';
+                cartItemsEl.innerHTML = '<div class="text-muted text-center py-2">Sepetiniz boş</div>';
                 cartTotalEl.textContent = money(0);
                 return;
             }
@@ -402,7 +537,7 @@
                     <img alt="${item.name}" src="${item.img}">
                     <div class="cart-meta">
                         <b>${item.name}</b>
-                        <div class="muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
+                        <div class="text-muted">${item.brand} · ${money(item.price)} x ${item.qty}</div>
                     </div>
                     <div class="d-flex flex-column gap-1 align-items-end">
                         <button data-id="${item.id}" class="btn btn-sm btn-outline-secondary decrease-qty-btn">-</button>
@@ -414,7 +549,7 @@
 
             const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
             cartTotalEl.textContent = money(total);
-            saveCart(); // Save after updating total
+            saveCart();
         }
 
         function addToCart(productId){
@@ -426,32 +561,27 @@
             
             updateCartUI();
             
-            // Basic animation for cart button
+            // Simple animation for cart button
             const cartButton = document.getElementById('cartToggle');
-            cartButton.classList.add('animate__animated', 'animate__pulse'); // Assuming animate.css or similar
+            cartButton.style.transform = 'scale(1.08)';
             setTimeout(() => {
-                cartButton.classList.remove('animate__animated', 'animate__pulse');
-            }, 500);
+                cartButton.style.transform = 'scale(1)';
+            }, 200);
         }
 
-        // Event delegation for product grid and cart
         document.body.addEventListener('click', e=>{
-            // Add to Cart button
             const add = e.target.closest('.add-to-cart-btn');
             if(add){ addToCart(parseInt(add.dataset.id)); }
 
-            // Clear Cart button
             if(e.target === clearCartBtn){
                 cart = [];
                 updateCartUI();
             }
 
-            // Checkout button (within mini-cart)
             if(e.target === checkoutBtn){
                 window.location.href = "odeme.html";
             }
 
-            // Remove item from cart
             const remove = e.target.closest('.remove-item-btn');
             if(remove){
                 const id = parseInt(remove.dataset.id);
@@ -459,14 +589,13 @@
                 updateCartUI();
             }
 
-            // Decrease item quantity
             const decrease = e.target.closest('.decrease-qty-btn');
             if(decrease){
                 const id = parseInt(decrease.dataset.id);
                 const item = cart.find(i=>i.id===id);
                 if(item){
-                    item.qty = Math.max(1, item.qty -1);
-                    if (item.qty === 0) { // If quantity becomes 0, remove item
+                    item.qty = Math.max(0, item.qty -1); // Allow quantity to go to 0
+                    if (item.qty === 0) {
                         cart = cart.filter(i=>i.id!==id);
                     }
                     updateCartUI();
@@ -474,10 +603,9 @@
             }
         });
 
-        // Category filtering
         categoryLinks.forEach(item => {
             item.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent default link behavior
+                e.preventDefault();
                 const category = e.target.dataset.category;
                 
                 categoryLinks.forEach(li => li.classList.remove('active'));
@@ -493,19 +621,15 @@
             });
         });
 
-        // Search filter
         searchInput.addEventListener("input", ()=>{
             const val = searchInput.value.toLowerCase();
             const filtered = products.filter(p => p.name.toLowerCase().includes(val) || p.brand.toLowerCase().includes(val));
             renderProducts(filtered);
             
-            // Remove active class from categories when searching
             categoryLinks.forEach(li => li.classList.remove('active'));
         });
         
-        // Initial load
         document.addEventListener('DOMContentLoaded', () => {
-            // Set 'Tüm Ürünler' as active by default on load
             document.querySelector('.navbar-nav .nav-link[data-category="all"]').click();
             updateCartUI();
         });
