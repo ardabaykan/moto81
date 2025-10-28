@@ -1,218 +1,410 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moto 81 Ödeme</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ödeme - Moto 81</title>
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VV359BDQY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-0VV359BDQY');
+    </script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         :root{
-            --bg: #ffffff;
-            --text:#0a0a0a;
-            --muted:#6b6b6b;
-            --btn:#e6e6e6;
-            --btn-dark:#cfcfcf;
-            --accent:#f5f5f5;
-            --shadow: 0 6px 18px rgba(12,12,12,0.08);
+            --primary: #0a0a0a; /* Koyu gri/Siyah */
+            --secondary: #212529; /* Daha koyu gri */
+            --light-bg: #f8f9fa; /* Hafif gri arka plan */
+            --white: #ffffff;
+            --gray-text: #6c757d; /* Muted text */
+            --border-color: #dee2e6; /* Hafif border */
+            --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-strong: 0 8px 24px rgba(0,0,0,0.1);
         }
-        *{box-sizing:border-box}
-        body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--text); line-height:1.45}
-
-        /* Header / Navbar */
-        .topbar{position:sticky;top:0;z-index:40;background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));backdrop-filter:blur(4px);border-bottom:1px solid #eee}
-        .container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-        .brand{font-weight:700;font-size:18px}
-        nav{display:flex;gap:12px;align-items:center}
-        .menu{display:flex;gap:8px;list-style:none;margin:0;padding:0}
-        .menu li{padding:8px 12px;border-radius:8px;cursor:pointer}
-        .menu li:hover{background:var(--accent)}
-        .menu li a { text-decoration: none; color: inherit; display: block; }
-        
-        /* Aktif menü öğesi stili (İsteğe bağlı, bu sayfada aktif menü yok) */
-        .menu li.active {
-            background: var(--accent);
-            font-weight: 600;
+        body{
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--secondary);
+            line-height:1.6;
         }
 
-        /* Hamburger */
-        .menu-toggle{display:none;cursor:pointer;font-size:22px;background:none;border:none}
+        /* Navbar for Checkout Page */
+        .navbar{
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .navbar-brand{
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary) !important;
+        }
+        .navbar-nav .nav-link{
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: var(--light-bg);
+            color: var(--primary) !important;
+        }
 
-        /* Main content */
-        main{max-width:1200px;margin:22px auto;padding:0 20px}
-        .muted{color:var(--muted);font-size:13px}
-        .card {
-            background: #fff; padding: 30px 25px;
-            border-radius: 14px;
-            box-shadow: var(--shadow);
-            text-align: center; max-width: 650px; width: 100%;
-            margin: 40px auto;
-            animation: fadeIn 0.6s ease-in-out;
+        main{
+            min-height: calc(100vh - 150px); /* Adjust based on header/footer height */
+            padding-top: 3rem;
+            padding-bottom: 3rem;
         }
-        .card h2 {
-            font-size: 24px; margin-bottom: 20px; color: var(--text);
-        }
-        .cart-summary {
-            text-align: left;
-            margin-bottom: 25px;
-            border-top: 1px dashed #ddd;
-            padding-top: 15px;
-        }
-        .cart-summary h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px dashed #f0f0f0;
-        }
-        .cart-item:last-child {
-            border-bottom: none;
-        }
-        .total {
-            font-size: 20px;
-            font-weight: bold;
-            color: #444;
-            margin-top: 15px;
-            text-align: right;
-        }
-        .iban {
-            font-size: 22px; font-weight: bold;
-            color: var(--text); margin-bottom: 20px;
-            word-break: break-word;
-            background: var(--accent);
-            padding: 10px 15px;
-            border-radius: 8px;
-        }
-        .note {
-            font-size: 16px; line-height: 1.6; color: #444;
-        }
-        .muted {
-            color: var(--muted);
-            font-size: 13px;
-        }
-        footer{padding:24px 0;text-align:center;color:var(--muted);border-top:1px solid #f0f0f0;margin-top:28px}
 
-        /* Animasyon */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .checkout-summary .card{
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-light);
+            background-color: var(--white);
+            padding: 1.5rem;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px){
-            .container{padding:8px 14px}
-            .iban{ font-size: 20px; }
+        .checkout-summary .list-group-item{
+            border-color: var(--border-color);
+            background-color: transparent;
+            color: var(--secondary);
+            padding-left: 0;
+            padding-right: 0;
         }
-        @media (max-width: 600px){
-            /* Mobil menü: Hamburger tıklandığında görünür */
-            .menu{
-                display:none;
-                flex-direction:column;
-                background:#fff;
-                position:absolute;
-                top:60px;
-                left:0;
-                width:100%;
-                padding:10px;
-                border-top:1px solid #eee;
+        .checkout-summary img{
+            width: 60px;
+            height: 60px;
+            object-fit: contain; /* Ensure image fits */
+            border-radius: 0.375rem;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+        }
+        .checkout-summary .text-muted{
+            font-size: 0.875rem;
+        }
+        .checkout-summary .total-price{
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        /* Forms */
+        .form-control{
+            border-color: var(--border-color);
+        }
+        .form-control:focus{
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);
+        }
+        .form-check-input:checked{
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        .form-check-input:focus{
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);
+        }
+
+        .btn-primary{
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary:hover{
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        /* Footer */
+        footer{
+            padding: 2.5rem 0;
+            text-align: center;
+            color: var(--gray-text);
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+            background-color: var(--white);
+        }
+        footer p{
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 767.98px) { /* Small devices */
+            main{
+                padding-top: 2rem;
+                padding-bottom: 2rem;
             }
-            .menu.show{display:flex}
-            .menu-toggle{display:block}
-            .brand{font-size:16px}
-            /* Menü öğelerini tam genişlikte yap */
-            .menu li {
-                width: 100%;
-                text-align: left;
+            .checkout-summary .card{
+                margin-top: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <header class="topbar">
-        <div class="container">
-            <div style="display:flex;align-items:center;gap:12px">
-                <div class="brand">Moto 81</div>
-                <button class="menu-toggle" id="menuToggle">☰</button>
-                <nav aria-label="Sayfa Navigasyonu">
-                    <ul class="menu" id="menu">
-                        <li><a href="index.html">Ürünler (Anasayfa)</a></li>
-                        <li><a href="odeme.html">Ödeme</a></li>
-                        </ul>
-                </nav>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid container">
+                <a class="navbar-brand" href="index.html">Moto 81</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="index.html">Ürünlere Geri Dön</a>
+                    </div>
+                </div>
             </div>
-            </div>
+        </nav>
     </header>
 
-    <main>
-        <div class="card">
-            <h2>Ödeme Bilgileri</h2>
+    <main class="container">
+        <h1 class="mb-5 text-center display-4 fw-bold">Ödeme</h1>
 
-            <div class="cart-summary">
-                <h3>Sipariş Özeti</h3>
-                <div id="cartItems"></div>
-                <div class="total">Toplam: <span id="cartTotal">0 ₺</span></div>
+        <div class="row g-5">
+            <!-- Order Summary Column -->
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <div class="checkout-summary card">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-secondary fw-bold">Sepetiniz</span>
+                        <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+                    </h4>
+                    <ul class="list-group mb-3" id="checkoutCartItems">
+                        <!-- Cart items will be rendered here by JS -->
+                        <li class="list-group-item d-flex justify-content-between lh-sm text-muted">
+                            <div>
+                                <h6 class="my-0">Sepetiniz boş</h6>
+                            </div>
+                            <span class="text-muted">0.00 ₺</span>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex justify-content-between align-items-center py-2 border-top border-bottom">
+                        <span class="text-secondary fw-bold">Toplam</span>
+                        <strong class="total-price" id="checkoutCartTotal">0.00 ₺</strong>
+                    </div>
+                </div>
             </div>
 
-            <div class="iban">+90 531 267 20 81</div>
-            <p class="note">
-                <strong>Tel No</strong><br><br>
-                Hangi ürünü istediğinizi iletebilirsiniz.<br>
-               <br><br>
-                Ürünlerimiz çoğu stoktadır olmayanları kontrol ettirebilirsiniz onlarda üretim aşamasındadır<br><br>
-                Teşekkürler 🙏
-            </p>
+            <!-- Billing and Shipping Address Column -->
+            <div class="col-md-7 col-lg-8 order-md-first">
+                <h4 class="mb-3 fw-bold">Teslimat Adresi</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">Adınız</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Lütfen geçerli bir ad girin.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Soyadınız</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Lütfen geçerli bir soyad girin.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="siz@example.com">
+                            <div class="invalid-feedback">
+                                Lütfen geçerli bir e-posta adresi girin.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address" class="form-label">Adres</label>
+                            <input type="text" class="form-control" id="address" placeholder="1234 Ana Cadde" required>
+                            <div class="invalid-feedback">
+                                Lütfen teslimat adresinizi girin.
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="address2" class="form-label">Adres 2 <span class="text-muted">(İsteğe Bağlı)</span></label>
+                            <input type="text" class="form-control" id="address2" placeholder="Daire, süit veya birim">
+                        </div>
+
+                        <div class="col-md-5">
+                            <label for="country" class="form-label">Ülke</label>
+                            <select class="form-select" id="country" required>
+                                <option value="">Seçin...</option>
+                                <option>Türkiye</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Lütfen bir ülke seçin.
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">Şehir</label>
+                            <input type="text" class="form-control" id="city" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Lütfen bir şehir girin.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="zip" class="form-label">Posta Kodu</label>
+                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Posta kodu gerekli.
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <h4 class="mb-3 fw-bold">Ödeme</h4>
+
+                    <div class="my-3">
+                        <div class="form-check">
+                            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                            <label class="form-check-label" for="credit">Kredi kartı</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
+                            <label class="form-check-label" for="debit">Banka kartı</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                            <label class="form-check-label" for="paypal">PayPal</label>
+                        </div>
+                    </div>
+
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <label for="cc-name" class="form-label">Kart Üzerindeki Ad Soyad</label>
+                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                            <small class="text-muted">Kart üzerindeki tam adı girin</small>
+                            <div class="invalid-feedback">
+                                Kart üzerindeki ad gerekli.
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="cc-number" class="form-label">Kredi Kartı Numarası</label>
+                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Kredi kartı numarası gerekli.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="cc-expiration" class="form-label">Son Kullanma Tarihi</label>
+                            <input type="text" class="form-control" id="cc-expiration" placeholder="MM/YY" required>
+                            <div class="invalid-feedback">
+                                Son kullanma tarihi gerekli.
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="cc-cvv" class="form-label">CVV</label>
+                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                            <div class="invalid-feedback">
+                                Güvenlik kodu gerekli.
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Siparişi Tamamla</button>
+                </form>
+            </div>
         </div>
     </main>
 
-    <footer>
-        © 2025 Moto 81 - Tüm Hakları Saklıdır
+    <footer class="mt-5">
+        <div class="container text-center">
+            <p>© 2025 Moto 81 - Tüm Hakları Saklıdır</p>
+        </div>
     </footer>
 
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-        const menuToggle = document.getElementById("menuToggle");
-        const menu = document.getElementById("menu");
+        const CART_KEY = 'moto81_cart_v1';
+        let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 
-        // Mobil menü
-        menuToggle.addEventListener("click", ()=>{
-            menu.classList.toggle("show");
-        });
+        const checkoutCartItemsEl = document.getElementById('checkoutCartItems');
+        const checkoutCartTotalEl = document.getElementById('checkoutCartTotal');
+        const summaryCartCount = document.getElementById('summaryCartCount');
 
-        // Formatlama fonksiyonu
         function money(num){
             return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
         }
 
-        const cartItemsEl = document.getElementById("cartItems");
-        const cartTotalEl = document.getElementById("cartTotal");
+        function renderCheckoutSummary(){
+            checkoutCartItemsEl.innerHTML = '';
+            
+            if(cart.length === 0){
+                checkoutCartItemsEl.innerHTML = `
+                    <li class="list-group-item d-flex justify-content-between lh-sm text-muted">
+                        <div>
+                            <h6 class="my-0">Sepetiniz boş</h6>
+                        </div>
+                        <span class="text-muted">0.00 ₺</span>
+                    </li>`;
+                checkoutCartTotalEl.textContent = money(0);
+                summaryCartCount.textContent = 0;
+                return;
+            }
 
-        // localStorage'dan sepet verisini al
-        const CART_KEY = 'mini_cart_v1';
-        const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-
-        let total = 0;
-
-        if(cart.length === 0){
-            cartItemsEl.innerHTML = '<div style="text-align: center; color: gray; padding: 10px 0;">Sepetiniz boş. Anasayfadan ürün ekleyebilirsiniz.</div>';
-        } else {
-            cart.forEach(item => {
-                const itemTotal = item.price * item.qty;
-                total += itemTotal;
-
-                const el = document.createElement('div');
-                el.className = 'cart-item';
-                el.innerHTML = `
-                    <div>${item.name} <span class="muted">(${item.qty} adet)</span></div>
-                    <div>${money(itemTotal)}</div>
+            cart.forEach(item =>{
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex justify-content-between lh-sm';
+                li.innerHTML = `
+                    <div class="d-flex align-items-center gap-2">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div>
+                            <h6 class="my-0">${item.name}</h6>
+                            <small class="text-muted">${item.brand} x ${item.qty}</small>
+                        </div>
+                    </div>
+                    <span class="text-muted">${money(item.price * item.qty)}</span>
                 `;
-                cartItemsEl.appendChild(el);
+                checkoutCartItemsEl.appendChild(li);
             });
+
+            const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+            checkoutCartTotalEl.textContent = money(total);
+            summaryCartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
         }
 
-        cartTotalEl.textContent = money(total);
-    </script>
+        // Bootstrap form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                    }
 
+                    form.classList.add('was-validated')
+                }, false)
+                })
+        })()
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCheckoutSummary();
+        });
+    </script>
 </body>
 </html>
