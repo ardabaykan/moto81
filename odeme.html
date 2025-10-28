@@ -19,7 +19,6 @@
     </script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Custom CSS -->
     <style>
         :root{
             --primary: #0a0a0a; /* Koyu gri/Siyah */
@@ -38,7 +37,7 @@
             line-height:1.6;
         }
 
-        /* Navbar Customizations (Same as index.html) */
+        /* Navbar Customizations */
         .navbar{
             background-color: var(--white);
             border-bottom: 1px solid var(--border-color);
@@ -57,42 +56,78 @@
             border-radius: 0.375rem;
             transition: all 0.2s ease-in-out;
         }
-        .navbar-nav .nav-link:hover {
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
             background-color: var(--light-bg);
             color: var(--primary) !important;
-        }
-        .navbar-toggler{
-            border-color: var(--border-color);
-        }
-        .navbar-toggler-icon{
-            filter: grayscale(100%);
+            font-weight: 500;
         }
 
-        /* Main Content */
         main{
-            min-height: calc(100vh - 180px); /* Adjust based on header/footer height */
+            min-height: calc(100vh - 180px); /* Header ve footer'ı hesaba katarak */
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-
-        .checkout-card{
+        .checkout-summary-card, .checkout-form-card {
             background-color: var(--white);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
             box-shadow: var(--shadow-light);
-            padding: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-
-        /* Forms */
+        .checkout-summary-card h4, .checkout-form-card h4 {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+        .checkout-summary .list-group-item{
+            background-color: var(--white);
+            border: none;
+            border-bottom: 1px dashed var(--border-color);
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .checkout-summary .list-group-item:last-child{
+            border-bottom: none;
+        }
+        .checkout-summary img{
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 0.375rem;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+        }
+        .checkout-summary .product-info{
+            flex-grow: 1;
+        }
+        .checkout-summary .product-info h6{
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 0.2rem;
+        }
+        .checkout-summary .text-muted{
+            font-size: 0.875rem;
+        }
+        .checkout-total{
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
         .form-label{
             font-weight: 500;
             color: var(--secondary);
-            margin-bottom: 0.5rem;
         }
         .form-control{
             border-color: var(--border-color);
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
         }
         .form-control:focus{
             border-color: var(--primary);
@@ -101,96 +136,22 @@
         .btn-primary{
             background-color: var(--primary);
             border-color: var(--primary);
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            border-radius: 0.5rem;
+            font-weight: 500;
             transition: all 0.2s ease-in-out;
         }
         .btn-primary:hover{
             background-color: var(--secondary);
             border-color: var(--secondary);
         }
-
-        /* Order Summary */
-        .order-summary-card{
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-light);
-            padding: 1.5rem;
-        }
-        .order-summary-card h4{
-            font-weight: 600;
+        .btn-outline-primary {
             color: var(--primary);
-            margin-bottom: 1.5rem;
+            border-color: var(--primary);
+            font-weight: 500;
         }
-        .order-item{
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-color);
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: var(--white);
         }
-        .order-item:last-child{
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        .order-item img{
-            width: 70px; /* Larger image in summary */
-            height: 70px;
-            object-fit: contain;
-            border-radius: 0.5rem;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            flex-shrink: 0; /* Prevent image from shrinking */
-        }
-        .order-item-details{
-            flex-grow: 1;
-        }
-        .order-item-details strong{
-            font-size: 1rem;
-            color: var(--secondary);
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-        .order-item-details .text-muted{
-            font-size: 0.875rem;
-        }
-        .order-total-line{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-        }
-        .account-info{
-            background-color: var(--light-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        .account-info h5{
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .account-info p{
-            font-size: 0.95rem;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
-        }
-        .account-info strong{
-            color: var(--primary);
-        }
-
-        /* Footer (Same as index.html) */
         footer{
             padding: 2.5rem 0;
             text-align: center;
@@ -203,36 +164,18 @@
             margin-bottom: 0;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 991.98px) {
-            .navbar-collapse{
-                background-color: var(--white);
-                border-top: 1px solid var(--border-color);
-                margin-top: 0.5rem;
-                padding: 1rem 0;
-                box-shadow: var(--shadow-light);
+        /* Responsive */
+        @media (max-width: 767.98px) {
+            .checkout-summary-card, .checkout-form-card {
+                padding: 1rem;
             }
-            .navbar-nav .nav-link{
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-            .checkout-card, .order-summary-card {
-                padding: 1.5rem;
+            .checkout-summary-card h4, .checkout-form-card h4 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
             }
             main {
-                padding-top: 1.5rem;
-                padding-bottom: 1.5rem;
-            }
-        }
-        @media (max-width: 767.98px) {
-            .order-md-last { /* For mobile, order summary at the bottom */
-                order: 2;
-            }
-            .order-md-first { /* For mobile, form at the top */
-                order: 1;
-            }
-            .checkout-card{
-                margin-bottom: 2rem; /* Add space between form and summary on mobile */
+                padding-top: 1rem;
+                padding-bottom: 1rem;
             }
         }
     </style>
@@ -255,81 +198,137 @@
     </header>
 
     <main class="container my-5">
-        <h1 class="mb-5 text-center" style="font-weight: 700; color: var(--primary);">Siparişi Tamamla</h1>
+        <h1 class="mb-5 text-center" style="font-weight: 700; color: var(--primary);">Ödeme İşlemleri</h1>
 
         <div class="row g-5">
-            <!-- Order Form -->
-            <div class="col-md-7 col-lg-8 order-md-first">
-                <div class="checkout-card">
-                    <h4 class="mb-4">Teslimat ve İletişim Bilgileri</h4>
-                    <form class="needs-validation" id="checkoutForm" novalidate>
+            <!-- Sepet Özeti -->
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <div class="checkout-summary-card">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Sepetiniz</span>
+                        <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+                    </h4>
+                    <ul class="list-group mb-3" id="cartSummaryItems">
+                        <!-- Sepet öğeleri buraya JS ile yüklenecek -->
+                        <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+                    </ul>
+
+                    <div class="d-flex justify-content-between align-items-center checkout-total">
+                        <strong>Toplam</strong>
+                        <span id="summaryCartTotal">0.00 ₺</span>
+                    </div>
+                </div>
+
+                <!-- İletişim Bilgileri (Ödeme Yöntemi olarak) -->
+                <div class="checkout-summary-card mt-4">
+                    <h4 class="mb-3">Ödeme Nasıl Yapılır?</h4>
+                    <p class="text-muted mb-4">
+                        Ödeme işlemleri için lütfen bizimle iletişime geçiniz. Size özel ödeme yöntemleri ve teslimat detayları hakkında bilgi vereceğiz.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <a href="tel:05312672081" class="btn btn-primary btn-lg">
+                            <i class="bi bi-telephone-fill"></i> Telefon ile İletişime Geç
+                        </a>
+                        <a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-instagram"></i> Instagram'dan Yaz
+                        </a>
+                    </div>
+                    <p class="text-muted text-center mt-3 small">Size en kısa sürede geri dönüş yapılacaktır.</p>
+                </div>
+            </div>
+
+            <!-- Teslimat ve Fatura Bilgileri Formu -->
+            <div class="col-md-7 col-lg-8">
+                <div class="checkout-form-card">
+                    <h4 class="mb-3">Teslimat ve Fatura Bilgileri</h4>
+                    <form class="needs-validation" novalidate>
                         <div class="row g-3">
-                            <div class="col-12">
-                                <label for="fullName" class="form-label">Adınız Soyadınız</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Adınız Soyadınız" required>
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Adınız</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
                                 <div class="invalid-feedback">
-                                    Lütfen adınızı ve soyadınızı girin.
+                                    Lütfen geçerli bir ad girin.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Soyadınız</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <div class="invalid-feedback">
+                                    Lütfen geçerli bir soyad girin.
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <label for="phone" class="form-label">Telefon Numarası</label>
-                                <input type="tel" class="form-control" id="phone" placeholder="Örnek: 05xx xxx xx xx" required pattern="[0-9]{10,11}">
+                                <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
+                                <input type="email" class="form-control" id="email" placeholder="siz@example.com">
                                 <div class="invalid-feedback">
-                                    Lütfen geçerli bir telefon numarası girin (10 veya 11 hane).
+                                    Lütfen geçerli bir e-posta adresi girin.
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <label for="address" class="form-label">Teslimat Adresi</label>
-                                <textarea class="form-control" id="address" placeholder="Açık adresinizi yazın..." rows="3" required></textarea>
+                                <label for="phone" class="form-label">Telefon Numaranız</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="5xx xxx xx xx" required>
+                                <div class="invalid-feedback">
+                                    Lütfen geçerli bir telefon numarası girin.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <label for="address" class="form-label">Adres</label>
+                                <input type="text" class="form-control" id="address" placeholder="1234 Ana Cadde" required>
                                 <div class="invalid-feedback">
                                     Lütfen teslimat adresinizi girin.
                                 </div>
                             </div>
-                        </div>
 
-                        <hr class="my-4">
+                            <div class="col-md-5">
+                                <label for="country" class="form-label">Ülke</label>
+                                <select class="form-select" id="country" required>
+                                    <option value="">Seçin...</option>
+                                    <option>Türkiye</option>
+                                    <!-- Diğer ülkeler eklenebilir -->
+                                </select>
+                                <div class="invalid-feedback">
+                                    Lütfen bir ülke seçin.
+                                </div>
+                            </div>
 
-                        <h4 class="mb-3">Ödeme Yöntemi</h4>
-                        <div class="my-3">
-                            <div class="form-check">
-                                <input id="bankTransfer" name="paymentMethod" type="radio" class="form-check-input" checked required>
-                                <label class="form-check-label" for="bankTransfer">Banka Havalesi / EFT</label>
+                            <div class="col-md-4">
+                                <label for="city" class="form-label">Şehir</label>
+                                <input type="text" class="form-control" id="city" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Lütfen bir şehir girin.
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="zip" class="form-label">Posta Kodu</label>
+                                <input type="text" class="form-control" id="zip" placeholder="" required>
+                                <div class="invalid-feedback">
+                                    Lütfen posta kodu girin.
+                                </div>
                             </div>
                         </div>
 
-                        <div class="account-info mt-4">
-                            <h5>Banka Hesap Bilgileri</h5>
-                            <p>Banka Adı: <strong>X Bankası A.Ş.</strong></p>
-                            <p>Hesap Adı: <strong>Moto 81 E-Ticaret</strong></p>
-                            <p>IBAN: <strong>TRXX 0000 0000 0000 0000 0000 00</strong></p>
-                            <p class="text-muted small">
-                                Siparişinizi tamamladıktan sonra lütfen yukarıdaki hesaba havale/EFT yaparak ödemenizi gerçekleştirin.
-                                Açıklama kısmına adınızı ve sipariş numaranızı eklemeyi unutmayın.
-                            </p>
-                        </div>
-                        
                         <hr class="my-4">
-                        <button class="w-100 btn btn-primary btn-lg" type="submit" id="completeOrderBtn">Siparişi Tamamla</button>
-                    </form>
-                </div>
-            </div>
 
-            <!-- Order Summary -->
-            <div class="col-md-5 col-lg-4 order-md-last">
-                <div class="order-summary-card">
-                    <h4 class="d-flex justify-content-between align-items-center mb-4">
-                        <span>Sipariş Özeti</span>
-                        <span class="badge bg-primary rounded-pill" id="summaryItemCount">0</span>
-                    </h4>
-                    <ul class="list-unstyled mb-0" id="orderSummaryItems">
-                        <!-- Items will be loaded here by JS -->
-                    </ul>
-                    <div class="order-total-line">
-                        <span>Toplam</span>
-                        <span id="summaryTotal">0.00 ₺</span>
-                    </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="same-address">
+                            <label class="form-check-label" for="same-address">Teslimat adresi ile fatura adresi aynı.</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="save-info">
+                            <label class="form-check-label" for="save-info">Bu bilgileri bir sonraki alışveriş için kaydet.</label>
+                        </div>
+
+                        <!-- Bu kısımda ödeme butonları yerine iletişim bilgileri özet bölümüne taşındı -->
+                        <div class="mt-4 alert alert-info" role="alert">
+                            <strong>Ödeme Bilgisi:</strong> Siparişinizi tamamlamak için lütfen sağdaki iletişim kanallarından bizimle irtibata geçin.
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -344,101 +343,64 @@
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+        // Form Validation for Bootstrap
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })();
+
+        // Sepet verilerini ana sayfadan çekme ve özetleme
         const CART_KEY = 'moto81_cart_v1';
         let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
 
-        const orderSummaryItems = document.getElementById('orderSummaryItems');
-        const summaryItemCount = document.getElementById('summaryItemCount');
-        const summaryTotal = document.getElementById('summaryTotal');
-        const checkoutForm = document.getElementById('checkoutForm');
-        const completeOrderBtn = document.getElementById('completeOrderBtn');
+        const summaryCartCount = document.getElementById('summaryCartCount');
+        const cartSummaryItems = document.getElementById('cartSummaryItems');
+        const summaryCartTotal = document.getElementById('summaryCartTotal');
 
         function money(num){
             return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
         }
 
-        function renderOrderSummary(){
-            orderSummaryItems.innerHTML = '';
-            let totalQuantity = 0;
-            let totalPrice = 0;
+        function renderCartSummary(){
+            summaryCartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
+            cartSummaryItems.innerHTML = '';
 
-            if (cart.length === 0) {
-                orderSummaryItems.innerHTML = '<li class="text-muted text-center py-3">Sepetinizde ürün bulunmamaktadır.</li>';
-                summaryItemCount.textContent = '0';
-                summaryTotal.textContent = money(0);
-                // Redirect if cart is empty
-                alert("Sepetiniz boş olduğu için ödeme sayfasına devam edemezsiniz. Ürün seçmek için ana sayfaya yönlendiriliyorsunuz.");
-                window.location.href = "index.html";
+            if(cart.length === 0){
+                cartSummaryItems.innerHTML = '<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
+                summaryCartTotal.textContent = money(0);
                 return;
             }
 
-            cart.forEach(item => {
+            cart.forEach(item =>{
                 const li = document.createElement('li');
-                li.className = 'order-item';
+                li.className = 'list-group-item d-flex justify-content-between lh-sm';
                 li.innerHTML = `
-                    <img src="${item.img}" alt="${item.name}">
-                    <div class="order-item-details">
-                        <strong>${item.name}</strong>
-                        <span class="text-muted">${item.brand}</span>
-                        <span class="text-muted">${item.qty} x ${money(item.price)}</span>
+                    <img src="${item.img}" alt="${item.name}" class="me-3">
+                    <div class="product-info">
+                        <h6>${item.name}</h6>
+                        <small class="text-muted">${item.brand} · Adet: ${item.qty}</small>
                     </div>
-                    <span class="text-end" style="font-weight: 600; color: var(--primary);">${money(item.qty * item.price)}</span>
+                    <span class="text-muted">${money(item.price * item.qty)}</span>
                 `;
-                orderSummaryItems.appendChild(li);
-                totalQuantity += item.qty;
-                totalPrice += (item.qty * item.price);
+                cartSummaryItems.appendChild(li);
             });
 
-            summaryItemCount.textContent = totalQuantity;
-            summaryTotal.textContent = money(totalPrice);
+            const total = cart.reduce((s,i)=> s + i.price * i.qty, 0);
+            summaryCartTotal.textContent = money(total);
         }
 
-        // Bootstrap form validation
-        checkoutForm.addEventListener('submit', function (event) {
-            if (!checkoutForm.checkValidity()) {
-                event.preventDefault();
-                event.stopPropagation();
-            } else {
-                event.preventDefault(); // Prevent actual form submission for this demo
-
-                const fullName = document.getElementById('fullName').value;
-                const phone = document.getElementById('phone').value;
-                const address = document.getElementById('address').value;
-                
-                let orderDetails = `Sipariş Detayları:\n`;
-                orderDetails += `Ad Soyad: ${fullName}\n`;
-                orderDetails += `Telefon: ${phone}\n`;
-                orderDetails += `Adres: ${address}\n\n`;
-                orderDetails += `--- Sipariş Edilen Ürünler ---\n`;
-
-                cart.forEach(item => {
-                    orderDetails += `${item.name} (${item.brand}) x ${item.qty} Adet - ${money(item.qty * item.price)}\n`;
-                });
-
-                orderDetails += `\nToplam Tutar: ${summaryTotal.textContent}\n\n`;
-                orderDetails += `Ödeme Yöntemi: Banka Havalesi / EFT\n`;
-                orderDetails += `Lütfen ödemenizi Banka Hesap Bilgileri bölümündeki hesaba yapınız.`;
-
-                alert("Siparişiniz başarıyla alındı!\n\n" + orderDetails);
-
-                // Clear cart after successful order
-                cart = [];
-                localStorage.removeItem(CART_KEY);
-                renderOrderSummary(); // Update summary to show empty cart
-                checkoutForm.reset(); // Clear form fields
-                checkoutForm.classList.remove('was-validated'); // Reset validation state
-
-                // Optional: Redirect to a "Thank You" page
-                // window.location.href = "tesekkurler.html"; 
-            }
-            checkoutForm.classList.add('was-validated');
-        }, false);
-
-
-        // Initial load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderOrderSummary();
-        });
+        // Sayfa yüklendiğinde sepet özetini render et
+        document.addEventListener('DOMContentLoaded', renderCartSummary);
     </script>
 </body>
 </html>
