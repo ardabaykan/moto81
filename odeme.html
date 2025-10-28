@@ -98,9 +98,9 @@
             border-bottom: none;
         }
         .checkout-summary img{
-            width: 70px; /* Resim boyutunu artırdık */
-            height: 70px; /* Resim boyutunu artırdık */
-            object-fit: contain;
+            width: 60px; /* Görsel boyutunu küçültüldü */
+            height: 60px; /* Görsel boyutunu küçültüldü */
+            object-fit: contain; /* Görseli kutuya sığdırır, kesmez */
             border-radius: 0.375rem;
             background-color: var(--white);
             border: 1px solid var(--border-color);
@@ -116,10 +116,10 @@
             font-weight: 500;
             color: var(--secondary);
             margin-bottom: 0.2rem;
-            font-size: 1rem; /* Ürün adı font boyutunu artırdık */
+            font-size: 0.95rem; /* Ürün adı font boyutunu düzenlendi */
         }
         .checkout-summary .text-muted{
-            font-size: 0.9rem; /* Açıklama font boyutunu artırdık */
+            font-size: 0.85rem; /* Açıklama font boyutunu düzenlendi */
         }
         .checkout-summary .item-price{
             font-weight: 600;
@@ -129,7 +129,7 @@
             margin-left: auto; /* Sağ tarafa hizala */
         }
         .checkout-total{
-            font-size: 1.35rem; /* Toplam font boyutunu artırdık */
+            font-size: 1.25rem; /* Toplam font boyutunu düzenlendi */
             font-weight: 700;
             color: var(--primary);
             margin-top: 1rem;
@@ -179,13 +179,16 @@
             margin-bottom: 1rem;
         }
         .instagram-profile-card .profile-img-container {
-            width: 150px; /* Profil resmi boyutunu ayarla */
-            height: 150px;
+            width: 120px; /* Profil resmi boyutunu ayarla */
+            height: 120px;
             border-radius: 50%; /* Yuvarlak profil resmi */
             overflow: hidden;
             margin: 0 auto 1.5rem auto; /* Ortala ve alt boşluk ekle */
             border: 3px solid var(--primary); /* Çerçeve ekle */
             box-shadow: var(--shadow-light);
+            display: flex; /* Resmi dikeyde ortalamak için */
+            align-items: center; /* Resmi dikeyde ortalamak için */
+            justify-content: center; /* Resmi yatayda ortalamak için */
         }
         .instagram-profile-card .profile-img-container img {
             width: 100%;
@@ -193,7 +196,7 @@
             object-fit: cover; /* Resmi kutuya sığdır */
         }
         .instagram-profile-card .username {
-            font-size: 1.5rem;
+            font-size: 1.4rem; /* Kullanıcı adı fontu düzenlendi */
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 0.5rem;
@@ -201,9 +204,10 @@
         .instagram-profile-card .bio {
             color: var(--gray-text);
             margin-bottom: 1.5rem;
-            max-width: 300px; /* Bio kısmını daralt */
+            max-width: 350px; /* Bio kısmını daraltıldı */
             margin-left: auto;
             margin-right: auto;
+            font-size: 0.95rem;
         }
         .instagram-profile-card .btn-instagram {
             background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
@@ -245,27 +249,38 @@
                 padding-bottom: 1rem;
             }
             .checkout-summary img{
-                width: 50px;
-                height: 50px;
+                width: 45px; /* Küçük ekranlarda sepet görseli */
+                height: 45px; /* Küçük ekranlarda sepet görseli */
             }
             .checkout-summary .product-info h6{
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
             .checkout-summary .text-muted{
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
             .checkout-total{
-                font-size: 1.15rem;
+                font-size: 1.05rem;
             }
             .instagram-profile-card .profile-img-container {
-                width: 100px;
-                height: 100px;
+                width: 90px; /* Küçük ekranlarda profil görseli */
+                height: 90px; /* Küçük ekranlarda profil görseli */
             }
             .instagram-profile-card .username {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             .instagram-profile-card .bio {
+                font-size: 0.85rem;
+            }
+            .instagram-profile-card .btn-instagram {
+                padding: 0.6rem 1.5rem;
                 font-size: 0.9rem;
+            }
+            /* Sıralama mobilde değişsin diye order sınıfları */
+            .order-md-last {
+                order: 1; /* Normalde en son ama mobilde başa al */
+            }
+            .order-md-first {
+                order: 2; /* Normalde ilk ama mobilde sona al */
             }
         }
     </style>
@@ -291,8 +306,45 @@
         <h1 class="mb-5 text-center" style="font-weight: 700; color: var(--primary);">Ödeme İşlemleri</h1>
 
         <div class="row g-5">
-            <!-- Teslimat ve Fatura Bilgileri Formu -->
-            <div class="col-md-7 col-lg-8">
+            <!-- Sepet Özeti ve Ödeme İletişim Bilgileri (Ödeme seçenekleri önce görünecek) -->
+            <div class="col-md-5 col-lg-4 order-md-first"> <!-- order-md-first eklendi -->
+                <!-- İletişim Bilgileri (Ödeme Yöntemi olarak) -->
+                <div class="checkout-summary-card">
+                    <h4 class="mb-3">Ödeme Nasıl Yapılır?</h4>
+                    <p class="text-muted mb-4">
+                        Ödeme işlemleri için lütfen aşağıdaki kanallardan bizimle iletişime geçiniz. Size özel ödeme yöntemleri ve teslimat detayları hakkında bilgi vereceğiz.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <!-- WhatsApp linki güncellendi -->
+                        <a href="https://wa.me/905312672081" target="_blank" class="btn btn-success btn-lg">
+                            <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
+                        </a>
+                        <a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
+                            <i class="bi bi-instagram me-2"></i> Instagram: @ard4_fr
+                        </a>
+                    </div>
+                    <p class="text-muted text-center mt-3 small">Size en kısa sürede geri dönüş yapılacaktır.</p>
+                </div>
+
+                <div class="checkout-summary-card mt-4">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Sepetiniz</span>
+                        <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+                    </h4>
+                    <ul class="list-group mb-3" id="cartSummaryItems">
+                        <!-- Sepet öğeleri buraya JS ile yüklenecek -->
+                        <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+                    </ul>
+
+                    <div class="d-flex justify-content-between align-items-center checkout-total">
+                        <strong>Toplam</strong>
+                        <span id="summaryCartTotal">0.00 ₺</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teslimat Bilgileri Formu -->
+            <div class="col-md-7 col-lg-8 order-md-last"> <!-- order-md-last eklendi -->
                 <div class="checkout-form-card">
                     <h4 class="mb-3">Teslimat Bilgileri</h4>
                     <form class="needs-validation" novalidate>
@@ -379,45 +431,9 @@
                         </div>
 
                         <div class="mt-4 alert alert-info" role="alert">
-                            <strong>Ödeme Bilgisi:</strong> Siparişinizi tamamlamak için lütfen sağdaki iletişim kanallarından bizimle irtibata geçin.
+                            <strong>Bilgi:</strong> Teslimat bilgilerinizi doldurduktan sonra, ödeme için soldaki iletişim kanallarından bizimle irtibata geçiniz.
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <!-- Sepet Özeti ve Ödeme İletişim Bilgileri -->
-            <div class="col-md-5 col-lg-4 order-md-last">
-                <div class="checkout-summary-card">
-                    <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-primary">Sepetiniz</span>
-                        <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
-                    </h4>
-                    <ul class="list-group mb-3" id="cartSummaryItems">
-                        <!-- Sepet öğeleri buraya JS ile yüklenecek -->
-                        <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
-                    </ul>
-
-                    <div class="d-flex justify-content-between align-items-center checkout-total">
-                        <strong>Toplam</strong>
-                        <span id="summaryCartTotal">0.00 ₺</span>
-                    </div>
-                </div>
-
-                <!-- İletişim Bilgileri (Ödeme Yöntemi olarak) -->
-                <div class="checkout-summary-card mt-4">
-                    <h4 class="mb-3">Ödeme Nasıl Yapılır?</h4>
-                    <p class="text-muted mb-4">
-                        Ödeme işlemleri için lütfen aşağıdaki kanallardan bizimle iletişime geçiniz. Size özel ödeme yöntemleri ve teslimat detayları hakkında bilgi vereceğiz.
-                    </p>
-                    <div class="d-grid gap-2">
-                        <a href="tel:05312672081" class="btn btn-primary btn-lg">
-                            <i class="bi bi-telephone-fill"></i> 0531 267 20 81
-                        </a>
-                        <a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-outline-primary btn-lg">
-                            <i class="bi bi-instagram"></i> Instagram: @ard4_fr
-                        </a>
-                    </div>
-                    <p class="text-muted text-center mt-3 small">Size en kısa sürede geri dönüş yapılacaktır.</p>
                 </div>
             </div>
         </div>
@@ -429,9 +445,12 @@
                     <h4>Bizi Instagram'da Takip Edin!</h4>
                     <a href="https://www.instagram.com/ard4_fr" target="_blank" class="text-decoration-none">
                         <div class="profile-img-container">
-                            <!-- BURAYA KENDİ INSTAGRAM PROFİL FOTOĞRAFINIZI VEYA İSTEDİĞİNİZ BİR GÖRSELİ KOYUN -->
-                            <!-- Örneğin: img/ard4_fr_profile.jpg -->
-                            <img src="https://via.placeholder.com/150/0a0a0a/ffffff?text=ard4_fr" alt="ard4_fr Instagram Profil" class="img-fluid">
+                            <!--
+                                BURAYA KENDİ INSTAGRAM PROFİL FOTOĞRAFINIZIN YOLUNU VEYA URL'SİNİ EKLEYİN!
+                                Örnek: <img src="img/ard4_fr_profile.jpg" alt="ard4_fr Instagram Profil">
+                                Geçici bir placeholder kullanılmıştır:
+                            -->
+                            <img src="https://via.placeholder.com/120x120/0a0a0a/ffffff?text=ard4_fr+Profile" alt="ard4_fr Instagram Profil" class="img-fluid">
                         </div>
                         <p class="username">@ard4_fr</p>
                     </a>
