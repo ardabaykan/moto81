@@ -70,7 +70,7 @@
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-        .checkout-summary-card, .checkout-form-card {
+        .checkout-summary-card, .checkout-form-card, .instagram-profile-card {
             background-color: var(--white);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
@@ -78,7 +78,7 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        .checkout-summary-card h4, .checkout-form-card h4 {
+        .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4 {
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 1.5rem;
@@ -166,6 +166,59 @@
             background-color: var(--primary);
             color: var(--white);
         }
+
+        /* Instagram Profile Card Styling */
+        .instagram-profile-card {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem; /* Üst kısımdaki boşluğu artır */
+        }
+        .instagram-profile-card h4 {
+            border-bottom: none; /* Alt çizgiyi kaldır */
+            padding-bottom: 0;
+            margin-bottom: 1rem;
+        }
+        .instagram-profile-card .profile-img-container {
+            width: 150px; /* Profil resmi boyutunu ayarla */
+            height: 150px;
+            border-radius: 50%; /* Yuvarlak profil resmi */
+            overflow: hidden;
+            margin: 0 auto 1.5rem auto; /* Ortala ve alt boşluk ekle */
+            border: 3px solid var(--primary); /* Çerçeve ekle */
+            box-shadow: var(--shadow-light);
+        }
+        .instagram-profile-card .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Resmi kutuya sığdır */
+        }
+        .instagram-profile-card .username {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .instagram-profile-card .bio {
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            max-width: 300px; /* Bio kısmını daralt */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .instagram-profile-card .btn-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        .instagram-profile-card .btn-instagram:hover {
+            transform: scale(1.05);
+            color: white; /* Hover'da renk değişimi olmaması için */
+        }
+
         footer{
             padding: 2.5rem 0;
             text-align: center;
@@ -180,10 +233,10 @@
 
         /* Responsive */
         @media (max-width: 767.98px) {
-            .checkout-summary-card, .checkout-form-card {
+            .checkout-summary-card, .checkout-form-card, .instagram-profile-card {
                 padding: 1rem;
             }
-            .checkout-summary-card h4, .checkout-form-card h4 {
+            .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4 {
                 font-size: 1.3rem;
                 margin-bottom: 1rem;
             }
@@ -203,6 +256,16 @@
             }
             .checkout-total{
                 font-size: 1.15rem;
+            }
+            .instagram-profile-card .profile-img-container {
+                width: 100px;
+                height: 100px;
+            }
+            .instagram-profile-card .username {
+                font-size: 1.2rem;
+            }
+            .instagram-profile-card .bio {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -358,6 +421,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- Instagram Profil Kartı -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8 col-lg-6">
+                <div class="instagram-profile-card">
+                    <h4>Bizi Instagram'da Takip Edin!</h4>
+                    <a href="https://www.instagram.com/ard4_fr" target="_blank" class="text-decoration-none">
+                        <div class="profile-img-container">
+                            <!-- BURAYA KENDİ INSTAGRAM PROFİL FOTOĞRAFINIZI VEYA İSTEDİĞİNİZ BİR GÖRSELİ KOYUN -->
+                            <!-- Örneğin: img/ard4_fr_profile.jpg -->
+                            <img src="https://via.placeholder.com/150/0a0a0a/ffffff?text=ard4_fr" alt="ard4_fr Instagram Profil" class="img-fluid">
+                        </div>
+                        <p class="username">@ard4_fr</p>
+                    </a>
+                    <p class="bio">
+                        Motosiklet dünyasından en son haberler, özel ürünler ve kampanyalar için bizi takip edin!
+                    </p>
+                    <a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-instagram d-inline-flex align-items-center">
+                        <i class="bi bi-instagram me-2"></i> Profili Görüntüle
+                    </a>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer class="mt-5">
