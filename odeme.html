@@ -19,31 +19,6 @@
     --border-color: #dee2e6;
     --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
 }
-    .modern-profile {
-    width: 120px; /* Görsel boyutu */
-    height: 120px;
-    border-radius: 50%; /* Tam yuvarlak */
-    overflow: hidden;
-    border: 3px solid #0a0a0a; /* Modern siyah çerçeve */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Hafif gölge */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto; /* Ortala */
-    transition: transform 0.3s ease;
-}
-
-.modern-profile img.profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Görseli kutuya sığdır */
-    display: block;
-}
-
-.modern-profile:hover {
-    transform: scale(1.05); /* Hover efekt */
-}
-
 body{
     font-family: 'Inter', sans-serif;
     background-color: var(--light-bg);
@@ -77,8 +52,8 @@ main{
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
-/* Sepet Kutusu */
-.checkout-summary-card{
+/* Genel Kart Stili */
+.custom-card{
     background-color: var(--white);
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
@@ -86,13 +61,15 @@ main{
     padding: 1.5rem;
     margin-bottom: 1.5rem;
 }
-.checkout-summary-card h4{
+.custom-card h4{
     font-weight: 600;
     color: var(--primary);
     margin-bottom: 1.5rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.75rem;
 }
+
+/* Sepet Özeti Stili */
 .checkout-summary .list-group-item{
     background-color: var(--white);
     border: none;
@@ -151,58 +128,90 @@ main{
 footer{padding: 2.5rem 0; text-align: center; color: var(--gray-text); border-top: 1px solid var(--border-color); background-color: var(--white);}
 footer p{margin-bottom:0;}
 
-/* Instagram Profil Kutucuğu Stilleri */
-.instagram-profile-widget {
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-light);
-    padding: 1.5rem;
+/* Yeni Modern Instagram Profil Kutucuğu Stilleri */
+.instagram-widget-modern {
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    border-radius: 1rem; /* Daha yumuşak köşeler */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 2rem;
     text-align: center;
-    margin-top: 1.5rem; /* Üstteki elemanlardan boşluk bırakır */
-    text-decoration: none; /* Link olduğu için alt çizgiyi kaldırır */
-    color: var(--secondary); /* Varsayılan link rengini engeller */
-    display: block; /* Tam genişlik kaplaması için */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: var(--white); /* Beyaz metin */
+    display: block;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
-.instagram-profile-widget:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    color: var(--primary); /* Hover'da renk değişimi */
+.instagram-widget-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png') no-repeat center center; /* Instagram logosu arka plan */
+    background-size: 150px;
+    opacity: 0.05;
+    z-index: 1;
 }
-.instagram-profile-widget .profile-picture {
-    width: 80px;
-    height: 80px;
+.instagram-widget-modern:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+.instagram-widget-modern .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+.instagram-widget-modern .profile-picture-modern {
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1rem;
-    border: 3px solid var(--primary); /* Profil fotoğrafına belirgin çerçeve */
+    border: 4px solid var(--white); /* Beyaz çerçeve */
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.3); /* Dış halka efekti */
 }
-.instagram-profile-widget h5 {
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-.instagram-profile-widget p {
-    font-size: 0.9rem;
-    color: var(--gray-text);
-    margin-bottom: 0;
-}
-.instagram-profile-widget .btn-follow {
-    margin-top: 1rem;
-    background-color: #E1306C; /* Instagram'ın pembe tonu */
-    border-color: #E1306C;
+.instagram-widget-modern .username-modern {
+    font-weight: 700;
+    font-size: 1.8rem;
     color: var(--white);
-    font-weight: 500;
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
 }
-.instagram-profile-widget .btn-follow:hover {
-    background-color: #c1205c;
-    border-color: #c1205c;
+.instagram-widget-modern .bio-modern {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+.instagram-widget-modern .btn-follow-modern {
+    background-color: var(--white); /* Beyaz buton */
+    border-color: var(--white);
+    color: #cc2366; /* Instagram'ın koyu pembe tonu */
+    font-weight: 600;
+    padding: 0.6rem 2rem;
+    border-radius: 50px; /* Yuvarlak buton */
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+.instagram-widget-modern .btn-follow-modern:hover {
+    background-color: rgba(255,255,255,0.9);
+    border-color: rgba(255,255,255,0.9);
+    color: #e6683c;
+    transform: scale(1.05);
 }
 
 /* Footer Sosyal Medya için */
 .footer-social-section {
-    margin-top: 2rem;
+    margin-top: 3rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
 }
@@ -221,6 +230,40 @@ footer p{margin-bottom:0;}
     color: var(--primary);
 }
 
+/* YouTube Video Kutusu */
+.youtube-video-section {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-light);
+    padding: 1.5rem;
+    margin-top: 3rem; /* Diğer alanlardan ayırmak için boşluk */
+    text-align: center;
+}
+.youtube-video-section h4 {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.75rem;
+}
+.video-responsive {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 0.5rem;
+}
+.video-responsive iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 </style>
 </head>
 <body>
@@ -243,113 +286,123 @@ footer p{margin-bottom:0;}
 <main class="container my-5">
 <h1 class="mb-5 text-center" style="font-weight:700;color:var(--primary)">Ödeme İşlemleri</h1>
 <div class="row g-5">
-<div class="col-md-7 col-lg-8 order-md-1">
-<div class="checkout-summary-card">
-<h4>Teslimat Bilgileri</h4>
-<form class="needs-validation" id="deliveryForm" novalidate>
-<div class="row g-3">
-<div class="col-sm-6">
-<label for="firstName" class="form-label">Adınız</label>
-<input type="text" class="form-control" id="firstName" required>
-<div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
+<div class="col-md-5 col-lg-4 order-md-1 order-lg-1">
+    <!-- Sepet Kutusu En Üste Alındı -->
+    <div class="custom-card mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Sepetiniz</span>
+            <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+        </h4>
+        <ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
+            <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+        </ul>
+        <div class="d-flex justify-content-between align-items-center checkout-total">
+            <strong>Toplam</strong>
+            <span id="summaryCartTotal">0.00 ₺</span>
+        </div>
+    </div>
+
+    <div class="custom-card">
+        <h4>Ödeme Nasıl Yapılır?</h4>
+        <p class="text-muted mb-4">
+            Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
+        </p>
+        <div class="d-grid gap-2">
+            <button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
+                <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
+            </button>
+        </div>
+        <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
+    </div>
+
+    <!-- Modern Instagram Profil Kutucuğu -->
+    <a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-widget-modern">
+        <div class="profile-header">
+            <img src="https://via.placeholder.com/90/e1306c/ffffff?text=Profil" class="profile-picture-modern" alt="Instagram Profil Fotoğrafı">
+        </div>
+        <div class="username-modern">@ard4_fr</div>
+        <p class="bio-modern">En yeni motosiklet ürünleri, aksesuarları ve kampanyalar için bizi takip edin!</p>
+        <span class="btn btn-follow-modern"><i class="bi bi-instagram me-2"></i>Takip Et</span>
+    </a>
+    <!-- Modern Instagram Profil Kutucuğu Bitişi -->
 </div>
-<div class="col-sm-6">
-<label for="lastName" class="form-label">Soyadınız</label>
-<input type="text" class="form-control" id="lastName" required>
-<div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
-</div>
-<div class="col-12">
-<label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
-<input type="email" class="form-control" id="email" placeholder="siz@example.com">
-<div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
-</div>
-<div class="col-12">
-<label for="phone" class="form-label">Telefon</label>
-<input type="tel" class="form-control" id="phone" required>
-<div class="invalid-feedback">Geçerli telefon girin.</div>
-</div>
-<div class="col-12">
-<label for="address" class="form-label">Adres</label>
-<input type="text" class="form-control" id="address" required>
-<div class="invalid-feedback">Adres girin.</div>
-</div>
-<div class="col-md-5">
-<label for="country" class="form-label">Ülke</label>
-<select class="form-select" id="country" required>
-<option value="">Seçin...</option>
-<option>Türkiye</option>
-</select>
-<div class="invalid-feedback">Ülke seçin.</div>
-</div>
-<div class="col-md-4">
-<label for="city" class="form-label">Şehir</label>
-<input type="text" class="form-control" id="city" required>
-<div class="invalid-feedback">Şehir girin.</div>
-</div>
-<div class="col-md-3">
-<label for="zip" class="form-label">Posta Kodu</label>
-<input type="text" class="form-control" id="zip" required>
-<div class="invalid-feedback">Posta kodu girin.</div>
-</div>
-</div>
-<hr class="my-4">
-<div class="form-check">
-<input type="checkbox" class="form-check-input" id="same-address">
-<label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
-</div>
-<div class="form-check">
-<input type="checkbox" class="form-check-input" id="save-info">
-<label class="form-check-label" for="save-info">Bilgileri kaydet</label>
-</div>
-<div class="mt-4 alert alert-info">
-<strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
-</div>
-</form>
+
+<div class="col-md-7 col-lg-8 order-md-2 order-lg-2">
+    <div class="custom-card">
+        <h4>Teslimat Bilgileri</h4>
+        <form class="needs-validation" id="deliveryForm" novalidate>
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label for="firstName" class="form-label">Adınız</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                    <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Soyadınız</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                    <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
+                </div>
+                <div class="col-12">
+                    <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="siz@example.com">
+                    <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
+                </div>
+                <div class="col-12">
+                    <label for="phone" class="form-label">Telefon</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                    <div class="invalid-feedback">Geçerli telefon girin.</div>
+                </div>
+                <div class="col-12">
+                    <label for="address" class="form-label">Adres</label>
+                    <input type="text" class="form-control" id="address" required>
+                    <div class="invalid-feedback">Adres girin.</div>
+                </div>
+                <div class="col-md-5">
+                    <label for="country" class="form-label">Ülke</label>
+                    <select class="form-select" id="country" required>
+                        <option value="">Seçin...</option>
+                        <option>Türkiye</option>
+                    </select>
+                    <div class="invalid-feedback">Ülke seçin.</div>
+                </div>
+                <div class="col-md-4">
+                    <label for="city" class="form-label">Şehir</label>
+                    <input type="text" class="form-control" id="city" required>
+                    <div class="invalid-feedback">Şehir girin.</div>
+                </div>
+                <div class="col-md-3">
+                    <label for="zip" class="form-label">Posta Kodu</label>
+                    <input type="text" class="form-control" id="zip" required>
+                    <div class="invalid-feedback">Posta kodu girin.</div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="same-address">
+                <label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="save-info">
+                <label class="form-check-label" for="save-info">Bilgileri kaydet</label>
+            </div>
+            <div class="mt-4 alert alert-info">
+                <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
+            </div>
+        </form>
+    </div>
 </div>
 </div>
 
-<div class="col-md-5 col-lg-4 order-md-2">
-<div class="checkout-summary-card">
-<h4>Ödeme Nasıl Yapılır?</h4>
-<p class="text-muted mb-4">
-Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
-</p>
-<div class="d-grid gap-2">
-<button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
-<i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
-</button>
+<!-- YouTube Video Kutusu -->
+<div class="youtube-video-section">
+    <h4>Milli Gururumuz</h4>
+    <div class="video-responsive">
+        <!-- YouTube video ID'sini buraya yapıştırın. Örn: "dQw4w9WgXcQ" -->
+        <iframe src="https://www.youtube.com/embed/VIDEONUZUN_ID_BURAYA_GELECEK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 </div>
-<p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
-</div>
+<!-- YouTube Video Kutusu Bitişi -->
 
-<!-- Yeni Instagram Profil Kutucuğu -->
-<a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-profile-widget">
-   <div class="modern-profile">
-    <img src="insta.jpg" alt="Instagram Profil" class="profile-img">
-</div>
-
-    <h5>@ard4_fr</h5>
-    <p>En yeni ürünler ve kampanyalar için bizi takip edin!</p>
-    <span class="btn btn-sm btn-follow"><i class="bi bi-instagram me-2"></i>Takip Et</span>
-</a>
-<!-- Instagram Profil Kutucuğu Bitişi -->
-
-
-<div class="checkout-summary-card mt-4">
-<h4 class="d-flex justify-content-between align-items-center mb-3">
-<span class="text-primary">Sepetiniz</span>
-<span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
-</h4>
-<ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
-<li class="list-group-item text-muted text-center">Sepetiniz boş</li>
-</ul>
-<div class="d-flex justify-content-between align-items-center checkout-total">
-<strong>Toplam</strong>
-<span id="summaryCartTotal">0.00 ₺</span>
-</div>
-</div>
-</div>
-</div>
 </main>
 
 <footer>
