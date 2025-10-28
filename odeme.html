@@ -135,7 +135,7 @@ footer p{margin-bottom:0;}
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     padding: 2rem;
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 2rem; /* Üstteki elemanlardan boşluk bırakır */
     text-decoration: none;
     color: var(--white); /* Beyaz metin */
     display: block;
@@ -286,125 +286,129 @@ footer p{margin-bottom:0;}
 <main class="container my-5">
 <h1 class="mb-5 text-center" style="font-weight:700;color:var(--primary)">Ödeme İşlemleri</h1>
 <div class="row g-5">
-<!-- Sağ Sütun: Sepet Özeti, Ödeme İletişim ve Instagram Widget -->
-<div class="col-md-5 col-lg-4 order-md-2 order-lg-2">
-    <!-- Sepet Kutusu En Üste Alındı -->
-    <div class="custom-card mb-4">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Sepetiniz</span>
-            <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
-        </h4>
-        <ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
-            <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
-        </ul>
-        <div class="d-flex justify-content-between align-items-center checkout-total">
-            <strong>Toplam</strong>
-            <span id="summaryCartTotal">0.00 ₺</span>
+    <!-- Sol Sütun: Sepet Özeti, Teslimat Bilgileri ve Ödeme İletişim -->
+    <div class="col-md-7 col-lg-8 order-md-1 order-lg-1">
+        <!-- Sepet Kutusu En Üste Alındı -->
+        <div class="custom-card mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Sepetiniz</span>
+                <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
+            </h4>
+            <ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
+                <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+            </ul>
+            <div class="d-flex justify-content-between align-items-center checkout-total">
+                <strong>Toplam</strong>
+                <span id="summaryCartTotal">0.00 ₺</span>
+            </div>
+        </div>
+
+        <!-- Teslimat Bilgileri Formu -->
+        <div class="custom-card">
+            <h4>Teslimat Bilgileri</h4>
+            <form class="needs-validation" id="deliveryForm" novalidate>
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="firstName" class="form-label">Adınız</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                        <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="lastName" class="form-label">Soyadınız</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                        <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="siz@example.com">
+                        <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="phone" class="form-label">Telefon</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                        <div class="invalid-feedback">Geçerli telefon girin.</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="address" class="form-label">Adres</label>
+                        <input type="text" class="form-control" id="address" required>
+                        <div class="invalid-feedback">Adres girin.</div>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="country" class="form-label">Ülke</label>
+                        <select class="form-select" id="country" required>
+                            <option value="">Seçin...</option>
+                            <option>Türkiye</option>
+                        </select>
+                        <div class="invalid-feedback">Ülke seçin.</div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">Şehir</label>
+                        <input type="text" class="form-control" id="city" required>
+                        <div class="invalid-feedback">Şehir girin.</div>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="zip" class="form-label">Posta Kodu</label>
+                        <input type="text" class="form-control" id="zip" required>
+                        <div class="invalid-feedback">Posta kodu girin.</div>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="same-address">
+                    <label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="save-info">
+                    <label class="form-check-label" for="save-info">Bilgileri kaydet</label>
+                </div>
+                <div class="mt-4 alert alert-info">
+                    <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
+                </div>
+            </form>
+        </div>
+
+        <div class="custom-card mt-4">
+            <h4>Ödeme Nasıl Yapılır?</h4>
+            <p class="text-muted mb-4">
+                Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
+            </p>
+            <div class="d-grid gap-2">
+                <button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
+                    <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
+                </button>
+            </div>
+            <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
         </div>
     </div>
 
-    <div class="custom-card">
-        <h4>Ödeme Nasıl Yapılır?</h4>
-        <p class="text-muted mb-4">
-            Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
-        </p>
-        <div class="d-grid gap-2">
-            <button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
-                <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
-            </button>
+    <!-- Sağ Sütun: Instagram Widget ve Boş Bırakıldı -->
+    <div class="col-md-5 col-lg-4 order-md-2 order-lg-2">
+        <!-- Modern Instagram Profil Kutucuğu -->
+        <a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-widget-modern">
+            <div class="profile-header">
+                <!-- Profil görselini buraya kendi Instagram profil resminizin URL'si ile değiştirin -->
+                <img src="insta.jpg" class="profile-picture-modern" alt="Instagram Profil Fotoğrafı">
+            </div>
+            <div class="username-modern">@ard4_fr</div>
+            <p class="bio-modern">En yeni motosiklet ürünleri, aksesuarları ve kampanyalar için bizi takip edin!</p>
+            <span class="btn btn-follow-modern"><i class="bi bi-instagram me-2"></i>Takip Et</span>
+        </a>
+        <!-- Modern Instagram Profil Kutucuğu Bitişi -->
+    </div>
+</div>
+
+<!-- YouTube Video Kutusu - Tüm Sayfa Genişliğinde -->
+<div class="row">
+    <div class="col-12">
+        <div class="youtube-video-section">
+            <h4>Milli Gururumuz</h4>
+            <div class="video-responsive">
+                <!-- YouTube video ID'sini buraya yapıştırın. -->
+                <iframe src="https://www.youtube.com/embed/jQWRx4Uu2WI?si=9IOKJ3A7VP3ZaLjy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
         </div>
-        <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
-    </div>
-
-    <!-- Modern Instagram Profil Kutucuğu -->
-    <a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-widget-modern">
-        <div class="profile-header">
-            <!-- Profil görselini buraya kendi Instagram profil resminizin URL'si ile değiştirin -->
-            <img src="insta.jpg" class="profile-picture-modern" alt="Instagram Profil Fotoğrafı">
-        </div>
-        <div class="username-modern">@ard4_fr</div>
-        <p class="bio-modern">En yeni motosiklet ürünleri, aksesuarları ve kampanyalar için bizi takip edin!</p>
-        <span class="btn btn-follow-modern"><i class="bi bi-instagram me-2"></i>Takip Et</span>
-    </a>
-    <!-- Modern Instagram Profil Kutucuğu Bitişi -->
-</div>
-
-<!-- Sol Sütun: Teslimat Bilgileri Formu -->
-<div class="col-md-7 col-lg-8 order-md-1 order-lg-1">
-    <div class="custom-card"> <!-- custom-card sınıfı eklendi -->
-        <h4>Teslimat Bilgileri</h4>
-        <form class="needs-validation" id="deliveryForm" novalidate>
-            <div class="row g-3">
-                <div class="col-sm-6">
-                    <label for="firstName" class="form-label">Adınız</label>
-                    <input type="text" class="form-control" id="firstName" required>
-                    <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="lastName" class="form-label">Soyadınız</label>
-                    <input type="text" class="form-control" id="lastName" required>
-                    <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
-                </div>
-                <div class="col-12">
-                    <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="siz@example.com">
-                    <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
-                </div>
-                <div class="col-12">
-                    <label for="phone" class="form-label">Telefon</label>
-                    <input type="tel" class="form-control" id="phone" required>
-                    <div class="invalid-feedback">Geçerli telefon girin.</div>
-                </div>
-                <div class="col-12">
-                    <label for="address" class="form-label">Adres</label>
-                    <input type="text" class="form-control" id="address" required>
-                    <div class="invalid-feedback">Adres girin.</div>
-                </div>
-                <div class="col-md-5">
-                    <label for="country" class="form-label">Ülke</label>
-                    <select class="form-select" id="country" required>
-                        <option value="">Seçin...</option>
-                        <option>Türkiye</option>
-                    </select>
-                    <div class="invalid-feedback">Ülke seçin.</div>
-                </div>
-                <div class="col-md-4">
-                    <label for="city" class="form-label">Şehir</label>
-                    <input type="text" class="form-control" id="city" required>
-                    <div class="invalid-feedback">Şehir girin.</div>
-                </div>
-                <div class="col-md-3">
-                    <label for="zip" class="form-label">Posta Kodu</label>
-                    <input type="text" class="form-control" id="zip" required>
-                    <div class="invalid-feedback">Posta kodu girin.</div>
-                </div>
-            </div>
-            <hr class="my-4">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="same-address">
-                <label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="save-info">
-                <label class="form-check-label" for="save-info">Bilgileri kaydet</label>
-            </div>
-            <div class="mt-4 alert alert-info">
-                <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
-            </div>
-        </form>
     </div>
 </div>
-</div>
-
-<!-- YouTube Video Kutusu -->
-<div class="youtube-video-section">
-    <h4>Milli Gururumuz</h4>
-    <div class="video-responsive">
-        <!-- YouTube video ID'sini buraya yapıştırın. Örn: "dQw4w9WgXcQ" -->
-        <iframe src="https://www.youtube.com/embed/jQWRx4Uu2WI?si=9IOKJ3A7VP3ZaLjy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-</div>
-<!-- YouTube Video Kutusu Bitişi -->
 
 </main>
 
