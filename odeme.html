@@ -70,7 +70,7 @@
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
-        .checkout-summary-card, .checkout-form-card, .instagram-profile-card {
+        .checkout-summary-card, .checkout-form-card, .instagram-profile-card, .youtube-video-card {
             background-color: var(--white);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
@@ -78,13 +78,15 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4 {
+        .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4, .youtube-video-card h4 {
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 0.75rem;
         }
+
+        /* Sepet Görsel Ayarları */
         .checkout-summary .list-group-item{
             background-color: var(--white);
             border: none;
@@ -98,10 +100,10 @@
             border-bottom: none;
         }
         .checkout-summary img{
-            width: 60px; /* Görsel boyutunu küçültüldü */
-            height: 60px; /* Görsel boyutunu küçültüldü */
+            width: 40px; /* Görsel boyutunu küçültüldü */
+            height: 40px; /* Görsel boyutunu küçültüldü */
             object-fit: contain; /* Görseli kutuya sığdırır, kesmez */
-            border-radius: 0.375rem;
+            border-radius: 0.25rem; /* Biraz daha küçük border-radius */
             background-color: var(--white);
             border: 1px solid var(--border-color);
             flex-shrink: 0; /* Küçülmesini engelle */
@@ -115,11 +117,13 @@
         .checkout-summary .product-info h6{
             font-weight: 500;
             color: var(--secondary);
-            margin-bottom: 0.2rem;
-            font-size: 0.95rem; /* Ürün adı font boyutunu düzenlendi */
+            margin-bottom: 0.1rem; /* Başlık ile alt metin arası boşluk azaltıldı */
+            font-size: 0.9rem; /* Ürün adı font boyutu ayarlandı */
+            line-height: 1.2;
         }
         .checkout-summary .text-muted{
-            font-size: 0.85rem; /* Açıklama font boyutunu düzenlendi */
+            font-size: 0.8rem; /* Açıklama font boyutu ayarlandı */
+            line-height: 1.2;
         }
         .checkout-summary .item-price{
             font-weight: 600;
@@ -127,9 +131,10 @@
             flex-shrink: 0;
             text-align: right;
             margin-left: auto; /* Sağ tarafa hizala */
+            font-size: 0.9rem;
         }
         .checkout-total{
-            font-size: 1.25rem; /* Toplam font boyutunu düzenlendi */
+            font-size: 1.2rem; /* Toplam font boyutu ayarlandı */
             font-weight: 700;
             color: var(--primary);
             margin-top: 1rem;
@@ -171,32 +176,32 @@
         .instagram-profile-card {
             text-align: center;
             padding: 2rem;
-            margin-top: 2rem; /* Üst kısımdaki boşluğu artır */
+            margin-top: 2rem;
         }
         .instagram-profile-card h4 {
-            border-bottom: none; /* Alt çizgiyi kaldır */
+            border-bottom: none;
             padding-bottom: 0;
             margin-bottom: 1rem;
         }
         .instagram-profile-card .profile-img-container {
-            width: 120px; /* Profil resmi boyutunu ayarla */
+            width: 120px;
             height: 120px;
-            border-radius: 50%; /* Yuvarlak profil resmi */
+            border-radius: 50%;
             overflow: hidden;
-            margin: 0 auto 1.5rem auto; /* Ortala ve alt boşluk ekle */
-            border: 3px solid var(--primary); /* Çerçeve ekle */
+            margin: 0 auto 1.5rem auto;
+            border: 3px solid var(--primary);
             box-shadow: var(--shadow-light);
-            display: flex; /* Resmi dikeyde ortalamak için */
-            align-items: center; /* Resmi dikeyde ortalamak için */
-            justify-content: center; /* Resmi yatayda ortalamak için */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .instagram-profile-card .profile-img-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Resmi kutuya sığdır */
+            object-fit: cover;
         }
         .instagram-profile-card .username {
-            font-size: 1.4rem; /* Kullanıcı adı fontu düzenlendi */
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary);
             margin-bottom: 0.5rem;
@@ -204,10 +209,10 @@
         .instagram-profile-card .bio {
             color: var(--gray-text);
             margin-bottom: 1.5rem;
-            max-width: 350px; /* Bio kısmını daraltıldı */
+            max-width: 350px;
             margin-left: auto;
             margin-right: auto;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         .instagram-profile-card .btn-instagram {
             background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
@@ -220,8 +225,40 @@
         }
         .instagram-profile-card .btn-instagram:hover {
             transform: scale(1.05);
-            color: white; /* Hover'da renk değişimi olmaması için */
+            color: white;
         }
+
+        /* YouTube Video Card Styling */
+        .youtube-video-card {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .youtube-video-card h4 {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 1.5rem;
+        }
+        .youtube-video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 800px; /* Maksimum genişlik */
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-strong);
+        }
+        .youtube-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
 
         footer{
             padding: 2.5rem 0;
@@ -237,10 +274,10 @@
 
         /* Responsive */
         @media (max-width: 767.98px) {
-            .checkout-summary-card, .checkout-form-card, .instagram-profile-card {
+            .checkout-summary-card, .checkout-form-card, .instagram-profile-card, .youtube-video-card {
                 padding: 1rem;
             }
-            .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4 {
+            .checkout-summary-card h4, .checkout-form-card h4, .instagram-profile-card h4, .youtube-video-card h4 {
                 font-size: 1.3rem;
                 margin-bottom: 1rem;
             }
@@ -249,38 +286,42 @@
                 padding-bottom: 1rem;
             }
             .checkout-summary img{
-                width: 45px; /* Küçük ekranlarda sepet görseli */
-                height: 45px; /* Küçük ekranlarda sepet görseli */
+                width: 35px; /* Küçük ekranlarda sepet görseli */
+                height: 35px; /* Küçük ekranlarda sepet görseli */
             }
             .checkout-summary .product-info h6{
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
             .checkout-summary .text-muted{
-                font-size: 0.75rem;
+                font-size: 0.7rem;
             }
             .checkout-total{
-                font-size: 1.05rem;
+                font-size: 1.0rem;
             }
             .instagram-profile-card .profile-img-container {
-                width: 90px; /* Küçük ekranlarda profil görseli */
-                height: 90px; /* Küçük ekranlarda profil görseli */
+                width: 80px;
+                height: 80px;
             }
             .instagram-profile-card .username {
-                font-size: 1.1rem;
+                font-size: 1.0rem;
             }
             .instagram-profile-card .bio {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
             }
             .instagram-profile-card .btn-instagram {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
+                padding: 0.5rem 1.2rem;
+                font-size: 0.85rem;
             }
-            /* Sıralama mobilde değişsin diye order sınıfları */
-            .order-md-last {
-                order: 1; /* Normalde en son ama mobilde başa al */
+            /* YouTube video için responsive düzenleme */
+            .youtube-video-wrapper {
+                padding-bottom: 75%; /* Daha küçük ekranlarda 4:3'e yakın bir oran */
             }
+            /* Sıralama mobilde değişsin diye order sınıfları (eski haline getirildi, mobil varsayılan akışı koruyacak) */
             .order-md-first {
-                order: 2; /* Normalde ilk ama mobilde sona al */
+                order: initial; /* Mobilde sırayı koru */
+            }
+            .order-md-last {
+                order: initial; /* Mobilde sırayı koru */
             }
         }
     </style>
@@ -307,7 +348,9 @@
 
         <div class="row g-5">
             <!-- Sepet Özeti ve Ödeme İletişim Bilgileri (Ödeme seçenekleri önce görünecek) -->
-            <div class="col-md-5 col-lg-4 order-md-first"> <!-- order-md-first eklendi -->
+            <!-- order-md-1 ve order-md-2 ile büyük ekranlarda sıralama sağlandı. -->
+            <!-- Küçük ekranlarda Bootstrap'in varsayılan akışı (HTML sırası) geçerli olacak. -->
+            <div class="col-md-5 col-lg-4 order-md-1"> 
                 <!-- İletişim Bilgileri (Ödeme Yöntemi olarak) -->
                 <div class="checkout-summary-card">
                     <h4 class="mb-3">Ödeme Nasıl Yapılır?</h4>
@@ -315,7 +358,6 @@
                         Ödeme işlemleri için lütfen aşağıdaki kanallardan bizimle iletişime geçiniz. Size özel ödeme yöntemleri ve teslimat detayları hakkında bilgi vereceğiz.
                     </p>
                     <div class="d-grid gap-2">
-                        <!-- WhatsApp linki güncellendi -->
                         <a href="https://wa.me/905312672081" target="_blank" class="btn btn-success btn-lg">
                             <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
                         </a>
@@ -344,7 +386,7 @@
             </div>
 
             <!-- Teslimat Bilgileri Formu -->
-            <div class="col-md-7 col-lg-8 order-md-last"> <!-- order-md-last eklendi -->
+            <div class="col-md-7 col-lg-8 order-md-2"> 
                 <div class="checkout-form-card">
                     <h4 class="mb-3">Teslimat Bilgileri</h4>
                     <form class="needs-validation" novalidate>
@@ -450,7 +492,7 @@
                                 Örnek: <img src="img/ard4_fr_profile.jpg" alt="ard4_fr Instagram Profil">
                                 Geçici bir placeholder kullanılmıştır:
                             -->
-                            <img src="https://via.placeholder.com/120x120/0a0a0a/ffffff?text=ard4_fr+Profile" alt="ard4_fr Instagram Profil" class="img-fluid">
+                            <img src="https://via.placeholder.com/120x120/0a0a0a/ffffff?text=Profil" alt="ard4_fr Instagram Profil" class="img-fluid">
                         </div>
                         <p class="username">@ard4_fr</p>
                     </a>
@@ -460,6 +502,26 @@
                     <a href="https://www.instagram.com/ard4_fr" target="_blank" class="btn btn-instagram d-inline-flex align-items-center">
                         <i class="bi bi-instagram me-2"></i> Profili Görüntüle
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toprak Razgatlıoğlu YouTube Videosu -->
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-10 col-lg-8">
+                <div class="youtube-video-card">
+                    <h4>Toprak Razgatlıoğlu'nun Gurur Veren Anları!</h4>
+                    <div class="youtube-video-wrapper">
+                        <!--
+                            BURAYA İSTEDİĞİNİZ YOUTUBE VİDEOSUNUN EMBED KODUNU KOYUN.
+                            Örnek: YouTube videosunu açın, "Paylaş" -> "Yerleştir" seçeneğini tıklayın ve oradaki iframe kodunu kopyalayın.
+                            "src" kısmındaki URL'ye "&autoplay=1" gibi parametreler eklemeyin, kullanıcı kontrolü daha iyidir.
+                            Aşağıdaki sadece bir yer tutucudur.
+                        -->
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <!-- https://www.youtube.com/embed/Pj1L6Jz6C6g (Toprak'ın bir şampiyonluk videosu örneği) -->
+                    </div>
+                    <p class="text-muted mt-3">Motosiklet dünyamızın gururu Toprak Razgatlıoğlu'nun heyecan verici anlarını izleyin.</p>
                 </div>
             </div>
         </div>
