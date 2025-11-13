@@ -3,13 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Moto 81</title>
-    <!-- Google Fonts - Inter -->
+    <title>Moto 81 - Gear That Reflects Your Passion</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Premium motorcycle accessories and spare parts. High-quality gear for PCX and NMAX motorcycles. Fast shipping and secure payment options.">
+    <meta name="keywords" content="motorcycle accessories, PCX, NMAX, Moto 81, premium gear, spare parts, motorcycle equipment">
+    <meta name="author" content="Moto 81">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Moto 81 - Premium Motorcycle Accessories">
+    <meta property="og:description" content="Gear That Reflects Your Passion - Premium motorcycle accessories for PCX and NMAX">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moto81.com">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Google tag (gtag.js) -->
+
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Google tag (gtag.js) - Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VV359BDQY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -17,714 +40,228 @@
         gtag('js', new Date());
         gtag('config', 'G-0VV359BDQY');
     </script>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <style>
-        :root{
-            --primary: #0a0a0a; /* Koyu gri/Siyah */
-            --secondary: #212529; /* Daha koyu gri */
-            --light-bg: #f8f9fa; /* Hafif gri arka plan */
-            --white: #ffffff;
-            --gray-text: #6c757d; /* Muted text */
-            --border-color: #dee2e6; /* Hafif border */
-            --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
-            --shadow-strong: 0 8px 24px rgba(0,0,0,0.1);
-            --red-discount: #dc3545; /* Kırmızı indirim rengi */
-        }
-        body{
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--secondary);
-            line-height:1.6;
-        }
-
-        /* Navbar Customizations */
-        .navbar{
-            background-color: var(--white);
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: var(--shadow-light);
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            position: sticky; /* Sticky navbar */
-            top: 0;
-            z-index: 1040; /* Lower than mini-cart to avoid initial overlap */
-        }
-        .navbar-brand{
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary) !important;
-        }
-        .navbar-nav .nav-link{
-            color: var(--secondary);
-            padding: 0.75rem 1.2rem; /* Daha geniş tıklama alanı */
-            border-radius: 0.375rem;
-            transition: all 0.2s ease-in-out;
-            font-weight: 600; /* Daha kalın font */
-            position: relative;
-        }
-        .navbar-nav .nav-link:hover,
-        .navbar-nav .nav-link.active {
-            background-color: var(--light-bg);
-            color: var(--primary) !important;
-        }
-        .navbar-nav .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 3px;
-            background-color: var(--primary);
-            border-radius: 2px;
-        }
-        .navbar-toggler{
-            border-color: var(--border-color);
-        }
-        .navbar-toggler-icon{
-            filter: grayscale(100%); /* Hamburger iconu siyah beyaz */
-        }
-        .form-control{
-            border-color: var(--border-color);
-        }
-        .form-control:focus{
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);
-        }
-        .navbar-collapse{
-            z-index: 1045; /* Ensure navbar collapse is above mini-cart on mobile */
-        }
-
-        /* Mini Cart */
-        .mini-cart{
-            position: fixed;
-            right: 1.5rem;
-            top: 1.5rem;
-            z-index: 1050; /* Higher z-index to stay on top */
-        }
-        .cart-button{
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            box-shadow: var(--shadow-light);
-            transition: all 0.2s ease-in-out;
-        }
-        .cart-button:hover{
-            background-color: var(--light-bg);
-            border-color: var(--primary);
-        }
-        .cart-button svg{
-            stroke: var(--primary);
-        }
-        .cart-count{
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 0.125rem 0.5rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .cart-dropdown{
-            width: 340px; /* Slightly wider for better readability */
-            max-height: 450px;
-            overflow-y: auto;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            box-shadow: var(--shadow-strong);
-            padding: 1rem;
-        }
-        .cart-item{
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px dashed var(--border-color);
-        }
-        .cart-item:last-child{
-            border-bottom: 0;
-        }
-        .cart-item img{
-            width: 64px; /* Slightly larger image */
-            height: 64px;
-            object-fit: contain; /* Görselin tamamının görünmesini sağlar */
-            border-radius: 0.375rem;
-            background-color: var(--white); /* Ensure white background for images */
-            border: 1px solid var(--border-color);
-        }
-        .cart-meta{
-            flex: 1;
-        }
-        .cart-meta b{
-            font-size: 1rem;
-            color: var(--secondary);
-            margin-bottom: 0.25rem;
-        }
-        .cart-meta .text-muted{
-            font-size: 0.875rem;
-        }
-        .cart-total{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            margin-top: 1rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .cart-dropdown .btn-primary{
-            background-color: var(--primary);
-            border-color: var(--primary);
-        }
-        .cart-dropdown .btn-outline-secondary{
-            color: var(--secondary);
-            border-color: var(--gray-text);
-        }
-        .cart-dropdown .btn-outline-danger{
-            color: #dc3545; /* Bootstrap danger color */
-            border-color: #dc3545;
-        }
-        .cart-dropdown .btn-sm{
-            padding: 0.125rem 0.375rem;
-            font-size: 0.75rem;
-        }
-
-        /* Hero Section */
-        .hero-section{
-            text-align: center;
-            padding: 3rem 1.5rem;
-            background-color: var(--white);
-            border-radius: 0.75rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-        }
-        .hero-section img{
-            max-width: 350px; /* Slightly larger logo */
-            height: auto;
-            margin-bottom: 1rem;
-            margin-top: 0.5rem;
-        }
-        .hero-section h1{
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .hero-section p{
-            color: var(--gray-text);
-            font-size: 1.1rem;
-        }
-
-        /* Product Cards */
-        .card{
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-light);
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            background-color: var(--white);
-            overflow: hidden; /* Ensure rounded corners for thumb */
-            position: relative; /* For discount badge */
-        }
-        .card:hover{
-            transform: translateY(-0.5rem);
-            box-shadow: var(--shadow-strong);
-        }
-
-        .thumb {
-            width: 100%;
-            height: 200px; /* Slightly taller for better visuals */
-            background-color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            padding: 1rem; /* İç boşluk ekleyerek ürünün nefes almasını sağlar */
-        }
-
-        .thumb img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            background-color: var(--white); /* Ensure white background for images */
-        }
-        .card-body{
-            padding: 1rem 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-        .card-title{
-            font-weight: 600;
-            font-size: 1.15rem;
-            color: var(--secondary);
-            margin-bottom: 0;
-        }
-        .card-text.brand-text{
-            font-size: 0.875rem;
-            color: var(--gray-text);
-        }
-        .card-price-info {
-            display: flex;
-            flex-direction: column;
-            margin-top: 0.5rem;
-        }
-        .card-text.original-price {
-            font-size: 0.95rem;
-            color: var(--gray-text);
-            text-decoration: line-through;
-            margin-bottom: 0.1rem;
-        }
-        .card-text.current-price {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--primary);
-        }
-        .card-text.discounted-price {
-            color: var(--red-discount); /* İndirimli fiyatı kırmızı yap */
-        }
-
-        /* Discount Badge */
-        .discount-badge {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background-color: var(--red-discount);
-            color: var(--white);
-            padding: 0.3rem 0.7rem;
-            border-radius: 0.375rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            z-index: 10;
-        }
-
-        .actions{
-            padding: 0 1.25rem 1.25rem 1.25rem;
-            margin-top: auto; /* Push button to the bottom */
-        }
-        .actions .btn-primary{
-            background-color: var(--primary);
-            border-color: var(--primary);
-            width: 100%;
-            padding: 0.6rem 1rem;
-            font-weight: 500;
-        }
-        .actions .btn-primary:hover{
-            background-color: var(--secondary);
-            border-color: var(--secondary);
-        }
-
-        /* Footer */
-        footer{
-            padding: 2.5rem 0;
-            text-align: center;
-            color: var(--gray-text);
-            border-top: 1px solid var(--border-color);
-            margin-top: 3rem;
-            background-color: var(--white);
-        }
-        footer p{
-            margin-bottom: 0;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 991.98px) { /* Medium devices (tablets) and down */
-            .navbar-collapse{
-                background-color: var(--white);
-                border-top: 1px solid var(--border-color);
-                margin-top: 0.5rem;
-                padding: 1rem 0;
-                box-shadow: var(--shadow-light);
-                position: absolute; /* Menü açıldığında konumunu ayarla */
-                width: 100%;
-                left: 0;
-                top: 100%; /* Navbar'ın hemen altına yerleştir */
-                z-index: 1045; /* Mini-cart'tan yüksek olmalı */
-            }
-            .navbar-nav{
-                width: 100%;
-                margin-bottom: 1rem !important; /* Fix for mb-2 */
-            }
-            .navbar-nav .nav-link{
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
-            .d-flex.w-100.w-lg-auto { /* Search bar container on mobile */
-                width: 100% !important;
-            }
-            .form-control{
-                width: calc(100% - 1.5rem); /* Adjust width within collapsed menu */
-                margin: 0 0.75rem;
-            }
-            .mini-cart{
-                right: 0.75rem;
-                top: 0.75rem; /* Navbar'ın içine daha yakın */
-                z-index: 1050; /* En üstte olmalı */
-            }
-            .hero-section{
-                padding: 2rem 1rem;
-            }
-            .hero-section h1{
-                font-size: 2rem;
-            }
-            .hero-section img{
-                max-width: 250px;
-            }
-            .mini-cart .dropdown-menu {
-                left: auto !important;
-                right: 0 !important;
-            }
-        }
-        @media (max-width: 767.98px) { /* Small devices (landscape phones) and down */
-            .card .thumb{
-                height: 180px;
-            }
-            .hero-section h1{
-                font-size: 1.8rem;
-            }
-            .hero-section p{
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 575.98px) { /* Extra small devices (portrait phones) and down */
-            .mini-cart{
-                right: 0.5rem;
-                top: 0.5rem;
-            }
-            .cart-dropdown{
-                width: calc(100vw - 2rem); /* Full width minus margins */
-                left: 1rem;
-                right: 1rem;
-            }
-            .hero-section{
-                padding: 1.5rem 0.75rem;
-                margin-bottom: 1.5rem;
-            }
-            .hero-section h1{
-                font-size: 1.5rem;
-            }
-            .hero-section img{
-                max-width: 200px;
-            }
-            .card .thumb{
-                height: 160px;
-            }
-            .card-title{
-                font-size: 1.05rem;
-            }
-            .card-text.current-price{
-                font-size: 1.1rem;
-            }
-        }
-    </style>
 </head>
 <body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+
     <header>
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
             <div class="container-fluid container">
-                <a class="navbar-brand" href="index.html">Moto 81</a>
+                <a class="navbar-brand" href="index.html" aria-label="Moto 81 Home">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Moto 81
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <div class="navbar-toggler-icon">
+                        <span></span>
+                    </div>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <a class="nav-link active" aria-current="page" href="#" data-category="all">Tüm Ürünler</a>
-                        <a class="nav-link" href="#" data-category="pcx">PCX Aksesuarları</a>
-                        <a class="nav-link" href="#" data-category="nmax">NMAX Aksesuarları</a>
+                    <div class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <a class="nav-link active" aria-current="page" href="#" data-category="all" role="button">Tüm Ürünler</a>
+                        <a class="nav-link" href="#" data-category="pcx" role="button">PCX</a>
+                        <a class="nav-link" href="#" data-category="nmax" role="button">NMAX</a>
                         <a class="nav-link" href="odeme.html">Ödeme</a>
                     </div>
-                    <div class="d-flex w-100 w-lg-auto"> <!-- Added w-100 for mobile search bar -->
-                        <input class="form-control me-2" type="search" placeholder="Ürün ara..." aria-label="Ürün ara" id="searchInput">
+                    <div class="d-flex w-100 w-lg-auto">
+                        <div class="search-container">
+                            <input class="form-control me-2" type="search" placeholder="Premium ürün ara..." aria-label="Ürün ara" id="searchInput">
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="mini-cart dropdown">
-        <button class="cart-button btn dropdown-toggle" type="button" id="cartToggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6z" stroke="#0a0a0a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="cart-count" id="cartCount">0</span>
+
+    <!-- Mini Cart Component -->
+    <div class="mini-cart dropdown" role="region" aria-label="Shopping cart">
+        <button class="cart-button dropdown-toggle" type="button" id="cartToggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" aria-haspopup="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6h15l-1.5 9h-12L6 6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 6l-1-3H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="8.5" cy="19.5" r="1.5" fill="currentColor"/>
+                <circle cx="17.5" cy="19.5" r="1.5" fill="currentColor"/>
+            </svg>
+            <span class="cart-count" id="cartCount" aria-label="Items in cart">0</span>
         </button>
         <div class="dropdown-menu dropdown-menu-end cart-dropdown" aria-labelledby="cartToggle">
-            <div class="p-3" id="cartItems">
-                <!-- Cart items will be rendered here by JS -->
-                <div class="text-muted text-center py-2">Sepetiniz boş</div>
+            <div class="cart-header">
+                <h5 class="mb-0">Alışveriş Sepeti</h5>
             </div>
-            <div class="p-3 pt-0">
-                <div class="cart-total">
-                    <div class="text-muted">Toplam</div>
-                    <div id="cartTotal">0.00 ₺</div>
-                </div>
-                <div class="d-flex justify-content-end gap-2 mt-3">
-                    <button class="btn btn-outline-secondary" id="clearCart">Temizle</button>
-                    <button class="btn btn-primary" id="checkoutBtn">Satın Al</button>
-                </div>
+            <div id="cartItems" role="region" aria-label="Cart items">
+                <div class="text-muted text-center py-4">Sepetiniz boş</div>
+            </div>
+            <div class="cart-total">
+                <span>Toplam</span>
+                <span id="cartTotal">0.00 ₺</span>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-outline-secondary flex-fill" id="clearCart">Temizle</button>
+                <button class="btn btn-primary flex-fill" id="checkoutBtn">Satın Al</button>
             </div>
         </div>
     </div>
 
-    <main class="container my-5">
+    <!-- Main Content -->
+    <main class="container my-5" id="main-content">
         <section class="hero-section">
-            <img src="logo.png" alt="Moto 81 Logo">
-            <h1>Moto 81'e Hoş Geldiniz</h1>
-            <p>Motor aksesuarları ve yedek parçalarda aradığınız her şey burada!</p>
+            <div class="hero-background" aria-hidden="true"></div>
+            <div class="hero-content">
+                <img src="logo.png" alt="Moto 81 Logo" class="hero-logo">
+                <h1>MOTO81</h1>
+                <p>Motor aksesuarları ve yedek parçalarda aradığınız her şey</p>
+                <button class="hero-cta" aria-label="Koleksiyonu Keşfet">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Koleksiyonu Keşfet
+                </button>
+            </div>
         </section>
 
-        <!-- Grid for products, using responsive columns -->
-        <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4" id="productGrid"></section>
+        <section class="product-grid" id="productGrid" role="region" aria-label="Products">
+            <!-- Products will be dynamically loaded here -->
+        </section>
     </main>
 
-    <footer class="mt-5">
-        <div class="container text-center">
-            <p>© 2025 Moto 81 - Tüm Hakları Saklıdır</p>
+    <!-- Enhanced Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Hakkımızda</h3>
+                    <p>Moto 81 olarak, premium motorcycle aksesuarları ve yedek parçalarında kalite ve performansı bir araya getiriyoruz. PCX ve NMAX motorcuları için en iyi ürünleri sunuyoruz.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="#" aria-label="Tüm Ürünler">Tüm Ürünler</a></li>
+                        <li><a href="#" aria-label="PCX Ürünleri">PCX Ürünleri</a></li>
+                        <li><a href="#" aria-label="NMAX Ürünleri">NMAX Ürünleri</a></li>
+                        <li><a href="odeme.html" aria-label="Ödeme">Ödeme</a></li>
+                        <li><a href="#" aria-label="İletişim">İletişim</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div class="footer-section">
+                    <h3>Müşteri Hizmetleri</h3>
+                    <ul>
+                        <li><a href="#" aria-label="Sıkça Sorulan Sorular">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#" aria-label="Teslimat Bilgileri">Teslimat Bilgileri</a></li>
+                        <li><a href="#" aria-label="İade Politikası">İade Politikası</a></li>
+                        <li><a href="#" aria-label="Garanti Koşulları">Garanti Koşulları</a></li>
+                        <li><a href="#" aria-label="Gizlilik Politikası">Gizlilik Politikası</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <p><strong>Adres:</strong> İstanbul, Türkiye</p>
+                    <p><strong>Telefon:</strong> +90 555 123 45 67</p>
+                    <p><strong>E-posta:</strong> info@moto81.com</p>
+                    <p><strong>Çalışma Saatleri:</strong> Pazartesi - Cumartesi: 09:00 - 18:00</p>
+                </div>
+            </div>
+
+            <!-- Social Media Section -->
+            <div class="social-media-section">
+                <h3 class="social-media-title">Bizi Takip Edin</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link facebook" aria-label="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link twitter" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link youtube" aria-label="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/company/moto81" target="_blank" rel="noopener noreferrer" class="social-link linkedin" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="newsletter-section">
+                <h3 class="newsletter-title">Bültenimize Abone Olun</h3>
+                <p class="newsletter-description">Yeni ürünler, indirimler ve özel teklifler hakkında ilk siz haberdar olun.</p>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" class="newsletter-input" placeholder="E-posta adresiniz" required aria-label="E-posta adresi">
+                    <button type="submit" class="newsletter-button">Abone Ol</button>
+                </form>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#" aria-label="Kullanım Koşulları">Kullanım Koşulları</a>
+                    <a href="#" aria-label="Gizlilik Politikası">Gizlilik Politikası</a>
+                    <a href="#" aria-label="Çerez Politikası">Çerez Politikası</a>
+                    <a href="#" aria-label="Site Haritası">Site Haritası</a>
+                </div>
+                <p>&copy; 2025 Moto 81 - Premium Motor Aksesuarları - Tüm Hakları Saklıdır</p>
+                
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <div class="payment-method" title="Visa">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#1a1f71"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VISA</text>
+                        </svg>
+                    </div>
+                    <div class="payment-method" title="Mastercard">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#eb001b"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="6" font-weight="bold">MASTERCARD</text>
+                        </svg>
+                    </div>
+                    <div class="payment-method" title="PayPal">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#003087"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="6" font-weight="bold">PAYPAL</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <!-- External Scripts -->
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        const products = [
-            // İndirimli ürünler için discountPercentage ve isDiscounted eklendi
-            {id:1, name:'Artçı Demir 24', brand:'Moto 81', price:1600.00, img:'nmaxdemir.jpg', category:'nmax'}, // Örnek indirim
-            {id:2, name:'Depo Kapağı 24', brand:'Moto 81', price:800.00, img:'nmaxdepo.jpg', category:'nmax'},
-            {id:3, name:'Şeffaf Filtre Kapağı 24-25', brand:'Moto 81', price:2700.00, img:'nmaxfiltre.jpg', category:'nmax'},
-            {id:4, name:'Karbon Filtre Kapağı 24-25', brand:'Moto 81', price:2500.00, img:'nmaxfiltrekarbon.jpg', category:'nmax'}, // Örnek indirim
-            {id:5, name:'Gidon Kapağı', brand:'Moto 81', price:1400.00, img:'nmaxgidon.jpg', category:'nmax',isDiscounted: true, discountPercentage: 12},
-            {id:6, name:'Kontak Kapağı', brand:'Moto 81', price:1600.00, img:'nmaxkontak.jpg', category:'nmax'},
-            {id:7, name:'Radyatör Kapağı 24-25', brand:'Moto 81', price:1800.00, img:'nmaxradyator.jpg', category:'nmax'},
-            {id:8, name:'Sinyal Üstü Kapağı', brand:'Moto 81', price:1800.00, img:'nmaxsinyalustu.jpg', category:'nmax'}, // Örnek indirim
-            {id:9, name:'Stop Altı Kapağı', brand:'Moto 81', price:900.00, img:'nmaxstopalti.jpg', category:'nmax'},
-            {id:10, name:'Varyatör Kapağı', brand:'Moto 81', price:2500.00, img:'nmaxvaryator.jpg', category:'nmax'},
 
-            {id:11, name:'PCX Headers', brand:'Moto 81', price:3000.00, img:'pcxheaders.jpg', category:'pcx', isDiscounted: true, discountPercentage: 5},
-            {id:12, name:'Pcx 2025 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2025onv.jpg', category:'pcx'}, // Örnek indirim
-            {id:13, name:'Pcx Karbon Egzoz', brand:'Moto 81', price:1700.00, img:'pcxegzozset.jpg', category:'pcx'},
-            {id:14, name:'Pcx Çamurluk', brand:'Moto 81', price:2250.00, img:'pcxoncamurluk.jpg', category:'pcx',isDiscounted: true, discountPercentage: 12},
-            {id:15, name:'Pcx Füme Filtre', brand:'Moto 81', price:1650.00, img:'pcxfumefiltre.jpg', category:'pcx',isDiscounted: true, discountPercentage: 5},
-            {id:16, name:'Pcx Şeffaf Filtre', brand:'Moto 81', price:1650.00, img:'pcxseffaffiltre.jpg', category:'pcx',isDiscounted: true, discountPercentage: 5},
-            {id:17, name:'Pcx Şeffaf Radyatör', brand:'Moto 81', price:1550.00, img:'pcxseffafradyator.jpg', category:'pcx',isDiscounted: true, discountPercentage: 5},
-            {id:18, name:'Pcx Karbon Varyatör', brand:'Moto 81', price:1650.00, img:'pcxkarbonvaryator.jpg', category:'pcx'},
-            {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxseffafvaryator.jpg', category:'pcx',isDiscounted: true, discountPercentage: 5},
-            {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg', category:'pcx'},
-            {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}, // Örnek indirimhttps://github.com/ardabaykan/moto81/blob/main/index.html
+    <!-- Custom Application Script -->
+    <script src="js/script.js"></script>
 
-            {id:22, name:'Nmax Çerçeve 25', brand:'Moto 81', price:2200.00, img:'nmaxgostergecercevesi.jpg', category:'nmax'},
-            {id:23, name:'Nmax Winglet 25', brand:'Moto 81', price:2000.00, img:'nmax2025altwinglet.jpg', category:'nmax',isDiscounted: true, discountPercentage: 3},
-            {id:24, name:'Nmax Ön Panel 24', brand:'Moto 81', price:2300.00, img:'nmaxoncam.jpg', category:'nmax',isDiscounted: true, discountPercentage: 12},
-            {id:25, name:'Nmax Kontak (2) 25', brand:'Moto 81', price:1500.00, img:'nmax2025kontakalt.jpg', category:'nmax'},
-            {id:26, name:'Nmax Gidon 25', brand:'Moto 81', price:2400.00, img:'nmax2025gidonkarbon.jpg', category:'nmax'}, // Örnek indirim
-            {id:27, name:'Nmax Kontak (1) 25', brand:'Moto 81', price:1500.00, img:'nmax2025kontakust.jpg', category:'nmax'},
-            {id:28, name:'Nmax Ön V 25', brand:'Moto 81', price:2000.00, img:'nmax2025onpanelv.jpg', category:'nmax'},
-            {id:29, name:'Nmax Radyatör 25', brand:'Moto 81', price:1850.00, img:'nmaxradyator2025.jpeg', category:'nmax'},
-            {id:30, name:'Nmax Depo 25', brand:'Moto 81', price:1300.00, img:'nmax2025benzindepokapak.jpg', category:'nmax'},
-            {id:31, name:'Nmax Depo Çerçeve 25', brand:'Moto 81', price:1950.00, img:'Nmax2025benzindepocevresi.jpg', category:'nmax'},
-            {id:32, name:'Nmax Varyatör 24', brand:'Moto 81', price:2400.00, img:'nmaxvaryator.jpg', category:'nmax'},
-            {id:33, name:'Nmax Ön Panel 25', brand:'Moto 81', price:2350.00, img:'nmaxoncam2025.jpg', category:'nmax'} // Örnek indirim
-        ];
-
-        const CART_KEY = 'moto81_cart_v1';
-        let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
-
-        const productGrid = document.getElementById('productGrid');
-        const cartCount = document.getElementById('cartCount');
-        const cartItemsEl = document.getElementById('cartItems');
-        const cartTotalEl = document.getElementById('cartTotal');
-        const searchInput = document.getElementById('searchInput');
-        const categoryLinks = document.querySelectorAll('.navbar-nav .nav-link[data-category]');
-        const clearCartBtn = document.getElementById('clearCart');
-        const checkoutBtn = document.getElementById('checkoutBtn');
-
-        function money(num){
-            return Number(num).toLocaleString('tr-TR', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' ₺';
-        }
-
-        function calculateDiscountedPrice(price, discountPercentage) {
-            return price * (1 - discountPercentage / 100);
-        }
-
-        function renderProducts(list = products){
-            productGrid.innerHTML = '';
-            if (list.length === 0) {
-                productGrid.innerHTML = '<div class="col-12 text-center text-muted py-5">Üzgünüz, aradığınız kriterlere uygun ürün bulunamadı.</div>';
-                return;
-            }
-
-            list.forEach(p => {
-                const col = document.createElement('div');
-                col.className = 'col'; // Bootstrap grid column
-
-                let priceHtml = `<p class="card-text current-price">${money(p.price)}</p>`;
-                let discountBadge = '';
-
-                if (p.isDiscounted && p.discountPercentage) {
-                    const discountedPrice = calculateDiscountedPrice(p.price, p.discountPercentage);
-                    priceHtml = `
-                        <p class="card-text original-price">${money(p.price)}</p>
-                        <p class="card-text current-price discounted-price">${money(discountedPrice)}</p>
-                    `;
-                    discountBadge = `<span class="discount-badge">-${p.discountPercentage}%</span>`;
-                }
-
-                col.innerHTML = `
-                    <div class="card h-100">
-                        ${discountBadge}
-                        <div class="thumb">
-                            <img src="${p.img}" class="card-img-top" alt="${p.name}">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">${p.name}</h5>
-                            <p class="card-text brand-text">${p.brand}</p>
-                            <div class="card-price-info">
-                                ${priceHtml}
-                            </div>
-                        </div>
-                        <div class="actions">
-                            <button class="btn btn-primary add-to-cart-btn" data-id="${p.id}">Sepete Ekle</button>
-                        </div>
-                    </div>
-                `;
-                productGrid.appendChild(col);
-            });
-        }
-
-        function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
-
-        function updateCartUI(){
-            cartCount.textContent = cart.reduce((s,i) => s + i.qty, 0);
-            cartItemsEl.innerHTML = '';
-            
-            if(cart.length === 0){
-                cartItemsEl.innerHTML = '<div class="text-muted text-center py-2">Sepetiniz boş</div>';
-                cartTotalEl.textContent = money(0);
-                return;
-            }
-
-            cart.forEach(item =>{
-                // Sepete eklenen ürünün güncel (indirimli ise indirimli) fiyatını al
-                const originalProduct = products.find(p => p.id === item.id);
-                const currentPrice = originalProduct.isDiscounted && originalProduct.discountPercentage
-                                     ? calculateDiscountedPrice(originalProduct.price, originalProduct.discountPercentage)
-                                     : originalProduct.price;
-
-                const el = document.createElement('div');
-                el.className = 'cart-item';
-                el.innerHTML = `
-                    <img alt="${item.name}" src="${item.img}">
-                    <div class="cart-meta">
-                        <b>${item.name}</b>
-                        <div class="text-muted">${item.brand} · ${money(currentPrice)} x ${item.qty}</div>
-                    </div>
-                    <div class="d-flex flex-column gap-1 align-items-end">
-                        <button data-id="${item.id}" class="btn btn-sm btn-outline-secondary decrease-qty-btn">-</button>
-                        <button data-id="${item.id}" class="btn btn-sm btn-outline-danger remove-item-btn">x</button>
-                    </div>
-                `;
-                cartItemsEl.appendChild(el);
-            });
-
-            const total = cart.reduce((s,item)=> {
-                const originalProduct = products.find(p => p.id === item.id);
-                const currentPrice = originalProduct.isDiscounted && originalProduct.discountPercentage
-                                     ? calculateDiscountedPrice(originalProduct.price, originalProduct.discountPercentage)
-                                     : originalProduct.price;
-                return s + currentPrice * item.qty;
-            }, 0);
-            cartTotalEl.textContent = money(total);
-            saveCart();
-        }
-
-        function addToCart(productId){
-            const p = products.find(x=>x.id===productId);
-            if(!p) return;
-            const existing = cart.find(c=>c.id===productId);
-            if(existing){ existing.qty +=1; }
-            else{ 
-                // Sepete eklerken ürünün tüm özelliklerini sakla
-                cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,qty:1,img:p.img, isDiscounted: p.isDiscounted, discountPercentage: p.discountPercentage}); 
-            }
-            
-            updateCartUI();
-            
-            // Simple animation for cart button
-            const cartButton = document.getElementById('cartToggle');
-            cartButton.style.transform = 'scale(1.08)';
-            setTimeout(() => {
-                cartButton.style.transform = 'scale(1)';
-            }, 200);
-        }
-
-        document.body.addEventListener('click', e=>{
-            const add = e.target.closest('.add-to-cart-btn');
-            if(add){ addToCart(parseInt(add.dataset.id)); }
-
-            if(e.target === clearCartBtn){
-                cart = [];
-                updateCartUI();
-            }
-
-            if(e.target === checkoutBtn){
-                window.location.href = "odeme.html";
-            }
-
-            const remove = e.target.closest('.remove-item-btn');
-            if(remove){
-                const id = parseInt(remove.dataset.id);
-                cart = cart.filter(i=>i.id!==id);
-                updateCartUI();
-            }
-
-            const decrease = e.target.closest('.decrease-qty-btn');
-            if(decrease){
-                const id = parseInt(decrease.dataset.id);
-                const item = cart.find(i=>i.id===id);
-                if(item){
-                    item.qty = Math.max(0, item.qty -1); // Allow quantity to go to 0
-                    if (item.qty === 0) {
-                        cart = cart.filter(i=>i.id!==id);
-                    }
-                    updateCartUI();
-                }
-            }
-        });
-
-        categoryLinks.forEach(item => {
-            item.addEventListener('click', (e) => {
-                e.preventDefault();
-                const category = e.target.dataset.category;
-                
-                categoryLinks.forEach(li => li.classList.remove('active'));
-                e.target.classList.add('active');
-
-                let filteredProducts = products;
-                if (category !== 'all') {
-                    filteredProducts = products.filter(p => p.category === category);
-                }
-                
-                renderProducts(filteredProducts);
-                searchInput.value = ''; // Clear search input on category change
-            });
-        });
-
-        searchInput.addEventListener("input", ()=>{
-            const val = searchInput.value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(val) || p.brand.toLowerCase().includes(val));
-            renderProducts(filtered);
-            
-            categoryLinks.forEach(li => li.classList.remove('active'));
-        });
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.navbar-nav .nav-link[data-category="all"]').click();
-            updateCartUI();
-        });
-    </script>
+    <!-- noscript for users who have disabled JavaScript -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; width: 100%; background: #ff6b35; color: white; text-align: center; padding: 10px; z-index: 9999;">
+            JavaScript is disabled. Some features of this site may not work properly. Please enable JavaScript for the best experience.
+        </div>
+    </noscript>
 </body>
 </html>
