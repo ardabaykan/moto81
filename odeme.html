@@ -50,7 +50,7 @@
             font-family: var(--font-family-inter);
             color: var(--secondary-color);
             line-height: 1.6;
-            background-color: var(--light-bg-color);
+            background-color: var(--light-bg-color); /* Ana sayfanın arka planı */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -174,6 +174,7 @@
             flex: 1;
             padding-top: 3rem;
             padding-bottom: 3rem;
+            background-color: var(--light-bg-color); /* Main arka planı */
         }
 
         /* Genel Kart Stili */
@@ -359,19 +360,22 @@
 
 
         /* Instagram Widget (Ana sayfadan kopyalandı ve geliştirildi) */
+        /* Instagram widget'ının kendi renk geçişli arka planını korumak için özel stil */
         .instagram-widget-modern {
             background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
             border-radius: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             padding: 2rem;
             text-align: center;
-            margin-top: 0; /* Artık sağ sütunun ilk elemanı olduğu için margin-top gerekmez */
+            margin-top: 0;
             text-decoration: none;
             color: var(--white-color);
             display: block;
             transition: all 0.3s ease-in-out;
             position: relative;
             overflow: hidden;
+            /* Arka plan main ile aynı olsa bile, bu widget kendi belirgin görünümünü koruyacak */
+            /* Zaten gradient arka plana sahip olduğu için ekstra bir `background-color` gerekmez */
         }
         .instagram-widget-modern::before {
             content: '';
