@@ -1,507 +1,1062 @@
 <!doctype html>
 <html lang="tr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ödeme - Moto 81</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<style>
-:root{
-    --primary: #0a0a0a;
-    --secondary: #212529;
-    --light-bg: #f8f9fa;
-    --white: #ffffff;
-    --gray-text: #6c757d;
-    --border-color: #dee2e6;
-    --shadow-light: 0 4px 12px rgba(0,0,0,0.05);
-}
-body{
-    font-family: 'Inter', sans-serif;
-    background-color: var(--light-bg);
-    color: var(--secondary);
-    line-height:1.6;
-}
-.navbar{
-    background-color: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow-light);
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-}
-.navbar-brand{
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: var(--primary) !important;
-}
-.navbar-nav .nav-link{
-    color: var(--secondary);
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-}
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active {
-    background-color: var(--light-bg);
-    color: var(--primary) !important;
-}
-main{
-    min-height: calc(100vh - 180px);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-}
-/* Genel Kart Stili */
-.custom-card{
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-light);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-.custom-card h4{
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
-}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ödeme - Moto 81</title>
 
-/* Sepet Özeti Stili */
-.checkout-summary .list-group-item{
-    background-color: var(--white);
-    border: none;
-    border-bottom: 1px dashed var(--border-color);
-    padding: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-.checkout-summary img{
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 0.25rem;
-    border: 1px solid var(--border-color);
-}
-.checkout-summary .product-info{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.checkout-summary .product-info h6{
-    font-weight: 500;
-    color: var(--secondary);
-    margin-bottom: 0.1rem;
-    font-size: 0.9rem;
-    line-height: 1.2;
-}
-.checkout-summary .text-muted{
-    font-size: 0.8rem;
-}
-.checkout-summary .item-price{
-    font-weight: 600;
-    color: var(--primary);
-    flex-shrink: 0;
-    text-align: right;
-    margin-left: auto;
-    font-size: 0.9rem;
-}
-.checkout-total{
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
-}
-.form-label{font-weight: 500; color: var(--secondary);}
-.form-control{border-color: var(--border-color);}
-.form-control:focus{border-color: var(--primary); box-shadow: 0 0 0 0.25rem rgba(0,0,0,0.1);}
-.btn-primary{background-color: var(--primary); border-color: var(--primary);}
-.btn-primary:hover{background-color: var(--secondary); border-color: var(--secondary);}
-.btn-outline-primary{color: var(--primary); border-color: var(--primary);}
-.btn-outline-primary:hover{background-color: var(--primary); color: var(--white);}
-footer{padding: 2.5rem 0; text-align: center; color: var(--gray-text); border-top: 1px solid var(--border-color); background-color: var(--white);}
-footer p{margin-bottom:0;}
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Moto 81 ödeme sayfası. Siparişinizi tamamlayın ve premium motosiklet aksesuarlarınızı güvenle alın.">
+    <meta name="keywords" content="ödeme, motosiklet aksesuarları, PCX, NMAX, Moto 81, premium gear, yedek parçalar">
+    <meta name="author" content="Moto 81">
 
-/* Yeni Modern Instagram Profil Kutucuğu Stilleri */
-.instagram-widget-modern {
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-    border-radius: 1rem; /* Daha yumuşak köşeler */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    padding: 2rem;
-    text-align: center;
-    margin-top: 2rem; /* Üstteki elemanlardan boşluk bırakır */
-    text-decoration: none;
-    color: var(--white); /* Beyaz metin */
-    display: block;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
-}
-.instagram-widget-modern::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png') no-repeat center center; /* Instagram logosu arka plan */
-    background-size: 150px;
-    opacity: 0.05;
-    z-index: 1;
-}
-.instagram-widget-modern:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-}
-.instagram-widget-modern .profile-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 2;
-}
-.instagram-widget-modern .profile-picture-modern {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--white); /* Beyaz çerçeve */
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.3); /* Dış halka efekti */
-}
-.instagram-widget-modern .username-modern {
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: var(--white);
-    margin-top: 0.75rem;
-    margin-bottom: 0.5rem;
-    position: relative;
-    z-index: 2;
-}
-.instagram-widget-modern .bio-modern {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.8);
-    margin-bottom: 1.5rem;
-    position: relative;
-    z-index: 2;
-}
-.instagram-widget-modern .btn-follow-modern {
-    background-color: var(--white); /* Beyaz buton */
-    border-color: var(--white);
-    color: #cc2366; /* Instagram'ın koyu pembe tonu */
-    font-weight: 600;
-    padding: 0.6rem 2rem;
-    border-radius: 50px; /* Yuvarlak buton */
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
-}
-.instagram-widget-modern .btn-follow-modern:hover {
-    background-color: rgba(255,255,255,0.9);
-    border-color: rgba(255,255,255,0.9);
-    color: #e6683c;
-    transform: scale(1.05);
-}
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Ödeme - Moto 81">
+    <meta property="og:description" content="Moto 81'de siparişinizi güvenle tamamlayın.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moto81.com/odeme.html">
 
-/* Footer Sosyal Medya için */
-.footer-social-section {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border-color);
-}
-.footer-social-section h5 {
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 1rem;
-}
-.footer-social-section .social-links a {
-    font-size: 1.8rem;
-    color: var(--gray-text);
-    margin: 0 0.8rem;
-    transition: color 0.3s ease;
-}
-.footer-social-section .social-links a:hover {
-    color: var(--primary);
-}
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-/* YouTube Video Kutusu */
-.youtube-video-section {
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    border-radius: 0.75rem;
-    box-shadow: var(--shadow-light);
-    padding: 1.5rem;
-    margin-top: 3rem; /* Diğer alanlardan ayırmak için boşluk */
-    text-align: center;
-}
-.youtube-video-section h4 {
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
-}
-.video-responsive {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000;
-    border-radius: 0.5rem;
-}
-.video-responsive iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-</style>
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS (Ana sayfadaki styles.css içeriği buraya entegre edildi) -->
+    <style>
+        :root {
+            --primary-color: #0a0a0a; /* Siyah tonu */
+            --secondary-color: #333333; /* Koyu gri */
+            --accent-color: #ff6b35; /* Turuncu vurgu */
+            --light-bg-color: #f8f9fa; /* Açık gri arka plan */
+            --white-color: #ffffff;
+            --gray-text-color: #6c757d; /* Gri metin */
+            --border-light-color: #e0e0e0; /* Açık kenarlık */
+            --shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.08); /* Hafif gölge */
+            --font-family-inter: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family-inter);
+            color: var(--secondary-color);
+            line-height: 1.6;
+            background-color: var(--light-bg-color); /* Ana sayfanın arka planı */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Başlıklar */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Navbar Stilleri */
+        .navbar {
+            background-color: var(--white-color);
+            border-bottom: 1px solid var(--border-light-color);
+            box-shadow: var(--shadow-subtle);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.75rem;
+            color: var(--primary-color) !important;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand svg {
+            margin-right: 0.5rem;
+            color: var(--accent-color); /* Logo ikonuna vurgu rengi */
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0;
+        }
+
+        .navbar-toggler-icon {
+            width: 1.5em;
+            height: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .navbar-toggler-icon span,
+        .navbar-toggler-icon span::before,
+        .navbar-toggler-icon span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .navbar-toggler-icon span::before {
+            top: -6px;
+        }
+
+        .navbar-toggler-icon span::after {
+            top: 6px;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon span {
+            background-color: transparent;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon span::before {
+            transform: translateY(6px) rotate(45deg);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon span::after {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--secondary-color);
+            font-weight: 500;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background-color: var(--accent-color);
+            color: var(--white-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input {
+            padding-right: 2.5rem;
+            border-radius: 50px;
+            border-color: var(--border-light-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+        }
+
+        .search-container svg {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-text-color);
+            pointer-events: none;
+        }
+
+        /* Main İçerik */
+        main {
+            flex: 1;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            background-color: var(--light-bg-color); /* Main arka planı */
+        }
+
+        /* Genel Kart Stili */
+        .custom-card {
+            background-color: var(--white-color);
+            border: 1px solid var(--border-light-color);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-subtle);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .custom-card h4 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light-color);
+            padding-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .custom-card h4 .badge {
+            font-size: 0.9rem;
+            font-weight: 600;
+            background-color: var(--accent-color) !important;
+        }
+
+
+        /* Sepet Özeti Stili */
+        .checkout-summary .list-group-item {
+            background-color: var(--white-color);
+            border: none;
+            border-bottom: 1px dashed var(--border-light-color);
+            padding: 0.75rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .checkout-summary img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border-light-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .checkout-summary .product-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .checkout-summary .product-info h6 {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        .checkout-summary .text-muted {
+            font-size: 0.85rem;
+            color: var(--gray-text-color) !important;
+        }
+
+        .checkout-summary .item-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            text-align: right;
+            margin-left: auto;
+            font-size: 1rem;
+        }
+
+        .checkout-total {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-light-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Form Stilleri */
+        .form-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            border-color: var(--border-light-color);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+            background-color: var(--white-color);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+        }
+
+        .alert-info {
+            background-color: #e0f2f7; /* Açık mavi */
+            color: #005662; /* Koyu mavi */
+            border-color: #b3e5fc;
+            border-radius: 0.5rem;
+            padding: 1rem 1.5rem;
+            font-size: 0.95rem;
+        }
+        .alert-info strong {
+            color: #005662;
+        }
+
+        /* Buton Stilleri */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-success {
+            background-color: #28a745; /* WhatsApp yeşili */
+            border-color: #28a745;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2);
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-outline-secondary {
+            color: var(--secondary-color);
+            border-color: var(--border-light-color);
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn-outline-secondary:hover {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+
+        /* Instagram Widget (Ana sayfadan kopyalandı ve geliştirildi) */
+        /* Instagram widget'ının kendi renk geçişli arka planını korumak için özel stil */
+        .instagram-widget-modern {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 0;
+            text-decoration: none;
+            color: var(--white-color);
+            display: block;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            /* Arka plan main ile aynı olsa bile, bu widget kendi belirgin görünümünü koruyacak */
+            /* Zaten gradient arka plana sahip olduğu için ekstra bir `background-color` gerekmez */
+        }
+        .instagram-widget-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png') no-repeat center center;
+            background-size: 150px;
+            opacity: 0.05;
+            z-index: 1;
+        }
+        .instagram-widget-modern:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .instagram-widget-modern .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        .instagram-widget-modern .profile-picture-modern {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white-color);
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        }
+        .instagram-widget-modern .username-modern {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--white-color);
+            margin-top: 0.75rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .instagram-widget-modern .bio-modern {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .instagram-widget-modern .btn-follow-modern {
+            background-color: var(--white-color);
+            border-color: var(--white-color);
+            color: #cc2366;
+            font-weight: 600;
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .instagram-widget-modern .btn-follow-modern:hover {
+            background-color: rgba(255,255,255,0.9);
+            border-color: rgba(255,255,255,0.9);
+            color: #e6683c;
+            transform: scale(1.05);
+        }
+
+
+        /* Footer Stilleri (Ana sayfadan kopyalandı) */
+        footer {
+            background-color: var(--primary-color); /* Koyu arka plan */
+            color: var(--white-color);
+            padding: 3rem 0;
+            font-size: 0.9rem;
+            margin-top: auto; /* Sayfanın en altına itmek için */
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-section p, .footer-section ul li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--white-color);
+        }
+
+        /* Sosyal Medya ve Newsletter */
+        .social-media-section, .newsletter-section {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        .social-media-title, .newsletter-title {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white-color);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links .social-link:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .newsletter-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px 0 0 50px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--white-color);
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-button {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            border: 1px solid var(--accent-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background-color: darken(var(--accent-color), 10%);
+            border-color: darken(var(--accent-color), 10%);
+            transform: translateX(2px);
+        }
+
+        /* Footer Alt Kısım */
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin: 0 0.8rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white-color);
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            width: 50px;
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white-color);
+            font-size: 0.7rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Özel Ödeme Metodları SVG renkleri */
+        .payment-method[title="Visa"] svg rect { fill: #1a1f71; }
+        .payment-method[title="Mastercard"] svg rect { fill: #eb001b; }
+        .payment-method[title="PayPal"] svg rect { fill: #003087; }
+        .payment-method[title="Visa"] svg text,
+        .payment-method[title="Mastercard"] svg text,
+        .payment-method[title="PayPal"] svg text { fill: var(--white-color); }
+
+
+        /* YouTube Video Kutusu */
+        .youtube-video-section {
+            background-color: var(--white-color);
+            border: 1px solid var(--border-light-color);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-subtle);
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .youtube-video-section h4 {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-light-color);
+            padding-bottom: 1rem;
+        }
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.75rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                margin-top: 1rem;
+            }
+            .navbar-nav .nav-link {
+                text-align: center;
+            }
+            .search-container {
+                margin-top: 1rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-input, .newsletter-button {
+                border-radius: 0.5rem !important;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-<nav class="navbar navbar-expand-lg">
-<div class="container-fluid container">
-<a class="navbar-brand" href="index.html">Moto 81</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-<div class="navbar-nav ms-auto">
-<a class="nav-link" href="index.html">Ürünlere Geri Dön</a>
-</div>
-</div>
-</div>
-</nav>
-</header>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
 
-<main class="container my-5">
-<h1 class="mb-5 text-center" style="font-weight:700;color:var(--primary)">Ödeme İşlemleri</h1>
-<div class="row g-5">
-    <!-- Sol Sütun: Sepet Özeti, Teslimat Bilgileri ve Ödeme İletişim -->
-    <div class="col-md-7 col-lg-8 order-md-1 order-lg-1">
-        <!-- Sepet Kutusu En Üste Alındı -->
-        <div class="custom-card mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">Sepetiniz</span>
-                <span class="badge bg-primary rounded-pill" id="summaryCartCount">0</span>
-            </h4>
-            <ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
-                <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
-            </ul>
-            <div class="d-flex justify-content-between align-items-center checkout-total">
-                <strong>Toplam</strong>
-                <span id="summaryCartTotal">0.00 ₺</span>
-            </div>
-        </div>
-
-        <!-- Teslimat Bilgileri Formu -->
-        <div class="custom-card">
-            <h4>Teslimat Bilgileri</h4>
-            <form class="needs-validation" id="deliveryForm" novalidate>
-                <div class="row g-3">
-                    <div class="col-sm-6">
-                        <label for="firstName" class="form-label">Adınız</label>
-                        <input type="text" class="form-control" id="firstName" required>
-                        <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
+    <header>
+        <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
+            <div class="container-fluid container">
+                <a class="navbar-brand" href="index.html" aria-label="Moto 81 Home">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Moto 81
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <div class="navbar-toggler-icon">
+                        <span></span>
                     </div>
-                    <div class="col-sm-6">
-                        <label for="lastName" class="form-label">Soyadınız</label>
-                        <input type="text" class="form-control" id="lastName" required>
-                        <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
-                    </div>
-                    <div class="col-12">
-                        <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="siz@example.com">
-                        <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
-                    </div>
-                    <div class="col-12">
-                        <label for="phone" class="form-label">Telefon</label>
-                        <input type="tel" class="form-control" id="phone" required>
-                        <div class="invalid-feedback">Geçerli telefon girin.</div>
-                    </div>
-                    <div class="col-12">
-                        <label for="address" class="form-label">Adres</label>
-                        <input type="text" class="form-control" id="address" required>
-                        <div class="invalid-feedback">Adres girin.</div>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="country" class="form-label">Ülke</label>
-                        <select class="form-select" id="country" required>
-                            <option value="">Seçin...</option>
-                            <option>Türkiye</option>
-                        </select>
-                        <div class="invalid-feedback">Ülke seçin.</div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="city" class="form-label">Şehir</label>
-                        <input type="text" class="form-control" id="city" required>
-                        <div class="invalid-feedback">Şehir girin.</div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="zip" class="form-label">Posta Kodu</label>
-                        <input type="text" class="form-control" id="zip" required>
-                        <div class="invalid-feedback">Posta kodu girin.</div>
-                    </div>
-                </div>
-                <hr class="my-4">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="same-address">
-                    <label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
-                </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="save-info">
-                    <label class="form-check-label" for="save-info">Bilgileri kaydet</label>
-                </div>
-                <div class="mt-4 alert alert-info">
-                    <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
-                </div>
-            </form>
-        </div>
-
-        <div class="custom-card mt-4">
-            <h4>Ödeme Nasıl Yapılır?</h4>
-            <p class="text-muted mb-4">
-                Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
-            </p>
-            <div class="d-grid gap-2">
-                <button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
-                    <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
                 </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <a class="nav-link" href="index.html" role="button">Ürünlere Geri Dön</a>
+                    </div>
+                </div>
             </div>
-            <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
+        </nav>
+    </header>
+
+    <main class="container my-5" id="main-content">
+        <h1 class="mb-5 text-center" style="font-weight:800;color:var(--primary-color)">Ödeme İşlemleri</h1>
+        <div class="row g-5">
+            <!-- Sol Sütun: Sepet Özeti, Teslimat Bilgileri ve Ödeme İletişim -->
+            <div class="col-md-7 col-lg-8 order-md-1 order-lg-1">
+                <!-- Sepet Kutusu En Üste Alındı -->
+                <div class="custom-card mb-4">
+                    <h4 class="d-flex justify-content-between align-items-center">
+                        <span>Sepetiniz</span>
+                        <span class="badge rounded-pill" id="summaryCartCount">0</span>
+                    </h4>
+                    <ul class="list-group mb-3 checkout-summary" id="cartSummaryItems">
+                        <li class="list-group-item text-muted text-center">Sepetiniz boş</li>
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center checkout-total">
+                        <strong>Toplam</strong>
+                        <span id="summaryCartTotal">0.00 ₺</span>
+                    </div>
+                </div>
+
+                <!-- Teslimat Bilgileri Formu -->
+                <div class="custom-card">
+                    <h4>Teslimat Bilgileri</h4>
+                    <form class="needs-validation" id="deliveryForm" novalidate>
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label for="firstName" class="form-label">Adınız</label>
+                                <input type="text" class="form-control" id="firstName" required aria-label="Adınız">
+                                <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lastName" class="form-label">Soyadınız</label>
+                                <input type="text" class="form-control" id="lastName" required aria-label="Soyadınız">
+                                <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe Bağlı)</span></label>
+                                <input type="email" class="form-control" id="email" placeholder="siz@example.com" aria-label="E-posta adresiniz">
+                                <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="phone" class="form-label">Telefon</label>
+                                <input type="tel" class="form-control" id="phone" required aria-label="Telefon numaranız">
+                                <div class="invalid-feedback">Geçerli telefon girin.</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="address" class="form-label">Adres</label>
+                                <input type="text" class="form-control" id="address" required aria-label="Adresiniz">
+                                <div class="invalid-feedback">Adres girin.</div>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="country" class="form-label">Ülke</label>
+                                <select class="form-select" id="country" required aria-label="Ülke seçimi">
+                                    <option value="">Seçin...</option>
+                                    <option>Türkiye</option>
+                                </select>
+                                <div class="invalid-feedback">Ülke seçin.</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="city" class="form-label">Şehir</label>
+                                <input type="text" class="form-control" id="city" required aria-label="Şehir adınız">
+                                <div class="invalid-feedback">Şehir girin.</div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="zip" class="form-label">Posta Kodu</label>
+                                <input type="text" class="form-control" id="zip" required aria-label="Posta kodunuz">
+                                <div class="invalid-feedback">Posta kodu girin.</div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="same-address">
+                            <label class="form-check-label" for="same-address">Teslimat ve fatura adresi aynı</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="save-info">
+                            <label class="form-check-label" for="save-info">Bilgileri kaydet</label>
+                        </div>
+                        <div class="mt-4 alert alert-info" role="alert">
+                            <strong>Bilgi:</strong> Teslimat bilgilerini doldurduktan sonra ödeme için iletişime geçin.
+                        </div>
+                    </form>
+                </div>
+
+                <div class="custom-card mt-4">
+                    <h4>Ödeme Nasıl Yapılır?</h4>
+                    <p class="text-muted mb-4">
+                        Ödeme için lütfen aşağıdaki kanallardan iletişime geçin. Teslimat bilgileriniz WhatsApp üzerinden bize otomatik olarak iletilecektir.
+                    </p>
+                    <div class="d-grid gap-2">
+                        <button type="button" id="whatsappPayButton" class="btn btn-success btn-lg mb-3">
+                            <i class="bi bi-whatsapp me-2"></i> WhatsApp'tan Yaz
+                        </button>
+                    </div>
+                    <p class="text-muted text-center mt-3 small">En kısa sürede geri dönüş yapılacaktır.</p>
+                </div>
+            </div>
+
+            <!-- Sağ Sütun: Instagram Widget -->
+            <div class="col-md-5 col-lg-4 order-md-2 order-lg-2">
+                <!-- Modern Instagram Profil Kutucuğu -->
+                <a href="https://www.instagram.com/ard4_fr" target="_blank" rel="noopener noreferrer" class="instagram-widget-modern">
+                    <div class="profile-header">
+                        <img src="https://via.placeholder.com/90/ff6b35/ffffff?text=M81" class="profile-picture-modern" alt="Instagram Profil Fotoğrafı">
+                    </div>
+                    <div class="username-modern">@ard4_fr</div>
+                    <p class="bio-modern">En yeni motosiklet ürünleri, aksesuarları ve kampanyalar için bizi takip edin!</p>
+                    <span class="btn btn-follow-modern"><i class="bi bi-instagram me-2"></i>Takip Et</span>
+                </a>
+            </div>
         </div>
-    </div>
 
-    <!-- Sağ Sütun: Instagram Widget ve Boş Bırakıldı -->
-    <div class="col-md-5 col-lg-4 order-md-2 order-lg-2">
-        <!-- Modern Instagram Profil Kutucuğu -->
-        <a href="https://www.instagram.com/ard4_fr" target="_blank" class="instagram-widget-modern">
-            <div class="profile-header">
-                <!-- Profil görselini buraya kendi Instagram profil resminizin URL'si ile değiştirin -->
-                <img src="insta.jpg" class="profile-picture-modern" alt="Instagram Profil Fotoğrafı">
-            </div>
-            <div class="username-modern">@ard4_fr</div>
-            <p class="bio-modern">En yeni motosiklet ürünleri, aksesuarları ve kampanyalar için bizi takip edin!</p>
-            <span class="btn btn-follow-modern"><i class="bi bi-instagram me-2"></i>Takip Et</span>
-        </a>
-        <!-- Modern Instagram Profil Kutucuğu Bitişi -->
-    </div>
-</div>
-
-<!-- YouTube Video Kutusu - Tüm Sayfa Genişliğinde -->
-<div class="row">
-    <div class="col-12">
-        <div class="youtube-video-section">
-            <h4>Milli Gururumuz</h4>
-            <div class="video-responsive">
-                <!-- YouTube video ID'sini buraya yapıştırın. -->
-                <iframe src="https://www.youtube.com/embed/jQWRx4Uu2WI?si=9IOKJ3A7VP3ZaLjy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <!-- YouTube Video Kutusu - Tüm Sayfa Genişliğinde -->
+        <div class="row">
+            <div class="col-12">
+                <div class="youtube-video-section">
+                    <h4>Milli Gururumuz</h4>
+                    <div class="video-responsive">
+                        <iframe src="https://www.youtube.com/embed/jQWRx4Uu2WI?si=9IOKJ3A7VP3ZaLjy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </main>
 
-</main>
+    <!-- Enhanced Footer (Ana sayfadan kopyalandı) -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>Hakkımızda</h3>
+                    <p>Moto 81 olarak, premium motorcycle aksesuarları ve yedek parçalarında kalite ve performansı bir araya getiriyoruz. PCX ve NMAX motorcuları için en iyi ürünleri sunuyoruz.</p>
+                </div>
 
-<footer>
-<div class="container">
-<p class="mb-2">&copy; 2025 Moto 81 - Tüm Hakları Saklıdır</p>
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="#" aria-label="Tüm Ürünler">Tüm Ürünler</a></li>
+                        <li><a href="#" aria-label="PCX Ürünleri">PCX Ürünleri</a></li>
+                        <li><a href="#" aria-label="NMAX Ürünleri">NMAX Ürünleri</a></li>
+                        <li><a href="odeme.html" aria-label="Ödeme">Ödeme</a></li>
+                        <li><a href="#" aria-label="İletişim">İletişim</a></li>
+                    </ul>
+                </div>
 
-<div class="footer-social-section">
-    <h5>Bizi Takip Edin ve İletişime Geçin!</h5>
-    <div class="social-links">
-        <a href="https://www.instagram.com/ard4_fr" target="_blank" aria-label="Instagram Profilimiz">
-            <i class="bi bi-instagram"></i>
-        </a>
-        <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp Hattımız">
-            <i class="bi bi-whatsapp"></i>
-        </a>
-        <!-- İsterseniz buraya başka sosyal medya linkleri de ekleyebilirsiniz -->
-    </div>
-</div>
-</div>
-</footer>
+                <!-- Customer Service -->
+                <div class="footer-section">
+                    <h3>Müşteri Hizmetleri</h3>
+                    <ul>
+                        <li><a href="#" aria-label="Sıkça Sorulan Sorular">Sıkça Sorulan Sorular</a></li>
+                        <li><a href="#" aria-label="Teslimat Bilgileri">Teslimat Bilgileri</a></li>
+                        <li><a href="#" aria-label="İade Politikası">İade Politikası</a></li>
+                        <li><a href="#" aria-label="Garanti Koşulları">Garanti Koşulları</a></li>
+                        <li><a href="#" aria-label="Gizlilik Politikası">Gizlilik Politikası</a></li>
+                    </ul>
+                </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-(function(){'use strict'
-var forms=document.querySelectorAll('.needs-validation')
-Array.prototype.slice.call(forms).forEach(function(form){
-form.addEventListener('submit',function(event){
-if(!form.checkValidity()){event.preventDefault(); event.stopPropagation();}
-form.classList.add('was-validated');
-},false)
-})
-})();
+                <!-- Contact Info -->
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <p><strong>Adres:</strong> İstanbul, Türkiye</p>
+                    <p><strong>Telefon:</strong> +90 555 123 45 67</p>
+                    <p><strong>E-posta:</strong> info@moto81.com</p>
+                    <p><strong>Çalışma Saatleri:</strong> Pazartesi - Cumartesi: 09:00 - 18:00</p>
+                </div>
+            </div>
 
-const CART_KEY='moto81_cart_v1';
-let cart=JSON.parse(localStorage.getItem(CART_KEY)||'[]');
-const summaryCartCount=document.getElementById('summaryCartCount');
-const cartSummaryItems=document.getElementById('cartSummaryItems');
-const summaryCartTotal=document.getElementById('summaryCartTotal');
-const whatsappPayButton = document.getElementById('whatsappPayButton');
-const deliveryForm = document.getElementById('deliveryForm');
+            <!-- Social Media Section -->
+            <div class="social-media-section">
+                <h3 class="social-media-title">Bizi Takip Edin</h3>
+                <div class="social-links">
+                    <a href="https://facebook.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link facebook" aria-label="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link twitter" aria-label="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link instagram" aria-label="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                        </svg>
+                    </a>
+                    <a href="https://youtube.com/moto81" target="_blank" rel="noopener noreferrer" class="social-link youtube" aria-label="YouTube">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/company/moto81" target="_blank" rel="noopener noreferrer" class="social-link linkedin" aria-label="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
 
-function money(num){return Number(num).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₺';}
+            <!-- Newsletter Section -->
+            <div class="newsletter-section">
+                <h3 class="newsletter-title">Bültenimize Abone Olun</h3>
+                <p class="newsletter-description">Yeni ürünler, indirimler ve özel teklifler hakkında ilk siz haberdar olun.</p>
+                <form class="newsletter-form" action="#" method="post">
+                    <input type="email" class="newsletter-input" placeholder="E-posta adresiniz" required aria-label="E-posta adresi">
+                    <button type="submit" class="newsletter-button">Abone Ol</button>
+                </form>
+            </div>
 
-function renderCartSummary(){
-    summaryCartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
-    cartSummaryItems.innerHTML='';
-    if(cart.length===0){
-        cartSummaryItems.innerHTML='<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
-        summaryCartTotal.textContent=money(0);
-        return;
-    }
-    cart.forEach(item=>{
-        const li=document.createElement('li');
-        li.className='list-group-item d-flex justify-content-between lh-sm';
-        li.innerHTML=`<img src="${item.img}" alt="${item.name}" class="me-3">
-        <div class="product-info"><h6>${item.name}</h6><small class="text-muted">${item.brand} · Adet: ${item.qty}</small></div>
-        <span class="item-price">${money(item.price*item.qty)}</span>`;
-        cartSummaryItems.appendChild(li);
-    });
-    summaryCartTotal.textContent=money(cart.reduce((s,i)=>s+i.price*i.qty,0));
-}
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#" aria-label="Kullanım Koşulları">Kullanım Koşulları</a>
+                    <a href="#" aria-label="Gizlilik Politikası">Gizlilik Politikası</a>
+                    <a href="#" aria-label="Çerez Politikası">Çerez Politikası</a>
+                    <a href="#" aria-label="Site Haritası">Site Haritası</a>
+                </div>
+                <p>&copy; 2025 Moto 81 - Premium Motor Aksesuarları - Tüm Hakları Saklıdır</p>
+                
+                <!-- Payment Methods -->
+                <div class="payment-methods">
+                    <div class="payment-method" title="Visa">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#1a1f71"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VISA</text>
+                        </svg>
+                    </div>
+                    <div class="payment-method" title="Mastercard">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#eb001b"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="6" font-weight="bold">MASTERCARD</text>
+                        </svg>
+                    </div>
+                    <div class="payment-method" title="PayPal">
+                        <svg width="48" height="32" viewBox="0 0 48 32" fill="currentColor" aria-hidden="true">
+                            <rect width="48" height="32" rx="4" fill="#003087"/>
+                            <text x="24" y="20" text-anchor="middle" fill="white" font-size="6" font-weight="bold">PAYPAL</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-whatsappPayButton.addEventListener('click', function() {
-    if (!deliveryForm.checkValidity()) {
-        deliveryForm.classList.add('was-validated');
-        alert('Lütfen teslimat bilgilerini eksiksiz ve doğru doldurunuz.');
-        return;
-    }
+    <!-- External Scripts -->
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const address = document.getElementById('address').value;
-    const country = document.getElementById('country').value;
-    const city = document.getElementById('city').value;
-    const zip = document.getElementById('zip').value;
+    <script>
+        (function(){
+            'use strict'
+            var forms=document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms).forEach(function(form){
+                form.addEventListener('submit',function(event){
+                    if(!form.checkValidity()){event.preventDefault(); event.stopPropagation();}
+                    form.classList.add('was-validated');
+                },false)
+            })
+        })();
 
-    let cartDetails = '';
-    cart.forEach(item => {
-        cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.price * item.qty)}\n`;
-    });
-    const totalAmount = summaryCartTotal.textContent;
+        const CART_KEY='moto81_cart_v1';
+        let cart=JSON.parse(localStorage.getItem(CART_KEY)||'[]');
+        const summaryCartCount=document.getElementById('summaryCartCount');
+        const cartSummaryItems=document.getElementById('cartSummaryItems');
+        const summaryCartTotal=document.getElementById('summaryCartTotal');
+        const whatsappPayButton = document.getElementById('whatsappPayButton');
+        const deliveryForm = document.getElementById('deliveryForm');
 
-    const message = `Merhaba Moto 81,\n\nYeni bir sipariş talebim var:\n\n*Teslimat Bilgileri:*\nAdı Soyadı: ${firstName} ${lastName}\nTelefon: ${phone}\nE-posta: ${email ? email : 'Belirtilmedi'}\nAdres: ${address}\nÜlke: ${country}\nŞehir: ${city}\nPosta Kodu: ${zip}\n\n*Sepet İçeriği:*\n${cartDetails}\n*Toplam Tutar: ${totalAmount}*\n\nÖdeme seçenekleri hakkında bilgi almak istiyorum. Teşekkürler.`;
+        function money(num){return Number(num).toLocaleString('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2})+' ₺';}
 
-    const whatsappURL = `https://wa.me/905312672081?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, '_blank');
-});
+        function renderCartSummary(){
+            summaryCartCount.textContent=cart.reduce((s,i)=>s+i.qty,0);
+            cartSummaryItems.innerHTML='';
+            if(cart.length===0){
+                cartSummaryItems.innerHTML='<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
+                summaryCartTotal.textContent=money(0);
+                return;
+            }
+            cart.forEach(item=>{
+                const li=document.createElement('li');
+                li.className='list-group-item d-flex justify-content-between lh-sm';
+                li.innerHTML=`<img src="${item.img}" alt="${item.name}" class="me-3">
+                <div class="product-info"><h6>${item.name}</h6><small class="text-muted">${item.brand} · Adet: ${item.qty}</small></div>
+                <span class="item-price">${money(item.price*item.qty)}</span>`;
+                cartSummaryItems.appendChild(li);
+            });
+            summaryCartTotal.textContent=money(cart.reduce((s,i)=>s+i.price*i.qty,0));
+        }
 
+        whatsappPayButton.addEventListener('click', function() {
+            if (!deliveryForm.checkValidity()) {
+                deliveryForm.classList.add('was-validated');
+                alert('Lütfen teslimat bilgilerini eksiksiz ve doğru doldurunuz.');
+                return;
+            }
 
-document.addEventListener('DOMContentLoaded',renderCartSummary);
-</script>
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const country = document.getElementById('country').value;
+            const city = document.getElementById('city').value;
+            const zip = document.getElementById('zip').value;
+
+            let cartDetails = '';
+            cart.forEach(item => {
+                cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.price * item.qty)}\n`;
+            });
+            const totalAmount = summaryCartTotal.textContent;
+
+            const message = `Merhaba Moto 81,\n\nYeni bir sipariş talebim var:\n\n*Teslimat Bilgileri:*\nAdı Soyadı: ${firstName} ${lastName}\nTelefon: ${phone}\nE-posta: ${email ? email : 'Belirtilmedi'}\nAdres: ${address}\nÜlke: ${country}\nŞehir: ${city}\nPosta Kodu: ${zip}\n\n*Sepet İçeriği:*\n${cartDetails}\n*Toplam Tutar: ${totalAmount}*\n\nÖdeme seçenekleri hakkında bilgi almak istiyorum. Teşekkürler.`;
+
+            const whatsappURL = `https://wa.me/905312672081?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
+        });
+
+        document.addEventListener('DOMContentLoaded',renderCartSummary);
+    </script>
+
+    <!-- noscript for users who have disabled JavaScript -->
+    <noscript>
+        <div style="position: fixed; top: 0; left: 0; width: 100%; background: #ff6b35; color: white; text-align: center; padding: 10px; z-index: 9999;">
+            JavaScript is disabled. Some features of this site may not work properly. Please enable JavaScript for the best experience.
+        </div>
+    </noscript>
 </body>
 </html>
