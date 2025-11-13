@@ -92,7 +92,16 @@ const DOM = {
     clearCartBtn: document.getElementById('clearCart'),
     checkoutBtn: document.getElementById('checkoutBtn'),
     cartToggle: document.getElementById('cartToggle'),
-    heroCTA: document.querySelector('.hero-cta')
+    heroCTA: document.querySelector('.hero-cta'),
+    // Mobile cart elements
+    mobileCartDrawer: document.getElementById('mobileCartDrawer'),
+    mobileCartBackdrop: document.getElementById('mobileCartBackdrop'),
+    mobileCartClose: document.getElementById('mobileCartClose'),
+    mobileCartContent: document.getElementById('mobileCartContent'),
+    mobileCartTotal: document.getElementById('mobileCartTotal'),
+    mobileEmptyCart: document.getElementById('mobileEmptyCart'),
+    mobileClearCart: document.getElementById('mobileClearCart'),
+    mobileCheckoutBtn: document.getElementById('mobileCheckoutBtn')
 };
 
 // Debug: Check if cart count element exists
@@ -383,6 +392,7 @@ function updateCartUI() {
     updateCartCount();
     updateCartItems();
     updateCartTotal();
+    updateMobileCartUI(); // Update mobile cart UI
     saveCart();
 }
 
@@ -635,6 +645,340 @@ function clearCart() {
     const itemCount = cart.reduce((sum, item) => sum + item.qty, 0);
     cart = [];
     updateCartUI();
+}
+
+// =============================================================================
+// MOBILE CART DRAWER FUNCTIONALITY
+// =============================================================================
+
+/**
+ * Check if device is mobile based on viewport width
+ * @returns {boolean} True if mobile device
+ */
+function isMobileDevice() {
+    return window.innerWidth <= 991.98; // Bootstrap lg breakpoint
+}
+
+/**
+ * Open mobile cart drawer
+ */
+function openMobileCart() {
+    if (!DOM.mobileCartDrawer || !isMobileDevice()) return;
+
+    DOM.mobileCartDrawer.classList.add('open');
+    DOM.mobileCartBackdrop.classList.add('show');
+
+    // Prevent body scroll when drawer is open
+    document.body.style.overflow = 'hidden';
+
+    // Focus management for accessibility
+    DOM.mobileCartClose.focus();
+}
+
+/**
+ * Close mobile cart drawer
+ */
+function closeMobileCart() {
+    if (!DOM.mobileCartDrawer) return;
+
+    DOM.mobileCartDrawer.classList.remove('open');
+    DOM.mobileCartBackdrop.classList.remove('show');
+
+    // Restore body scroll
+    document.body.style.overflow = '';
+
+    // Return focus to cart toggle button
+    if (DOM.cartToggle) {
+        DOM.cartToggle.focus();
+    }
+}
+
+/**
+ * Toggle mobile cart drawer
+ */
+function toggleMobileCart() {
+    if (DOM.mobileCartDrawer.classList.contains('open')) {
+        closeMobileCart();
+    } else {
+        openMobileCart();
+    }
+}
+
+/**
+ * Update mobile cart UI
+ */
+function updateMobileCartUI() {
+    if (!DOM.mobileCartContent || !DOM.mobileCartTotal || !DOM.mobileEmptyCart) {
+        return;
+    }
+
+    // Update mobile cart total
+    const total = cart.reduce((sum, item) => {
+        const itemPrice = item.priceAtAdd || item.price || 0;
+        if (item.isDiscounted && item.discountPercentage) {
+            return sum + (calculateDiscountedPrice(itemPrice, item.discountPercentage) * item.qty);
+        }
+        return sum + (itemPrice * item.qty);
+    }, 0);
+
+    DOM.mobileCartTotal.textContent = formatCurrency(total);
+
+    // Update mobile cart items
+    if (cart.length === 0) {
+        showMobileEmptyCart();
+    } else {
+        showMobileCartItems();
+    }
+}
+
+/**
+ * Show empty mobile cart state
+ */
+function showMobileEmptyCart() {
+    if (!DOM.mobileCartContent || !DOM.mobileEmptyCart) return;
+
+    DOM.mobileCartContent.innerHTML = '';
+    DOM.mobileCartContent.appendChild(DOM.mobileEmptyCart.cloneNode(true));
+}
+
+/**
+ * Show mobile cart items
+ */
+function showMobileCartItems() {
+    if (!DOM.mobileCartContent) return;
+
+    DOM.mobileCartContent.innerHTML = '';
+
+    cart.forEach(item => {
+        const originalProduct = findProductById(item.id);
+        if (!originalProduct) return;
+
+        const displayPrice = item.priceAtAdd || item.price || 0;
+        const finalPrice = item.isDiscounted && item.discountPercentage
+            ? calculateDiscountedPrice(displayPrice, item.discountPercentage)
+            : displayPrice;
+
+        const mobileCartItem = createMobileCartItemElement(item, finalPrice, originalProduct);
+        DOM.mobileCartContent.appendChild(mobileCartItem);
+    });
+}
+
+/**
+ * Create mobile cart item element
+ * @param {Object} item - Cart item
+ * @param {number} displayPrice - Price to display
+ * @param {Object} product - Original product object
+ * @returns {HTMLElement} Mobile cart item element
+ */
+function createMobileCartItemElement(item, displayPrice, product) {
+    const element = document.createElement('div');
+    element.className = 'mobile-cart-item';
+    element.setAttribute('data-product-id', item.id);
+
+    // Check if price has changed since item was added
+    const currentMarketPrice = getCurrentProductPrice(product);
+    const priceChanged = Math.abs(currentMarketPrice - displayPrice) > 0.01;
+
+    element.innerHTML = `
+        <img alt="${item.name}" src="${item.img}" loading="lazy">
+        <div class="mobile-cart-meta">
+            <b>${item.name}</b>
+            <div class="text-muted">${item.brand} · ${formatCurrency(displayPrice)} x ${item.qty}</div>
+            ${priceChanged ? '<small class="text-warning" style="font-size: 11px;">Fiyat güncellendi</small>' : ''}
+            <div class="mobile-quantity-controls">
+                <button class="mobile-qty-btn mobile-decrease-qty-btn" data-id="${item.id}" aria-label="Decrease quantity">
+                    <span>−</span>
+                </button>
+                <span class="mobile-qty-display" aria-label="Quantity: ${item.qty}">${item.qty}</span>
+                <button class="mobile-qty-btn mobile-increase-qty-btn" data-id="${item.id}" aria-label="Increase quantity">
+                    <span>+</span>
+                </button>
+            </div>
+        </div>
+        <button class="mobile-remove-btn mobile-remove-item-btn" data-id="${item.id}" aria-label="Remove item">
+            ×
+        </button>
+    `;
+
+    return element;
+}
+
+/**
+ * Initialize mobile cart event listeners
+ */
+function initializeMobileCartListeners() {
+    // Mobile cart close button
+    if (DOM.mobileCartClose) {
+        DOM.mobileCartClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMobileCart();
+        });
+    }
+
+    // Mobile cart backdrop
+    if (DOM.mobileCartBackdrop) {
+        DOM.mobileCartBackdrop.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMobileCart();
+        });
+    }
+
+    // Mobile cart action buttons
+    if (DOM.mobileClearCart) {
+        DOM.mobileClearCart.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clearCart();
+            closeMobileCart();
+        });
+    }
+
+    if (DOM.mobileCheckoutBtn) {
+        DOM.mobileCheckoutBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMobileCart();
+            window.location.href = "odeme.html";
+        });
+    }
+
+    // Enhanced cart toggle for mobile detection
+    if (DOM.cartToggle) {
+        DOM.cartToggle.addEventListener('click', (e) => {
+            if (isMobileDevice()) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMobileCart();
+            }
+            // Allow default Bootstrap dropdown behavior on desktop
+        });
+    }
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (!isMobileDevice() && DOM.mobileCartDrawer.classList.contains('open')) {
+            closeMobileCart();
+        }
+    });
+
+    // Initialize mobile touch gestures
+    initializeMobileGestures();
+}
+
+/**
+ * Handle Escape key for mobile cart
+ */
+function handleMobileCartKeyboard(event) {
+    if (event.key === 'Escape' && DOM.mobileCartDrawer.classList.contains('open')) {
+        closeMobileCart();
+    }
+}
+
+/**
+ * Initialize mobile touch gestures for cart drawer
+ */
+function initializeMobileGestures() {
+    if (!DOM.mobileCartDrawer) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    // Touch start event
+    DOM.mobileCartDrawer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    // Touch move event (for potential future enhancements)
+    DOM.mobileCartDrawer.addEventListener('touchmove', (e) => {
+        // Could add real-time drawer animation here
+    }, { passive: true });
+
+    // Touch end event
+    DOM.mobileCartDrawer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipeGesture(touchStartX, touchEndX, touchStartY, touchEndY);
+    }, { passive: true });
+
+    // Prevent default touch behaviors that interfere with our swipe detection
+    DOM.mobileCartDrawer.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        const drawerRect = DOM.mobileCartDrawer.getBoundingClientRect();
+
+        // Only prevent default if we're swiping horizontally near the edge
+        if (touch.clientX > drawerRect.width - 50) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+}
+
+/**
+ * Handle swipe gesture for cart drawer
+ * @param {number} startX - Starting X coordinate
+ * @param {number} endX - Ending X coordinate
+ * @param {number} startY - Starting Y coordinate
+ * @param {number} endY - Ending Y coordinate
+ */
+function handleSwipeGesture(startX, endX, startY, endY) {
+    const swipeDistanceX = endX - startX;
+    const swipeDistanceY = endY - startY;
+    const minSwipeDistance = 50; // Minimum distance for swipe gesture
+    const maxVerticalDistance = 100; // Maximum vertical movement to consider as horizontal swipe
+
+    // Check if it's a horizontal swipe (right to left)
+    if (Math.abs(swipeDistanceX) > minSwipeDistance && Math.abs(swipeDistanceY) < maxVerticalDistance) {
+        if (swipeDistanceX < 0) {
+            // Swipe left - could trigger future functionality
+            console.log('Swipe left detected');
+        } else {
+            // Swipe right - close drawer
+            closeMobileCart();
+        }
+    }
+}
+
+/**
+ * Add haptic feedback for mobile interactions
+ */
+function triggerHapticFeedback(type = 'light') {
+    if ('vibrate' in navigator) {
+        switch (type) {
+            case 'light':
+                navigator.vibrate(10);
+                break;
+            case 'medium':
+                navigator.vibrate(25);
+                break;
+            case 'heavy':
+                navigator.vibrate(50);
+                break;
+            case 'success':
+                navigator.vibrate([10, 50, 10]);
+                break;
+            case 'error':
+                navigator.vibrate([100, 50, 100]);
+                break;
+            default:
+                navigator.vibrate(10);
+        }
+    }
+}
+
+/**
+ * Enhanced mobile cart open with haptic feedback
+ */
+function openMobileCartWithFeedback() {
+    openMobileCart();
+    triggerHapticFeedback('light');
+}
+
+/**
+ * Enhanced mobile cart close with haptic feedback
+ */
+function closeMobileCartWithFeedback() {
+    closeMobileCart();
+    triggerHapticFeedback('light');
 }
 
 // =============================================================================
@@ -892,6 +1236,31 @@ function handleDocumentClick(event) {
         removeFromCart(productId);
         return;
     }
+
+    // Mobile cart quantity controls
+    const mobileDecreaseButton = event.target.closest('.mobile-decrease-qty-btn');
+    if (mobileDecreaseButton) {
+        event.stopPropagation(); // Prevent drawer from closing
+        const productId = parseInt(mobileDecreaseButton.dataset.id);
+        updateCartItemQuantity(productId, -1);
+        return;
+    }
+
+    const mobileIncreaseButton = event.target.closest('.mobile-increase-qty-btn');
+    if (mobileIncreaseButton) {
+        event.stopPropagation(); // Prevent drawer from closing
+        const productId = parseInt(mobileIncreaseButton.dataset.id);
+        updateCartItemQuantity(productId, 1);
+        return;
+    }
+
+    const mobileRemoveButton = event.target.closest('.mobile-remove-item-btn');
+    if (mobileRemoveButton) {
+        event.stopPropagation(); // Prevent drawer from closing
+        const productId = parseInt(mobileRemoveButton.dataset.id);
+        removeFromCart(productId);
+        return;
+    }
 }
 
 /**
@@ -921,15 +1290,15 @@ function handleHeroCTAClick() {
  * @param {Event} event - Keyboard event
  */
 function handleKeyboardEvent(event) {
-    
+
     // Escape key to close mobile menu
     if (event.key === 'Escape') {
         const navbarCollapse = document.querySelector('.navbar-collapse');
         const navbarToggler = document.querySelector('.navbar-toggler');
-        
+
         if (navbarCollapse && navbarCollapse.classList.contains('show')) {
             console.log('Escape key pressed, closing mobile menu');
-            
+
             const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
             if (bsCollapse) {
                 bsCollapse.hide();
@@ -940,6 +1309,9 @@ function handleKeyboardEvent(event) {
                 bsCollapseNew.hide();
             }
         }
+
+        // Escape key to close mobile cart drawer
+        handleMobileCartKeyboard(event);
     }
 }
 
@@ -985,6 +1357,9 @@ function initializeEventListeners() {
 
     // Keyboard events
     document.addEventListener('keydown', handleKeyboardEvent);
+
+    // Mobile cart functionality
+    initializeMobileCartListeners();
 }
 
 /**

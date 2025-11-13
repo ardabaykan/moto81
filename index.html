@@ -69,7 +69,13 @@
                     </div>
                     <div class="d-flex w-100 w-lg-auto">
                         <div class="search-container">
-                            <input class="form-control me-2" type="search" placeholder="Premium ürün ara..." aria-label="Ürün ara" id="searchInput">
+                            <div class="search-input-wrapper">
+                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <path d="m21 21-4.35-4.35"></path>
+                                </svg>
+                                <input class="form-control" type="search" placeholder="Premium ürün ara..." aria-label="Premium ürün ara" id="searchInput">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,6 +95,8 @@
             </svg>
             <span class="cart-count" id="cartCount" aria-label="Items in cart">0</span>
         </button>
+
+        <!-- Desktop Cart Dropdown -->
         <div class="dropdown-menu dropdown-menu-end cart-dropdown" aria-labelledby="cartToggle">
             <div class="cart-header">
                 <h5 class="mb-0">Alışveriş Sepeti</h5>
@@ -106,6 +114,39 @@
             </div>
         </div>
     </div>
+
+    <!-- Mobile Cart Drawer -->
+    <div class="mobile-cart-drawer" id="mobileCartDrawer" role="dialog" aria-modal="true" aria-labelledby="mobileCartTitle">
+        <div class="mobile-cart-header">
+            <h5 id="mobileCartTitle">Alışveriş Sepeti</h5>
+            <button class="mobile-cart-close" id="mobileCartClose" aria-label="Close cart">
+                ×
+            </button>
+        </div>
+
+        <div class="mobile-cart-content" id="mobileCartContent">
+            <!-- Mobile cart items will be dynamically inserted here -->
+            <div class="mobile-empty-cart" id="mobileEmptyCart">
+                <div class="mobile-empty-cart-icon">🛒</div>
+                <div class="mobile-empty-cart-text">Sepetiniz boş</div>
+                <div class="mobile-empty-cart-subtitle">Harika ürünlerimizi keşfetmek için alışverişe devam edin!</div>
+            </div>
+        </div>
+
+        <div class="mobile-cart-footer">
+            <div class="mobile-cart-total">
+                <span>Toplam</span>
+                <span id="mobileCartTotal">0.00 ₺</span>
+            </div>
+            <div class="mobile-cart-actions">
+                <button class="btn btn-outline-secondary" id="mobileClearCart">Temizle</button>
+                <button class="btn btn-primary" id="mobileCheckoutBtn">Satın Al</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Cart Backdrop -->
+    <div class="mobile-cart-backdrop" id="mobileCartBackdrop"></div>
 
     <!-- Main Content -->
     <main class="container my-5" id="main-content">
