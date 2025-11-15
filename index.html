@@ -32,10 +32,28 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- Ürünlerin Arka Planını Beyaz Yapan Stil -->
+    <!-- Sayfa, Sepet ve Ürün Kartları Stilleri -->
     <style>
-        #productGrid > div {
+        body {
             background-color: #ffffff !important;
+        }
+
+        .cart-dropdown,
+        .mobile-cart-drawer {
+            background-color: #ffffff !important;
+        }
+
+        /* 
+         * Ürün kartlarının arka planını beyaz yapar ve yüksekliğini %100'e ayarlar.
+         * Bu, kartların bulundukları satırda aynı yüksekliğe sahip olmasını sağlar.
+         * Flexbox özellikleri, kart içeriğinin (başlık, fiyat, düğme) düzgün hizalanmasına yardımcı olur.
+         */
+        #productGrid .product-card { /* Bu kural, script.js dosyanızda oluşturulan .product-card class'ına sahip elementleri hedefler */
+            background-color: #ffffff !important;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* İçeriği dikeyde yayar, düğmeyi en alta iter */
         }
     </style>
 
