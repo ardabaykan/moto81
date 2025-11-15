@@ -1232,27 +1232,31 @@ a:focus {
 }
 
 /* =============================================================================
-   PRODUCT GRID AND CARDS
+   MODERN PRODUCT GRID AND CARDS
    ============================================================================= */
 
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: var(--space-8);
     padding: 0;
+    position: relative;
 }
 
 .card {
-    background: var(--surface);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    background: #ffffff; /* Arka planı beyaz yap */
+    border: 1px solid #e0e0e0; /* Kenarlık rengini açık gri yap */
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md); /* Gölgeyi daha belirgin hale getir */
     transition: all var(--transition-normal);
     overflow: hidden;
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
     perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 /* Carbon fiber pattern overlay on hover */
@@ -1270,9 +1274,10 @@ a:focus {
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-2xl);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: var(--shadow-xl); /* Hover gölgesini daha belirgin yap */
     border-color: var(--accent);
+    background: #ffffff;
 }
 
 .card:hover::before {
@@ -1290,14 +1295,15 @@ a:focus {
 
 .thumb {
     width: 100%;
-    height: 240px;
-    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+    height: 280px;
+    background: #ffffff; /* Resim arka planını beyaz yap */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
-    padding: 1.5rem;
+    padding: var(--space-6);
+    border-bottom: 1px solid #e0e0e0; /* Kenarlık ekle */
 }
 
 .thumb img {
@@ -1320,17 +1326,24 @@ a:focus {
 .card-title {
     font-weight: 700;
     font-size: var(--text-lg);
-    color: var(--primary);
+    color: #0a0a0a; /* Metin rengini siyah yap */
     margin-bottom: 0;
-    line-height: 1.3;
+    line-height: var(--leading-tight);
+    transition: color var(--transition-fast);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-text.brand-text {
     font-size: var(--text-sm);
-    color: var(--gray-600);
+    color: #606060; /* Marka metin rengini gri yap */
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    margin-bottom: var(--space-2);
 }
 
 .card-price-info {
