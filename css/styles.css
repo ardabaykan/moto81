@@ -1415,12 +1415,12 @@ a:focus {
 }
 
 .card {
-    background: var(--glass-bg);
+    background: #ffffff; /* Arka planı beyaz olarak ayarlamıştık */
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
+    border: 1px solid #e0e0e0; /* Kenarlığı ayarlamıştık */
     border-radius: var(--radius-xl);
-    box-shadow: var(--glass-shadow);
+    /* box-shadow: var(--glass-shadow); */ /* Gölge kaldırıldı */
     transition: all var(--transition-normal);
     overflow: hidden;
     position: relative;
@@ -1449,9 +1449,9 @@ a:focus {
 
 .card:hover {
     transform: translateY(-12px) scale(1.03);
-    box-shadow: var(--glass-shadow-hover);
-    border-color: var(--glass-border-hover);
-    background: var(--glass-bg-hover);
+    /* box-shadow: var(--glass-shadow-hover); */ /* Hover gölgesi kaldırıldı */
+    border-color: var(--accent); /* Hover'da kenarlık rengi belirgin olsun */
+    background: #ffffff;
     backdrop-filter: var(--glass-blur-hover);
     -webkit-backdrop-filter: var(--glass-blur-hover);
 }
@@ -1483,7 +1483,7 @@ a:focus {
     overflow: hidden;
     position: relative;
     padding: var(--space-6);
-    border-bottom: 1px solid #e0e0e0; /* Beyaz arka planla daha uyumlu bir kenarlık rengi */
+    border-bottom: 1px solid #e0e0e0; /* Beyaz arka planla daha uyumlu bir kenarlık rengi */}
 
 .thumb img {
     max-width: 100%;
@@ -1792,17 +1792,25 @@ a:focus {
         flex-shrink: 0;
     }
 }
+.add-to-cart-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    color: var(--surface);
+    width: 100%;
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: var(--text-base);
     cursor: pointer;
     transition: all var(--transition-fast);
     transform: translateY(10px);
     opacity: 0;
-    box-shadow: var(--shadow-md);
+    /* box-shadow: var(--shadow-md); */ /* Gölge kaldırıldı */
     text-transform: uppercase;
     letter-spacing: 0.05em;
     position: relative;
     overflow: hidden;
 }
-
 /* Ripple effect on add to cart button */
 .add-to-cart-btn::before {
     content: '';
