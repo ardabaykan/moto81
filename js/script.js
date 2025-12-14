@@ -4,7 +4,7 @@
  * Main application script handling product display, cart management,
  * search functionality, and user interactions.
  *
- * @version 1.0.0
+ * @version 1.0.1 (Fixed & Updated)
  * @author Moto 81 Development Team
  * @since 2025
  */
@@ -72,8 +72,21 @@ const PRODUCTS = [
     {id:18, name:'Pcx Karbon Varyatör', brand:'Moto 81', price:1650.00, img:'pcxkarbonvaryator.jpg', category:'pcx'},
     {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxseffafvaryator.jpg', category:'pcx', isDiscounted: true, discountPercentage: 5},
     {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg', category:'pcx'},
-    {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
-    {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
+    {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}, // BURADAKİ VİRGÜL EKLENDİ (HATA BURADAYDI)
+    {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
+
+    // --- BURAYA YENİ BİR ÖRNEK ÜRÜN EKLİYORUM ---
+    // Yeni ürün eklerken bu şablonu kullanabilirsiniz. ID'si benzersiz olmalı.
+    {
+        id: 100, 
+        name: 'ÖRNEK YENİ ÜRÜN (NMAX)', 
+        brand: 'Moto 81', 
+        price: 1250.00, 
+        img: 'resim_yok.jpg', 
+        category: 'nmax',
+        isDiscounted: true,
+        discountPercentage: 10
+    }
 ];
 
 // =============================================================================
@@ -1578,10 +1591,6 @@ async function initializeApp() {
         filterByCategory('all');
 
         console.log('Moto 81 E-Commerce Application initialized successfully');
-
-        // Show welcome message for returning users
-        if (cart.length > 0) {
-        }
 
         // Debug: Force update cart count after initialization
         setTimeout(() => {
