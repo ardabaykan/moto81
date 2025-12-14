@@ -73,7 +73,7 @@ const PRODUCTS = [
     {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxseffafvaryator.jpg', category:'pcx', isDiscounted: true, discountPercentage: 5},
     {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg', category:'pcx'},
     {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
-    {id:22, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
+    {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}
 ];
 
 // =============================================================================
