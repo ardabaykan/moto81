@@ -37,7 +37,7 @@ const CONFIG = {
  * Each product includes id, name, brand, price, image, category, and optional discount info
  */
 const PRODUCTS = [
-    // NMAX Products
+    // --- MEVCUT ÜRÜNLERİN (ESKİLER AYNI KALIYOR) ---
     {id:1, name:'Artçı Demir 24', brand:'Moto 81', price:1600.00, img:'nmaxdemir.jpg', category:'nmax'},
     {id:2, name:'Depo Kapağı 24', brand:'Moto 81', price:800.00, img:'nmaxdepo.jpg', category:'nmax'},
     {id:3, name:'Şeffaf Filtre Kapağı 24-25', brand:'Moto 81', price:2700.00, img:'nmaxfiltre.jpg', category:'nmax'},
@@ -60,8 +60,6 @@ const PRODUCTS = [
     {id:31, name:'Nmax Depo Çerçeve 25', brand:'Moto 81', price:1950.00, img:'Nmax2025benzindepocevresi.jpg', category:'nmax'},
     {id:32, name:'Nmax Varyatör 24', brand:'Moto 81', price:2400.00, img:'nmaxvaryator.jpg', category:'nmax'},
     {id:33, name:'Nmax Ön Panel 25', brand:'Moto 81', price:2350.00, img:'nmaxoncam2025.jpg', category:'nmax', isDiscounted: true, discountPercentage: 8},
-
-    // PCX Products
     {id:11, name:'PCX Headers', brand:'Moto 81', price:3000.00, img:'pcxheaders.jpg', category:'pcx', isDiscounted: true, discountPercentage: 5},
     {id:12, name:'Pcx 2025 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2025onv.jpg', category:'pcx'},
     {id:13, name:'Pcx Karbon Egzoz', brand:'Moto 81', price:1700.00, img:'pcxegzozset.jpg', category:'pcx'},
@@ -72,21 +70,22 @@ const PRODUCTS = [
     {id:18, name:'Pcx Karbon Varyatör', brand:'Moto 81', price:1650.00, img:'pcxkarbonvaryator.jpg', category:'pcx'},
     {id:19, name:'Pcx Şeffaf Varyatör', brand:'Moto 81', price:1650.00, img:'pcxseffafvaryator.jpg', category:'pcx', isDiscounted: true, discountPercentage: 5},
     {id:20, name:'Pcx 2024 Ön V', brand:'Moto 81', price:2200.00, img:'pcx2024onv.jpg', category:'pcx'},
-    {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'}, // BURADAKİ VİRGÜL EKLENDİ (HATA BURADAYDI)
+    {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
     {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
 
-    // --- BURAYA YENİ BİR ÖRNEK ÜRÜN EKLİYORUM ---
-    // Yeni ürün eklerken bu şablonu kullanabilirsiniz. ID'si benzersiz olmalı.
-    {
-        id: 100, 
-        name: 'ÖRNEK YENİ ÜRÜN (NMAX)', 
-        brand: 'Moto 81', 
-        price: 1250.00, 
-        img: 'resim_yok.jpg', 
-        category: 'nmax',
-        isDiscounted: true,
-        discountPercentage: 10
-    }
+    // --- YENİ EKLENEN "GENÇ İŞİ" MODİFİYE ÜRÜNLERİ (+750 TL EKLENDİ) ---
+    {id:50, name:'H2 Yarasa Ayna Takımı (Vidasız)', brand:'Moto 81', price:1600.00, img:'', category:'nmax'},
+    {id:51, name:'Nmax Spor Kısa Ön Cam (Simsiyah)', brand:'Moto 81', price:1400.00, img:'', category:'nmax', isDiscounted: true, discountPercentage: 10},
+    {id:52, name:'Ayarlı/Katlanır Spor Manet Seti (Kırmızı)', brand:'Moto 81', price:1650.00, img:'', category:'nmax'},
+    {id:53, name:'Amerikan Park Modülü (Ayarlı)', brand:'Moto 81', price:1000.00, img:'', category:'nmax'},
+    {id:54, name:'F1 Çakar Stop Modülü (9 Modlu)', brand:'Moto 81', price:1050.00, img:'', category:'nmax'},
+    {id:55, name:'Nmax Karbon Egzoz Koruma Kapağı', brand:'Moto 81', price:1300.00, img:'', category:'nmax'},
+    {id:56, name:'Rizoma Tipi Spor Elcik Takımı', brand:'Moto 81', price:1200.00, img:'', category:'nmax'},
+    {id:57, name:'Fosforlu Jant Şeridi (Nmax Logolu)', brand:'Moto 81', price:900.00, img:'', category:'nmax'},
+    {id:58, name:'Nmax Ara Gidon (Telefon Barı)', brand:'Moto 81', price:1150.00, img:'', category:'nmax'},
+    {id:59, name:'App Spor Plakalık (Pleksi)', brand:'Moto 81', price:950.00, img:'', category:'nmax'},
+    {id:60, name:'Nmax Tank Pad Seti (3D Karbon)', brand:'Moto 81', price:1100.00, img:'', category:'nmax'},
+    {id:61, name:'CNC Yan Ayak Genişletme (Gold)', brand:'Moto 81', price:1150.00, img:'', category:'nmax'}
 ];
 
 // =============================================================================
