@@ -73,19 +73,19 @@ const PRODUCTS = [
     {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
     {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
 
-    // --- YENİ EKLENEN "GENÇ İŞİ" MODİFİYE ÜRÜNLERİ (+750 TL EKLENDİ) ---
-    {id:50, name:'H2 Yarasa Ayna Takımı (Vidasız)', brand:'Moto 81', price:1600.00, img:'', category:'nmax'},
-    {id:51, name:'Nmax Spor Kısa Ön Cam (Simsiyah)', brand:'Moto 81', price:1400.00, img:'', category:'nmax', isDiscounted: true, discountPercentage: 10},
-    {id:52, name:'Ayarlı/Katlanır Spor Manet Seti (Kırmızı)', brand:'Moto 81', price:1650.00, img:'', category:'nmax'},
-    {id:53, name:'Amerikan Park Modülü (Ayarlı)', brand:'Moto 81', price:1000.00, img:'', category:'nmax'},
-    {id:54, name:'F1 Çakar Stop Modülü (9 Modlu)', brand:'Moto 81', price:1050.00, img:'', category:'nmax'},
-    {id:55, name:'Nmax Karbon Egzoz Koruma Kapağı', brand:'Moto 81', price:1300.00, img:'', category:'nmax'},
-    {id:56, name:'Rizoma Tipi Spor Elcik Takımı', brand:'Moto 81', price:1200.00, img:'', category:'nmax'},
-    {id:57, name:'Fosforlu Jant Şeridi (Nmax Logolu)', brand:'Moto 81', price:900.00, img:'', category:'nmax'},
-    {id:58, name:'Nmax Ara Gidon (Telefon Barı)', brand:'Moto 81', price:1150.00, img:'', category:'nmax'},
-    {id:59, name:'App Spor Plakalık (Pleksi)', brand:'Moto 81', price:950.00, img:'', category:'nmax'},
-    {id:60, name:'Nmax Tank Pad Seti (3D Karbon)', brand:'Moto 81', price:1100.00, img:'', category:'nmax'},
-    {id:61, name:'CNC Yan Ayak Genişletme (Gold)', brand:'Moto 81', price:1150.00, img:'', category:'nmax'}
+    // --- YENİ EKLENEN "GENÇ İŞİ" ÜRÜNLER (Resim İsimleri Kodlandı) ---
+    {id:50, name:'H2 Yarasa Ayna Takımı (Vidasız)', brand:'Moto 81', price:1600.00, img:'h2_ayna.jpg', category:'nmax'},
+    {id:51, name:'Nmax Spor Kısa Ön Cam (Simsiyah)', brand:'Moto 81', price:1400.00, img:'spor_cam.jpg', category:'nmax', isDiscounted: true, discountPercentage: 10},
+    {id:52, name:'Ayarlı/Katlanır Spor Manet Seti (Kırmızı)', brand:'Moto 81', price:1650.00, img:'spor_manet.jpg', category:'nmax'},
+    {id:53, name:'Amerikan Park Modülü (Ayarlı)', brand:'Moto 81', price:1000.00, img:'amerikan_park.jpg', category:'nmax'},
+    {id:54, name:'F1 Çakar Stop Modülü (9 Modlu)', brand:'Moto 81', price:1050.00, img:'f1_stop.jpg', category:'nmax'},
+    {id:55, name:'Nmax Karbon Egzoz Koruma Kapağı', brand:'Moto 81', price:1300.00, img:'karbon_egzoz.jpg', category:'nmax'},
+    {id:56, name:'Rizoma Tipi Spor Elcik Takımı', brand:'Moto 81', price:1200.00, img:'spor_elcik.jpg', category:'nmax'},
+    {id:57, name:'Fosforlu Jant Şeridi (Nmax Logolu)', brand:'Moto 81', price:900.00, img:'jant_seridi.jpg', category:'nmax'},
+    {id:58, name:'Nmax Ara Gidon (Telefon Barı)', brand:'Moto 81', price:1150.00, img:'ara_gidon.jpg', category:'nmax'},
+    {id:59, name:'App Spor Plakalık (Pleksi)', brand:'Moto 81', price:950.00, img:'spor_plakalik.jpg', category:'nmax'},
+    {id:60, name:'Nmax Tank Pad Seti (3D Karbon)', brand:'Moto 81', price:1100.00, img:'tank_pad.jpg', category:'nmax'},
+    {id:61, name:'CNC Yan Ayak Genişletme (Gold)', brand:'Moto 81', price:1150.00, img:'ayak_genisletme.jpg', category:'nmax'}
 ];
 
 // =============================================================================
