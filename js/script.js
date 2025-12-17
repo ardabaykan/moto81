@@ -73,19 +73,34 @@ const PRODUCTS = [
     {id:21, name:'Pcx Karbon Tutamaç', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
     {id:42, name:'Pcx Karbon ', brand:'Moto 81', price:2500.00, img:'pcxarkademir.jpg', category:'pcx'},
 
-    // --- YENİ EKLENEN "GENÇ İŞİ" ÜRÜNLER (Resim İsimleri Kodlandı) ---
-    {id:50, name:'H2 Yarasa Ayna Takımı (Vidasız)', brand:'Moto 81', price:1600.00, img:'h2_ayna.jpg', category:'nmax'},
-    {id:51, name:'Nmax Spor Kısa Ön Cam (Simsiyah)', brand:'Moto 81', price:1400.00, img:'spor_cam.jpg', category:'nmax', isDiscounted: true, discountPercentage: 10},
-    {id:52, name:'Ayarlı/Katlanır Spor Manet Seti (Kırmızı)', brand:'Moto 81', price:1650.00, img:'spor_manet.jpg', category:'nmax'},
-    {id:53, name:'Amerikan Park Modülü (Ayarlı)', brand:'Moto 81', price:1000.00, img:'amerikan_park.jpg', category:'nmax'},
-    {id:54, name:'F1 Çakar Stop Modülü (9 Modlu)', brand:'Moto 81', price:1050.00, img:'f1_stop.jpg', category:'nmax'},
-    {id:55, name:'Nmax Karbon Egzoz Koruma Kapağı', brand:'Moto 81', price:1300.00, img:'karbon_egzoz.jpg', category:'nmax'},
-    {id:56, name:'Rizoma Tipi Spor Elcik Takımı', brand:'Moto 81', price:1200.00, img:'spor_elcik.jpg', category:'nmax'},
-    {id:57, name:'Fosforlu Jant Şeridi (Nmax Logolu)', brand:'Moto 81', price:900.00, img:'jant_seridi.jpg', category:'nmax'},
-    {id:58, name:'Nmax Ara Gidon (Telefon Barı)', brand:'Moto 81', price:1150.00, img:'ara_gidon.jpg', category:'nmax'},
-    {id:59, name:'App Spor Plakalık (Pleksi)', brand:'Moto 81', price:950.00, img:'spor_plakalik.jpg', category:'nmax'},
-    {id:60, name:'Nmax Tank Pad Seti (3D Karbon)', brand:'Moto 81', price:1100.00, img:'tank_pad.jpg', category:'nmax'},
-    {id:61, name:'CNC Yan Ayak Genişletme (Gold)', brand:'Moto 81', price:1150.00, img:'ayak_genisletme.jpg', category:'nmax'}
+    // --- YENİ EKLENEN ÜRÜNLER (FİYATLAR BOŞ) ---
+{ id:100, name:'Nmax 21-24 Filtre Kırmızı', brand:'Moto 81', price:null, img:'21-24filtrekirmizi.jpg', category:'nmax' },
+{ id:101, name:'Nmax 21-24 Filtre Mavi', brand:'Moto 81', price:null, img:'21-24filtremavi.jpg', category:'nmax' },
+
+{ id:102, name:'Nmax Üst Kaplama 21-24', brand:'Moto 81', price:null, img:'fumestopcam21-24.jpg', category:'nmax' },
+{ id:103, name:'Nmax Gidon Karbon 15-20', brand:'Moto 81', price:null, img:'gidonkarbon15-20.jpg', category:'nmax' },
+
+{ id:104, name:'Nmax Karbon Gösterge Çerçevesi', brand:'Moto 81', price:null, img:'karbonekran.jpg', category:'nmax' },
+{ id:105, name:'Nmax Karbon Radyatör Kapağı', brand:'Moto 81', price:null, img:'karbonradyator.jpg', category:'nmax' },
+
+{ id:106, name:'Nmax 2025 Gösterge', brand:'Moto 81', price:null, img:'nmax2025.jpg', category:'nmax' },
+{ id:107, name:'Nmax Arka Çamurluk', brand:'Moto 81', price:null, img:'nmaxarkacamurluk.jpg', category:'nmax' },
+
+{ id:108, name:'Nmax Gen 1 Varyatör', brand:'Moto 81', price:null, img:'nmaxgen1varyator.jpg', category:'nmax' },
+{ id:109, name:'Nmax Headers 21-24', brand:'Moto 81', price:null, img:'nmaxheaders21-24.jpg', category:'nmax' },
+
+{ id:110, name:'Nmax Karbon Ön Cam', brand:'Moto 81', price:null, img:'nmaxkarboncam.jpg', category:'nmax' },
+
+{ id:111, name:'Nmax Alt Kaplama Set', brand:'Moto 81', price:null, img:'nmaxkaltinraynset.jpg', category:'nmax' },
+{ id:112, name:'Nmax Paspas Set', brand:'Moto 81', price:null, img:'nmaxpaspas.jpg', category:'nmax' },
+
+{ id:113, name:'Nmax Sissy Bar', brand:'Moto 81', price:null, img:'nmaxsissybar.jpg', category:'nmax' },
+{ id:114, name:'Nmax Şeffaf Ön Cam', brand:'Moto 81', price:null, img:'nmaxseffafcam.jpg', category:'nmax' },
+
+{ id:115, name:'Nmax Karbon Stop Kapağı', brand:'Moto 81', price:null, img:'stopkarbon.jpg', category:'nmax' },
+{ id:116, name:'Nmax Şeffaf Ön Cam (Uzun)', brand:'Moto 81', price:null, img:'seffafcamoncam.jpg', category:'nmax' },
+
+{ id:117, name:'Nmax Velescope Set', brand:'Moto 81', price:null, img:'velescope.jpg', category:'nmax' }
 ];
 
 // =============================================================================
