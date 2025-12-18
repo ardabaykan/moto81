@@ -99,7 +99,7 @@ const PRODUCTS = [
 { id:115, name:'Nmax Karbon Stop Kapağı', brand:'Moto 81', price:2200, img:'stopkarbon.jpg', category:'nmax', isDiscounted:true, discountPercentage:10 },
 { id:116, name:'Nmax Şeffaf Ön Cam (Uzun)', brand:'Moto 81', price:3500, img:'seffafcamoncam.jpg', category:'nmax', isDiscounted:true, discountPercentage:10 },
 
-{ id:117, name:'Nmax Velescope Set', brand:'Moto 81', price:3500, img:'velescope.jpg', category:'nmax', isDiscounted:true, discountPercentage:10 }
+{ id:117, name:'Nmax Velescope Set', brand:'Moto 81', price:3500, img:'velescope.jpg', category:'nmax', isDiscounted:true, discountPercentage:3 }
 
 
 ];
