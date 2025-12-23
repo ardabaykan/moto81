@@ -33,7 +33,7 @@ const CONFIG = {
  * Product catalog with motorcycle accessories
  */
 const PRODUCTS = [
-    {id:1, name:'Artçı Demir 24', brand:'Moto 81', price:1600.00, img:'nmaxdemir.jpg', category:'nmax'},
+    {id:1, name:'Artçı Demir 24', brand:'Moto 81', price:2000.00, img:'nmaxdemir.jpg', category:'nmax'},
     {id:2, name:'Depo Kapağı 24', brand:'Moto 81', price:800.00, img:'nmaxdepo.jpg', category:'nmax'},
     {id:3, name:'Şeffaf Filtre Kapağı 24-25', brand:'Moto 81', price:2750.00, img:'nmaxfiltre.jpg', category:'nmax' , isDiscounted: true, discountPercentage: 5},
     {id:4, name:'Karbon Filtre Kapağı 24-25', brand:'Moto 81', price:2700.00, img:'nmaxfiltrekarbon.jpg', category:'nmax', isDiscounted: true, discountPercentage: 10},
