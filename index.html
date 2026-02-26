@@ -30,6 +30,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -151,30 +154,72 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="modern-footer">
         <div class="container footer-content">
             <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Hakkımızda</h3>
-                    <p>Moto 81 olarak, premium motorcycle aksesuarları ve yedek parçalarında kalite ve performansı bir araya getiriyoruz.</p>
+                <!-- BRAND SECTION -->
+                <div class="footer-widget brand-widget">
+                    <h2 class="footer-logo">ABMOTOPARTS</h2>
+                    <p class="footer-tagline">Motor aksesuarları ve yedek parçalarında aradığınız her şey.</p>
+                    <div class="footer-socials">
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
                 </div>
-                <div class="footer-section">
-                    <h3>Hızlı Linkler</h3>
-                    <ul>
+
+                <!-- QUICK LINKS SECTION -->
+                <div class="footer-widget links-widget">
+                    <h3 class="widget-title">Hızlı Linkler</h3>
+                    <ul class="footer-links">
                         <li><a href="#" data-category="all">Tüm Ürünler</a></li>
                         <li><a href="#" data-category="pcx">PCX</a></li>
                         <li><a href="#" data-category="nmax">NMAX</a></li>
                         <li><a href="odeme.html">Ödeme</a></li>
+                        <li><a href="#">Hakkımızda</a></li>
+                        <li><a href="#">İletişim</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>İletişim</h3>
-                    <p><strong>Telefon:</strong> +90 531 267 2081</p>
-                    <p><strong>E-posta:</strong> info@abmotoparts.com</p>
+
+                <!-- CONTACT SECTION -->
+                <div class="footer-widget contact-widget">
+                    <h3 class="widget-title">İletişim</h3>
+                    <ul class="contact-info">
+                        <li><i class="fa-solid fa-phone"></i> +90 531 267 2081</li>
+                        <li><i class="fa-solid fa-envelope"></i> info@abmotoparts.com</li>
+                        <li><i class="fa-solid fa-clock"></i> Pzt - Cmt: 09:00 - 18:00</li>
+                        <li><i class="fa-solid fa-location-dot"></i> İstanbul / Türkiye</li>
+                    </ul>
+                </div>
+
+                <!-- NEWSLETTER SECTION -->
+                <div class="footer-widget newsletter-widget">
+                    <h3 class="widget-title">Bülten</h3>
+                    <p>Yeni ürünler ve kampanyalar için abone olun.</p>
+                    <form class="footer-newsletter-form" onsubmit="event.preventDefault();">
+                        <div class="newsletter-input-group">
+                            <input type="email" placeholder="E-posta adresiniz" required>
+                            <button type="submit" aria-label="Abone Ol"><i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 ABMOTOPARTS - Tüm Hakları Saklıdır</p>
+        </div>
+
+        <!-- BOTTOM FOOTER -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-inner">
+                    <p class="copyright">&copy; 2025 ABMOTOPARTS - Tüm Hakları Saklıdır.</p>
+                    <div class="footer-badges">
+                        <span class="security-badge"><i class="fa-solid fa-lock"></i> Güvenli Alışveriş & SSL</span>
+                        <div class="payment-methods">
+                            <i class="fa-brands fa-cc-visa"></i>
+                            <i class="fa-brands fa-cc-mastercard"></i>
+                            <i class="fa-brands fa-cc-paypal"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
