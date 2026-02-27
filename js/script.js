@@ -13,72 +13,24 @@ const CONFIG = {
     MAX_QUANTITY: 999
 };
 
-// PRODUCT DATA
-const PRODUCTS = [
-    // NMAX ÜRÜNLERİ
-    { id: 1, name: 'Artçı Demir 24', brand: 'Moto 81', price: 2000.00, img: 'nmaxdemir.jpg', category: 'nmax' },
-    { id: 2, name: 'Depo Kapağı 24', brand: 'Moto 81', price: 800.00, img: 'nmaxdepo.jpg', category: 'nmax' },
-    { id: 3, name: 'Şeffaf Filtre Kapağı 24-25', brand: 'Moto 81', price: 2750.00, img: 'nmaxfiltre.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 5 },
-    { id: 4, name: 'Karbon Filtre Kapağı 24-25', brand: 'Moto 81', price: 2700.00, img: 'nmaxfiltrekarbon.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 5, name: 'Gidon Kapağı', brand: 'Moto 81', price: 1400.00, img: 'nmaxgidon.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 12 },
-    { id: 6, name: 'Kontak Kapağı', brand: 'Moto 81', price: 1600.00, img: 'nmaxkontak.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 30 },
-    { id: 7, name: 'Radyatör Kapağı 24-25', brand: 'Moto 81', price: 1800.00, img: 'nmaxradyator.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 20 },
-    { id: 8, name: 'Sinyal Üstü Kapağı', brand: 'Moto 81', price: 1800.00, img: 'nmaxsinyalustu.jpg', category: 'nmax' },
-    { id: 9, name: 'Stop Altı Kapağı', brand: 'Moto 81', price: 900.00, img: 'nmaxstopalti.jpg', category: 'nmax' },
-    { id: 10, name: 'Varyatör Kapağı', brand: 'Moto 81', price: 2500.00, img: 'nmaxvaryator.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 22, name: 'Nmax Çerçeve 25', brand: 'Moto 81', price: 2200.00, img: 'nmaxgostergecercevesi.jpg', category: 'nmax' },
-    { id: 23, name: 'Nmax Winglet 25', brand: 'Moto 81', price: 2000.00, img: 'nmax2025altwinglet.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 24, name: 'Nmax Ön Panel 24', brand: 'Moto 81', price: 2300.00, img: 'nmaxoncam.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 12 },
-    { id: 25, name: 'Nmax Kontak (2) 25', brand: 'Moto 81', price: 1500.00, img: 'nmax2025kontakalt.jpg', category: 'nmax' },
-    { id: 26, name: 'Nmax Gidon 25', brand: 'Moto 81', price: 2400.00, img: 'nmax2025gidonkarbon.jpg', category: 'nmax' },
-    { id: 27, name: 'Nmax Kontak (1) 25', brand: 'Moto 81', price: 1500.00, img: 'nmax2025kontakust.jpg', category: 'nmax' },
-    { id: 28, name: 'Nmax Ön V 25', brand: 'Moto 81', price: 2000.00, img: 'nmax2025onpanelv.jpg', category: 'nmax' },
-    { id: 29, name: 'Nmax Radyatör 25', brand: 'Moto 81', price: 1850.00, img: 'nmaxradyator2025.jpeg', category: 'nmax' },
-    { id: 30, name: 'Nmax Depo 25', brand: 'Moto 81', price: 1300.00, img: 'nmax2025benzindepokapak.jpg', category: 'nmax' },
-    { id: 31, name: 'Nmax Depo Çerçeve 25', brand: 'Moto 81', price: 1950.00, img: 'Nmax2025benzindepocevresi.jpg', category: 'nmax' },
-    { id: 32, name: 'Nmax Varyatör 24', brand: 'Moto 81', price: 2400.00, img: 'nmaxvaryator.jpg', category: 'nmax' },
-    { id: 33, name: 'Nmax Ön Panel 25', brand: 'Moto 81', price: 2350.00, img: 'nmaxoncam2025.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 8 },
-    { id: 42, name: 'H2 Katlanır Ayna', brand: 'Moto 81', price: 1400.00, img: 'h2ayna.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 50 },
-    { id: 100, name: 'Nmax 21-24 Filtre Kırmızı', brand: 'Moto 81', price: 2000, img: '21-24filtrekirmizi.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 101, name: 'Nmax 21-24 Filtre Mavi', brand: 'Moto 81', price: 2000, img: '21-24filtremavi.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 102, name: 'Nmax Füme/Şeffaf Stop Camı 21-24', brand: 'Moto 81', price: 2500, img: 'fumestopcam21-24.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 5 },
-    { id: 103, name: 'Nmax Gidon Karbon 15-20', brand: 'Moto 81', price: 2500, img: 'gidonkarbon15-20.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 104, name: 'Nmax 2025 Şeffaf Cam', brand: 'Moto 81', price: 3500, img: 'karbonekran.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 105, name: 'Nmax Karbon Radyatör Kapağı', brand: 'Moto 81', price: 1500, img: 'karbonradyator.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 106, name: 'Nmax 15-20 Gösterge', brand: 'Moto 81', price: 3500, img: 'nmax2025.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 107, name: 'Nmax Arka Çamurluk', brand: 'Moto 81', price: 2500, img: 'nmaxarkacamurluk.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 108, name: 'Nmax Gen 1 Varyatör', brand: 'Moto 81', price: 2500, img: 'nmaxgen1varyator.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 109, name: 'Nmax Headers 21-24', brand: 'Moto 81', price: 4000, img: 'nmaxheaders21-24.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 0 },
-    { id: 110, name: 'Nmax Karbon Ön Çamurluk', brand: 'Moto 81', price: 3000, img: 'nmaxkarboncam.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 10 },
-    { id: 111, name: 'Nmax Alt Kaplama Set', brand: 'Moto 81', price: 4500, img: 'nmaxkaltinraynset.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 112, name: 'Nmax Paspas Set', brand: 'Moto 81', price: 3000, img: 'nmaxpaspas.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 5 },
-    { id: 113, name: 'Nmax Sissy Bar', brand: 'Moto 81', price: 5000, img: 'nmaxsissybar.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 9 },
-    { id: 114, name: 'Nmax Şeffaf Ön Cam', brand: 'Moto 81', price: 3500, img: 'nmaxseffafcam.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3 },
-    { id: 115, name: 'Nmax Karbon Stop Kapağı', brand: 'Moto 81', price: 2500, img: 'stopkarbon.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 5 },
-    { id: 116, name: 'Nmax Şeffaf Ön Cam', brand: 'Moto 81', price: 3850, img: 'seffafcamoncam.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 5 },
-
-    // PCX ÜRÜNLERİ
-    { id: 11, name: 'PCX Headers', brand: 'Moto 81', price: 3000.00, img: 'pcxheaders.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 5 },
-    { id: 12, name: 'Pcx 2025 Ön V', brand: 'Moto 81', price: 2200.00, img: 'pcx2025onv.jpg', category: 'pcx' },
-    { id: 13, name: 'Pcx Karbon Egzoz', brand: 'Moto 81', price: 1700.00, img: 'pcxegzozset.jpg', category: 'pcx' },
-    { id: 14, name: 'Pcx Çamurluk', brand: 'Moto 81', price: 2250.00, img: 'pcxoncamurluk.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 12 },
-    { id: 15, name: 'Pcx Füme Filtre', brand: 'Moto 81', price: 1650.00, img: 'pcxfumefiltre.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 5 },
-    { id: 16, name: 'Pcx Şeffaf Filtre', brand: 'Moto 81', price: 1650.00, img: 'pcxseffaffiltre.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 5 },
-    { id: 17, name: 'Pcx Şeffaf Radyatör', brand: 'Moto 81', price: 1550.00, img: 'pcxseffafradyator.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 5 },
-    { id: 18, name: 'Pcx Karbon Varyatör', brand: 'Moto 81', price: 1650.00, img: 'pcxkarbonvaryator.jpg', category: 'pcx' },
-    { id: 19, name: 'Pcx Şeffaf Varyatör', brand: 'Moto 81', price: 1650.00, img: 'pcxseffafvaryator.jpg', category: 'pcx', isDiscounted: true, discountPercentage: 5 },
-    { id: 20, name: 'Pcx 2024 Ön V', brand: 'Moto 81', price: 2200.00, img: 'pcx2024onv.jpg', category: 'pcx' },
-    { id: 21, name: 'Pcx Karbon Tutamaç', brand: 'Moto 81', price: 2500.00, img: 'pcxarkademir.jpg', category: 'pcx' },
-
-    // STOK DIŞI
-    { id: 117, name: 'Nmax Velescope Set', brand: 'Moto 81', price: 3850, img: 'velescope.jpg', category: 'nmax', isDiscounted: true, discountPercentage: 3, outOfStock: true }
-];
-
 // STATE
 const state = {
-    cart: [],
     currentCategory: 'all',
     isMobileCartOpen: false
+};
+
+// PRODUCT DATA
+let PRODUCTS = [];
+
+const loadProducts = async () => {
+    try {
+        const response = await fetch('products.json');
+        PRODUCTS = await response.json();
+        return PRODUCTS;
+    } catch (error) {
+        console.error('Ürünler yüklenirken hata oluştu:', error);
+        return [];
+    }
 };
 
 // DOM CACHE
@@ -141,7 +93,23 @@ const renderProducts = (products) => {
         return;
     }
 
+    let currentCategory = '';
+    
     products.forEach(p => {
+        if (p.category !== currentCategory) {
+            currentCategory = p.category;
+            const separator = document.createElement('div');
+            separator.className = 'col-span-full my-6 flex items-center gap-4';
+            const categoryLabels = { nmax: 'NMAX', pcx: 'PCX', xmax: 'XMAX' };
+            const categoryLabel = categoryLabels[currentCategory] || currentCategory.toUpperCase();
+            separator.innerHTML = `
+                <div class="flex-1 h-[2px] bg-gradient-to-r from-transparent via-[#ff6b35] to-transparent"></div>
+                <span class="text-[1.25rem] font-black text-gray-900 tracking-[0.15em] uppercase">${categoryLabel}</span>
+                <div class="flex-1 h-[2px] bg-gradient-to-r from-transparent via-[#ff6b35] to-transparent"></div>
+            `;
+            DOM.productGrid.appendChild(separator);
+        }
+        
         const price = getCurrentPrice(p);
         const el = document.createElement('div');
         el.className = 'bg-white h-full flex flex-col justify-between rounded-[0.75rem] lg:rounded-[1rem] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:border-transparent group';
@@ -184,7 +152,8 @@ const toggleMobileMenu = () => {
 };
 
 // INIT
-const init = () => {
+const init = async () => {
+    await loadProducts();
     renderProducts(PRODUCTS);
 
     // Event Listeners
