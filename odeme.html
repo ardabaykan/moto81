@@ -1105,21 +1105,69 @@
         function renderCartSummary() {
             summaryCartCount.textContent = cart.reduce((s, i) => s + i.qty, 0);
             cartSummaryItems.innerHTML = '';
+
             if (cart.length === 0) {
-                cartSummaryItems.innerHTML = '<li class="list-group-item text-muted text-center">Sepetiniz boş</li>';
+                cartSummaryItems.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="mb-3" style="font-size: 3rem; color: var(--border-light-color);">🛒</div>
+                        <h5 class="text-muted">Sepetiniz Boş</h5>
+                        <p class="text-muted mb-4">Siparişi tamamlamak için önce ürün eklemelisiniz.</p>
+                        <a href="index.html" class="btn btn-outline-secondary">Alışverişe Başla</a>
+                    </div>`;
                 summaryCartTotal.textContent = money(0);
+                whatsappPayButton.disabled = true;
                 return;
             }
+
+            whatsappPayButton.disabled = false;
+
             cart.forEach(item => {
                 const li = document.createElement('li');
-                li.className = 'list-group-item d-flex justify-content-between lh-sm';
-                li.innerHTML = `<img src="${item.img}" alt="${item.name}" class="me-3">
-                <div class="product-info"><h6>${item.name}</h6><small class="text-muted">${item.brand} · Adet: ${item.qty}</small></div>
-                <span class="item-price">${money(item.price * item.qty)}</span>`;
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                <div class="d-flex w-100 align-items-center gap-3">
+                    <img src="${item.img}" alt="${item.name}" style="width: 80px; height: 80px;">
+                    <div class="product-info flex-grow-1">
+                        <h6 class="mb-1">${item.name}</h6>
+                        <span class="item-price d-block mb-2 text-start">${money(item.priceAtAdd)}</span>
+                        
+                        <div class="d-flex align-items-center justify-content-between mt-auto">
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, -1)">−</button>
+                                <span class="fw-semibold mx-1">${item.qty}</span>
+                                <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, 1)">+</button>
+                            </div>
+                            <button type="button" class="btn btn-sm text-danger p-0" onclick="removeItem(${item.id})" aria-label="Sil">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
                 cartSummaryItems.appendChild(li);
             });
-            summaryCartTotal.textContent = money(cart.reduce((s, i) => s + i.price * i.qty, 0));
+            summaryCartTotal.textContent = money(cart.reduce((s, i) => s + (i.priceAtAdd * i.qty), 0));
         }
+
+        window.updateQty = function (id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            } else if (item.qty > 999) { // CONFIG.MAX_QUANTITY
+                item.qty = 999;
+            }
+
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            renderCartSummary();
+        };
+
+        window.removeItem = function (id) {
+            cart = cart.filter(i => i.id !== id);
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            renderCartSummary();
+        };
 
         whatsappPayButton.addEventListener('click', function (event) {
             // JavaScript ile WhatsApp mesajı gönderme varsayılan davranışını engelle
@@ -1143,7 +1191,7 @@
             let cartDetails = '';
             if (cart.length > 0) {
                 cart.forEach(item => {
-                    cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.price * item.qty)}\n`;
+                    cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.priceAtAdd * item.qty)}\n`;
                 });
             } else {
                 cartDetails = "Sepette ürün bulunmamaktadır (veya JavaScript kapalı olduğu için sepet bilgisi alınamamıştır).\n";
@@ -1155,6 +1203,11 @@
 
             const whatsappURL = `https://wa.me/905312672081?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
+
+            // Clear cart from local storage after order placed
+            localStorage.setItem(CART_KEY, JSON.stringify([]));
+            cart = [];
+            renderCartSummary();
         });
 
         document.addEventListener('DOMContentLoaded', renderCartSummary);
