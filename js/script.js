@@ -130,160 +130,7 @@ const debounce = (func, wait) => {
     };
 };
 
-// STORAGE
-const loadCart = () => {
-    try {
-        const saved = localStorage.getItem(CONFIG.CART_KEY);
-        state.cart = saved ? JSON.parse(saved) : [];
-    } catch (e) {
-        console.error('Cart load error', e);
-        state.cart = [];
-    }
-};
 
-const saveCart = () => {
-    localStorage.setItem(CONFIG.CART_KEY, JSON.stringify(state.cart));
-};
-
-// CART MANAGEMENT
-const updateCartUI = () => {
-    // Count
-    const totalItems = state.cart.reduce((sum, item) => sum + item.qty, 0);
-    DOM.cartCount.textContent = totalItems;
-
-    // Desktop Items
-    if (state.cart.length === 0) {
-        DOM.cartItems.innerHTML = '<div class="text-center py-5 text-muted">Sepetiniz boş</div>';
-    } else {
-        DOM.cartItems.innerHTML = state.cart.map(item => `
-            <div class="cart-item">
-                <img src="${item.img}" alt="${item.name}">
-                <div class="cart-meta">
-                    <b>${item.name}</b>
-                    <div class="text-muted">${formatCurrency(item.priceAtAdd)} x ${item.qty}</div>
-                </div>
-                <div class="cart-quantity-controls">
-                    <button class="qty-btn" data-id="${item.id}" data-action="decrease">−</button>
-                    <span class="qty-display">${item.qty}</span>
-                    <button class="qty-btn" data-id="${item.id}" data-action="increase">+</button>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Total
-    const total = state.cart.reduce((sum, item) => sum + (item.priceAtAdd * item.qty), 0);
-    DOM.cartTotal.textContent = formatCurrency(total);
-
-    // Mobile Update
-    updateMobileCartUI();
-    saveCart();
-};
-
-const updateMobileCartUI = () => {
-    if (!DOM.mobileCartContent) return;
-
-    const total = state.cart.reduce((sum, item) => sum + (item.priceAtAdd * item.qty), 0);
-    DOM.mobileCartTotal.textContent = formatCurrency(total);
-
-    if (state.cart.length === 0) {
-        DOM.mobileCartContent.innerHTML = `
-            <div class="mobile-empty-cart">
-                <div class="mobile-empty-cart-icon">🛒</div>
-                <div class="mobile-empty-cart-text">Sepetiniz Boş</div>
-            </div>`;
-        return;
-    }
-
-    DOM.mobileCartContent.innerHTML = state.cart.map(item => `
-        <div class="mobile-cart-item">
-            <img src="${item.img}" alt="${item.name}">
-            <div class="mobile-cart-meta">
-                <b>${item.name}</b>
-                <div class="text-muted">${formatCurrency(item.priceAtAdd)}</div>
-                <div class="mobile-quantity-controls">
-                    <button class="mobile-qty-btn" data-id="${item.id}" data-action="decrease">−</button>
-                    <span class="mobile-qty-display">${item.qty}</span>
-                    <button class="mobile-qty-btn" data-id="${item.id}" data-action="increase">+</button>
-                </div>
-            </div>
-        </div>
-    `).join('');
-};
-
-const addToCart = (productId, btn) => {
-    const product = PRODUCTS.find(p => p.id === productId);
-    if (!product || product.outOfStock) return;
-
-    if (btn) createFlyingImage(product.img, btn);
-
-    const existing = state.cart.find(i => i.id === productId);
-    if (existing) {
-        existing.qty++;
-    } else {
-        state.cart.push({
-            id: product.id,
-            name: product.name,
-            img: product.img,
-            priceAtAdd: getCurrentPrice(product),
-            qty: 1
-        });
-    }
-
-    animateCartButton();
-    updateCartUI();
-
-    if (window.innerWidth < 992) {
-        openMobileCart();
-    }
-};
-
-const handleCartAction = (id, action) => {
-    const item = state.cart.find(i => i.id === id);
-    if (!item) return;
-
-    if (action === 'increase') {
-        if (item.qty < CONFIG.MAX_QUANTITY) item.qty++;
-    } else {
-        item.qty--;
-        if (item.qty <= 0) state.cart = state.cart.filter(i => i.id !== id);
-    }
-    updateCartUI();
-};
-
-// ANIMATIONS
-const animateCartButton = () => {
-    DOM.cartToggle.classList.remove('bounce');
-    void DOM.cartToggle.offsetWidth; // trigger reflow
-    DOM.cartToggle.classList.add('bounce');
-    setTimeout(() => DOM.cartToggle.classList.remove('bounce'), 500);
-};
-
-const createFlyingImage = (src, startEl) => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.className = 'flying-image';
-    img.style.cssText = `
-        position: fixed; width: 50px; height: 50px; object-fit: contain; z-index: 9999;
-        border-radius: 50%; pointer-events: none; transition: all 0.8s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-    `;
-    document.body.appendChild(img);
-
-    const startRect = startEl.getBoundingClientRect();
-    const endRect = DOM.cartToggle.getBoundingClientRect();
-
-    img.style.left = startRect.left + 'px';
-    img.style.top = startRect.top + 'px';
-
-    requestAnimationFrame(() => {
-        img.style.left = (endRect.left + endRect.width / 2 - 25) + 'px';
-        img.style.top = (endRect.top + endRect.height / 2 - 25) + 'px';
-        img.style.transform = 'scale(0.1)';
-        img.style.opacity = '0';
-    });
-
-    setTimeout(() => img.remove(), 800);
-};
 
 // PRODUCT RENDERING
 const renderProducts = (products) => {
@@ -326,20 +173,7 @@ const renderProducts = (products) => {
     });
 };
 
-// MOBILE MENU & CART CONTROLS
-const openMobileCart = () => {
-    state.isMobileCartOpen = true;
-    DOM.mobileCartDrawer.classList.add('open');
-    DOM.mobileCartBackdrop.classList.add('show');
-    document.body.style.overflow = 'hidden';
-};
 
-const closeMobileCart = () => {
-    state.isMobileCartOpen = false;
-    DOM.mobileCartDrawer.classList.remove('open');
-    DOM.mobileCartBackdrop.classList.remove('show');
-    document.body.style.overflow = '';
-};
 
 const toggleMobileMenu = () => {
     DOM.navbarCollapse.classList.toggle('show');
@@ -348,35 +182,30 @@ const toggleMobileMenu = () => {
 
 // INIT
 const init = () => {
-    loadCart();
-    updateCartUI();
     renderProducts(PRODUCTS);
 
     // Event Listeners
     DOM.productGrid.addEventListener('click', e => {
         if (e.target.matches('.add-to-cart-btn') && !e.target.disabled) {
-            addToCart(parseInt(e.target.dataset.id), e.target);
+            const product = PRODUCTS.find(p => p.id === parseInt(e.target.dataset.id));
+            if (product) {
+                // Bridge to the user's addToCart
+                addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: getCurrentPrice(product),
+                    image: product.img
+                });
+            }
         }
     });
 
     document.body.addEventListener('click', e => {
-        const id = parseInt(e.target.dataset.id);
-        const action = e.target.dataset.action;
-        if (id && action) handleCartAction(id, action);
-
         // Close dropdowns on outside click
-        if (!e.target.closest('.mini-cart') && DOM.cartDropdown.classList.contains('show')) {
+        if (!e.target.closest('.mini-cart') && DOM.cartDropdown && DOM.cartDropdown.classList.contains('show')) {
             DOM.cartDropdown.classList.remove('show');
         }
     });
-
-    DOM.cartToggle.addEventListener('click', () => {
-        if (window.innerWidth < 992) openMobileCart();
-        else DOM.cartDropdown.classList.toggle('show');
-    });
-
-    DOM.mobileCartBackdrop.addEventListener('click', closeMobileCart);
-    DOM.mobileCartClose.addEventListener('click', closeMobileCart);
 
     DOM.navbarToggler.addEventListener('click', toggleMobileMenu);
 
@@ -417,12 +246,6 @@ const init = () => {
         });
     });
 
-    DOM.clearCartBtn.addEventListener('click', () => { state.cart = []; updateCartUI(); });
-    DOM.mobileClearCart.addEventListener('click', () => { state.cart = []; updateCartUI(); });
-
-    DOM.checkoutBtn.addEventListener('click', () => window.location.href = 'odeme.html');
-    DOM.mobileCheckoutBtn.addEventListener('click', () => window.location.href = 'odeme.html');
-
     if (DOM.heroCTA) {
         DOM.heroCTA.addEventListener('click', () => {
             DOM.productGrid.scrollIntoView({ behavior: 'smooth' });
@@ -431,3 +254,15 @@ const init = () => {
 };
 
 document.addEventListener('DOMContentLoaded', init);
+
+// USER SIMPLE CART IMPLEMENTATION
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+function openCart() { document.getElementById('mobileCart').classList.add('open'); renderCart() }
+function closeCart() { document.getElementById('mobileCart').classList.remove('open') }
+function renderCart() { const c = document.getElementById('cartItems'), t = document.getElementById('cartTotal'); if (!cart.length) { c.innerHTML = '<p>Sepetiniz boş</p>'; t.textContent = '0'; return } let h = '', total = 0; cart.forEach(i => { total += i.price * i.quantity; h += `<div class="cart-item-simple"><img src="${i.image}" alt="${i.name}"><div class="cart-item-info"><h4>${i.name}</h4><p>${i.price}₺ x ${i.quantity}</p></div></div>` }); c.innerHTML = h; t.textContent = total.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
+function animateCartButton() { const b = document.getElementById('cartToggle'); b.classList.remove('bounce'); void b.offsetWidth; b.classList.add('bounce'); setTimeout(() => b.classList.remove('bounce'), 500); }
+function addToCart(p) { const e = cart.find(i => i.id === p.id); e ? e.quantity++ : cart.push({ ...p, quantity: 1 }); localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); animateCartButton(); }
+function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.quantity, 0) }
+function goToPayment() { window.location.href = 'odeme.html' }
+document.getElementById('cartToggle').addEventListener('click', openCart);
+updateCartCount();

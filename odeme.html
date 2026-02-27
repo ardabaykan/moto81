@@ -1092,7 +1092,7 @@
             })
         })();
 
-        const CART_KEY = 'moto81_cart_v1';
+        const CART_KEY = 'cart';
         let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
         const summaryCartCount = document.getElementById('summaryCartCount');
         const cartSummaryItems = document.getElementById('cartSummaryItems');
@@ -1103,7 +1103,7 @@
         function money(num) { return Number(num).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ₺'; }
 
         function renderCartSummary() {
-            summaryCartCount.textContent = cart.reduce((s, i) => s + i.qty, 0);
+            summaryCartCount.textContent = cart.reduce((s, i) => s + i.quantity, 0);
             cartSummaryItems.innerHTML = '';
 
             if (cart.length === 0) {
@@ -1126,15 +1126,15 @@
                 li.className = 'list-group-item';
                 li.innerHTML = `
                 <div class="d-flex w-100 align-items-center gap-3">
-                    <img src="${item.img}" alt="${item.name}" style="width: 80px; height: 80px;">
+                    <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px;">
                     <div class="product-info flex-grow-1">
                         <h6 class="mb-1">${item.name}</h6>
-                        <span class="item-price d-block mb-2 text-start">${money(item.priceAtAdd)}</span>
+                        <span class="item-price d-block mb-2 text-start">${money(item.price)}</span>
                         
                         <div class="d-flex align-items-center justify-content-between mt-auto">
                             <div class="d-flex align-items-center gap-2">
                                 <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, -1)">−</button>
-                                <span class="fw-semibold mx-1">${item.qty}</span>
+                                <span class="fw-semibold mx-1">${item.quantity}</span>
                                 <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, 1)">+</button>
                             </div>
                             <button type="button" class="btn btn-sm text-danger p-0" onclick="removeItem(${item.id})" aria-label="Sil">
@@ -1145,18 +1145,18 @@
                 </div>`;
                 cartSummaryItems.appendChild(li);
             });
-            summaryCartTotal.textContent = money(cart.reduce((s, i) => s + (i.priceAtAdd * i.qty), 0));
+            summaryCartTotal.textContent = money(cart.reduce((s, i) => s + (i.price * i.quantity), 0));
         }
 
         window.updateQty = function (id, delta) {
             const item = cart.find(i => i.id === id);
             if (!item) return;
-            item.qty += delta;
+            item.quantity += delta;
 
-            if (item.qty <= 0) {
+            if (item.quantity <= 0) {
                 cart = cart.filter(i => i.id !== id);
-            } else if (item.qty > 999) { // CONFIG.MAX_QUANTITY
-                item.qty = 999;
+            } else if (item.quantity > 999) { // CONFIG.MAX_QUANTITY
+                item.quantity = 999;
             }
 
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -1191,7 +1191,7 @@
             let cartDetails = '';
             if (cart.length > 0) {
                 cart.forEach(item => {
-                    cartDetails += `- ${item.name} (${item.brand}) - Adet: ${item.qty} - Fiyat: ${money(item.priceAtAdd * item.qty)}\n`;
+                    cartDetails += `- ${item.name} (${item.brand || 'Moto 81'}) - Adet: ${item.quantity} - Fiyat: ${money(item.price * item.quantity)}\n`;
                 });
             } else {
                 cartDetails = "Sepette ürün bulunmamaktadır (veya JavaScript kapalı olduğu için sepet bilgisi alınamamıştır).\n";

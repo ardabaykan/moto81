@@ -100,43 +100,23 @@
             </svg>
             <span class="cart-count" id="cartCount">0</span>
         </button>
+    </div>
 
-        <!-- Desktop Dropdown -->
-        <div class="dropdown-menu dropdown-menu-end cart-dropdown" id="cartDropdown">
+    <!-- NEW UNIQUE MOBILE CART CODE -->
+    <div id="mobileCart" class="mobile-cart">
+        <div class="cart-overlay" onclick="closeCart()"></div>
+        <div class="cart-content">
             <div class="cart-header">
-                <h5 class="mb-0">Alışveriş Sepeti</h5>
+                <h3>Sepetim</h3>
+                <button onclick="closeCart()" class="cart-close">×</button>
             </div>
             <div id="cartItems" class="cart-items"></div>
-            <div class="cart-total">
-                <span>Toplam</span>
-                <span id="cartTotal">0.00 ₺</span>
-            </div>
-            <div class="cart-actions">
-                <button class="btn btn-outline-secondary flex-fill" id="clearCart">Temizle</button>
-                <button class="btn btn-primary flex-fill" id="checkoutBtn">Satın Al</button>
+            <div class="cart-footer">
+                <div class="cart-total">Toplam: <span id="cartTotal">0</span> ₺</div>
+                <button onclick="goToPayment()" class="btn-checkout">Satın Al</button>
             </div>
         </div>
     </div>
-
-    <!-- MOBILE CART DRAWER -->
-    <div class="mobile-cart-drawer" id="mobileCartDrawer">
-        <div class="mobile-cart-header">
-            <h5>Sepetim</h5>
-            <button class="mobile-cart-close" id="mobileCartClose" aria-label="Kapat">×</button>
-        </div>
-        <div class="mobile-cart-content" id="mobileCartContent"></div>
-        <div class="mobile-cart-footer">
-            <div class="mobile-cart-total">
-                <span>Toplam</span>
-                <span id="mobileCartTotal">0.00 ₺</span>
-            </div>
-            <div class="mobile-cart-actions">
-                <button class="btn btn-outline-secondary" id="mobileClearCart">Temizle</button>
-                <button class="btn btn-primary" id="mobileCheckoutBtn">Satın Al</button>
-            </div>
-        </div>
-    </div>
-    <div class="mobile-cart-backdrop" id="mobileCartBackdrop"></div>
 
     <!-- MAIN CONTENT -->
     <main class="container my-5" id="main-content">
