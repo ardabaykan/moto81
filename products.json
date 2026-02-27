@@ -473,7 +473,7 @@
     "img": "pcxarkademir.jpg",
     "category": "pcx"
   },
-{
+  {
     "id": 117,
     "name": "Nmax Velescope Set",
     "brand": "Moto 81",
@@ -485,31 +485,107 @@
     "outOfStock": true
   },
   {
-    "id": 200,
-    "name": "Xmax Karbon Gidon Kapağı",
+    "id": 203,
+    "name": "Xmax Ayna Set",
     "brand": "Moto 81",
-    "price": 3200,
-    "img": "xmaxgidon.jpg",
-    "category": "xmax",
-    "isDiscounted": true,
-    "discountPercentage": 8
-  },
-  {
-    "id": 201,
-    "name": "Xmax Şeffaf Filtre Kapağı",
-    "brand": "Moto 81",
-    "price": 2800,
-    "img": "xmaxfiltre.jpg",
+    "price": null,
+    "img": "xmax_ayna_set.png",
     "category": "xmax"
   },
   {
-    "id": 202,
-    "name": "Xmax Karbon Ön Panel",
+    "id": 204,
+    "name": "Xmax Camaltı Braket",
     "brand": "Moto 81",
-    "price": 4500,
-    "img": "xmaxonpanel.jpg",
-    "category": "xmax",
-    "isDiscounted": true,
-    "discountPercentage": 5
+    "price": null,
+    "img": "xmax_camaltı_braket.png",
+    "category": "xmax"
+  },
+  {
+    "id": 205,
+    "name": "Xmax Camaltı Braket V2",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_camaltıbraket_v2.png",
+    "category": "xmax"
+  },
+  {
+    "id": 206,
+    "name": "Xmax Egzoz Karbon",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_egzoz_karbon.png",
+    "category": "xmax"
+  },
+  {
+    "id": 207,
+    "name": "Xmax Füme Stop",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_füme_stop.png",
+    "category": "xmax"
+  },
+  {
+    "id": 208,
+    "name": "Xmax Füme Stop Camı",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_füme_stop_camı.png",
+    "category": "xmax"
+  },
+  {
+    "id": 209,
+    "name": "Xmax Karbon Benzin Deposu",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_karbon_benzin_deposu.png",
+    "category": "xmax"
+  },
+  {
+    "id": 210,
+    "name": "Xmax Mor Performans Hava Filtresi",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_mor_performars_havailtresi.png",
+    "category": "xmax"
+  },
+  {
+    "id": 211,
+    "name": "Xmax Nmax Spor Yay",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_nmax_sporyay.png",
+    "category": "xmax"
+  },
+  {
+    "id": 212,
+    "name": "Xmax RGB Stop",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_rgb_stop.png",
+    "category": "xmax"
+  },
+  {
+    "id": 213,
+    "name": "Xmax Spor Jant",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_spor_jant.png",
+    "category": "xmax"
+  },
+  {
+    "id": 214,
+    "name": "Xmax Techmax Karbon Gösterge Çerçevesi",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_techmax_karbon_gösterge_çerçevesi.png",
+    "category": "xmax"
+  },
+  {
+    "id": 215,
+    "name": "Xmax Şeffaf Hava Filtresi 18-25",
+    "brand": "Moto 81",
+    "price": null,
+    "img": "xmax_şeffaf _hava filtresi 18-25.png",
+    "category": "xmax"
   }
 ]

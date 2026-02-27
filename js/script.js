@@ -94,7 +94,7 @@ const renderProducts = (products) => {
     }
 
     let currentCategory = '';
-    
+
     products.forEach(p => {
         if (p.category !== currentCategory) {
             currentCategory = p.category;
@@ -109,7 +109,7 @@ const renderProducts = (products) => {
             `;
             DOM.productGrid.appendChild(separator);
         }
-        
+
         const price = getCurrentPrice(p);
         const el = document.createElement('div');
         el.className = 'bg-white h-full flex flex-col justify-between rounded-[0.75rem] lg:rounded-[1rem] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:border-transparent group';
