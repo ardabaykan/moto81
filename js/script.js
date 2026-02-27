@@ -137,33 +137,35 @@ const renderProducts = (products) => {
     DOM.productGrid.innerHTML = '';
 
     if (products.length === 0) {
-        DOM.productGrid.innerHTML = '<div class="col-12 text-center py-5">Ürün bulunamadı.</div>';
+        DOM.productGrid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-medium">Ürün bulunamadı.</div>';
         return;
     }
 
     products.forEach(p => {
         const price = getCurrentPrice(p);
         const el = document.createElement('div');
-        el.className = 'product-card';
+        el.className = 'bg-white h-full flex flex-col justify-between rounded-[0.75rem] lg:rounded-[1rem] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:border-transparent group';
 
         let priceHtml = p.isDiscounted
-            ? `<p class="card-text original-price">${formatCurrency(p.price)}</p>
-               <p class="card-text current-price">${formatCurrency(price)}</p>`
-            : `<p class="card-text current-price">${formatCurrency(p.price)}</p>`;
+            ? `<p class="text-[0.7rem] lg:text-[0.85rem] line-through text-gray-400 font-bold mb-1 m-0">${formatCurrency(p.price)}</p>
+               <p class="text-[1rem] lg:text-[1.25rem] font-extrabold text-accent m-0">${formatCurrency(price)}</p>`
+            : `<p class="text-[1rem] lg:text-[1.25rem] font-extrabold text-accent m-0">${formatCurrency(p.price)}</p>`;
 
         el.innerHTML = `
-            <div class="thumb ${p.outOfStock ? 'out-of-stock' : ''}">
-                <img src="${p.img}" alt="${p.name}">
-                ${p.outOfStock ? '<div class="stock-badge">TÜKENDİ</div>' : ''}
-                ${p.isDiscounted && !p.outOfStock ? `<div class="discount-badge">-%${p.discountPercentage}</div>` : ''}
+            <div class="aspect-square bg-white flex items-center justify-center p-4 lg:p-6 relative overflow-hidden ${p.outOfStock ? 'opacity-50' : ''}">
+                <img src="${p.img}" alt="${p.name}" class="max-w-[85%] max-h-[85%] object-contain transition-transform duration-500 group-hover:scale-[1.08] group-hover:rotate-[2deg]">
+                ${p.outOfStock ? '<div class="absolute top-4 right-4 bg-gray-800 text-white px-3 py-1 rounded-full text-[0.75rem] font-bold z-10 shadow-md">TÜKENDİ</div>' : ''}
+                ${p.isDiscounted && !p.outOfStock ? `<div class="absolute top-4 right-4 bg-accent-gradient text-white px-3 py-1 rounded-full text-[0.75rem] font-extrabold z-10 shadow-[0_2px_8px_rgba(0,0,0,0.15)]">-%${p.discountPercentage}</div>` : ''}
             </div>
-            <div class="card-body">
-                <h5 class="card-title">${p.name}</h5>
-                <p class="card-text brand-text">${p.brand}</p>
-                <div class="card-price-info">${priceHtml}</div>
+            <div class="p-3 lg:p-5 flex-1 flex flex-col justify-between">
+                <div>
+                    <h5 class="text-[0.85rem] lg:text-[1rem] font-bold text-gray-900 mb-1 line-clamp-2 min-h-[2.6em]">${p.name}</h5>
+                    <p class="text-[0.7rem] lg:text-[0.85rem] text-gray-500 mb-2">${p.brand}</p>
+                </div>
+                <div>${priceHtml}</div>
             </div>
-            <div class="actions">
-                <button class="add-to-cart-btn ${p.outOfStock ? 'out-of-stock' : ''}" 
+            <div class="px-3 pb-3 lg:px-5 lg:pb-5">
+                <button class="add-to-cart-btn w-full p-2 lg:p-3 bg-gray-900 text-white rounded-[0.5rem] lg:rounded-[0.75rem] text-[0.75rem] lg:text-[1rem] font-bold transition-colors hover:bg-[#ff6b35] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed border-none" 
                         data-id="${p.id}" ${p.outOfStock ? 'disabled' : ''}>
                     ${p.outOfStock ? 'Stokta Yok' : 'Sepete Ekle'}
                 </button>
@@ -176,8 +178,9 @@ const renderProducts = (products) => {
 
 
 const toggleMobileMenu = () => {
-    DOM.navbarCollapse.classList.toggle('show');
-    document.body.style.overflow = DOM.navbarCollapse.classList.contains('show') ? 'hidden' : '';
+    const isOpen = DOM.navbarCollapse.classList.toggle('show');
+    DOM.navbarToggler.classList.toggle('menu-open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
 };
 
 // INIT
@@ -207,24 +210,31 @@ const init = () => {
         }
     });
 
-    DOM.navbarToggler.addEventListener('click', toggleMobileMenu);
+    if (DOM.navbarToggler) {
+        DOM.navbarToggler.addEventListener('click', toggleMobileMenu);
+    }
 
     // Close mobile menu if clicking a link inside it
-    DOM.navbarCollapse.addEventListener('click', e => {
-        if (e.target.matches('a')) {
-            DOM.navbarCollapse.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    });
+    if (DOM.navbarCollapse) {
+        DOM.navbarCollapse.addEventListener('click', e => {
+            if (e.target.matches('a')) {
+                DOM.navbarCollapse.classList.remove('show');
+                if (DOM.navbarToggler) DOM.navbarToggler.classList.remove('menu-open');
+                document.body.style.overflow = '';
+            }
+        });
+    }
 
-    DOM.searchInput.addEventListener('input', debounce(e => {
-        const q = e.target.value.toLowerCase();
-        const filtered = PRODUCTS.filter(p =>
-            p.name.toLowerCase().includes(q) ||
-            p.category.toLowerCase().includes(q)
-        );
-        renderProducts(filtered);
-    }, 300));
+    if (DOM.searchInput) {
+        DOM.searchInput.addEventListener('input', debounce(e => {
+            const q = e.target.value.toLowerCase();
+            const filtered = PRODUCTS.filter(p =>
+                p.name.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q)
+            );
+            renderProducts(filtered);
+        }, 300));
+    }
 
     DOM.categoryLinks.forEach(link => {
         link.addEventListener('click', e => {
@@ -240,7 +250,7 @@ const init = () => {
 
             // Mobile: close menu after selection
             if (window.innerWidth < 992) {
-                DOM.navbarCollapse.classList.remove('show');
+                if (DOM.navbarCollapse) DOM.navbarCollapse.classList.remove('show');
                 document.body.style.overflow = '';
             }
         });
@@ -259,7 +269,9 @@ document.addEventListener('DOMContentLoaded', init);
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function openCart() { document.getElementById('mobileCart').classList.add('open'); renderCart() }
 function closeCart() { document.getElementById('mobileCart').classList.remove('open') }
-function renderCart() { const c = document.getElementById('cartItems'), t = document.getElementById('cartTotal'); if (!cart.length) { c.innerHTML = '<p>Sepetiniz boş</p>'; t.textContent = '0'; return } let h = '', total = 0; cart.forEach(i => { total += i.price * i.quantity; h += `<div class="cart-item-simple"><img src="${i.image}" alt="${i.name}"><div class="cart-item-info"><h4>${i.name}</h4><p>${i.price}₺ x ${i.quantity}</p></div></div>` }); c.innerHTML = h; t.textContent = total.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
+function renderCart() { const c = document.getElementById('cartItems'), t = document.getElementById('cartTotal'); if (!cart.length) { c.innerHTML = '<p class="text-gray-500 mb-0">Sepetiniz boş</p>'; t.textContent = '0'; return } let h = '', total = 0; cart.forEach(i => { total += i.price * i.quantity; h += `<div class="flex gap-[15px] py-[15px] border-b border-[#f0f0f0] items-center"><img src="${i.image}" alt="${i.name}" class="w-[60px] h-[60px] object-cover rounded-[8px]"><div class="flex-1"><h4 class="m-0 mb-[5px] text-[14px] font-bold text-gray-900">${i.name}</h4><p class="m-0 text-[#ff6b00] font-bold">${i.price}₺</p></div><div class="flex items-center gap-2"><button onclick="decreaseQuantity(${i.id})" class="w-8 h-8 rounded-full bg-gray-200 border-none cursor-pointer text-gray-700 font-bold hover:bg-gray-300">-</button><span class="font-bold text-gray-900 min-w-[20px] text-center">${i.quantity}</span><button onclick="increaseQuantity(${i.id})" class="w-8 h-8 rounded-full bg-gray-200 border-none cursor-pointer text-gray-700 font-bold hover:bg-gray-300">+</button></div></div>` }); c.innerHTML = h; t.textContent = total.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }
+function increaseQuantity(id) { const item = cart.find(i => i.id === id); if (item) { item.quantity++; localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); renderCart(); } }
+function decreaseQuantity(id) { const idx = cart.findIndex(i => i.id === id); if (idx > -1) { cart[idx].quantity--; if (cart[idx].quantity <= 0) { cart.splice(idx, 1); } localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); renderCart(); } }
 function animateCartButton() { const b = document.getElementById('cartToggle'); b.classList.remove('bounce'); void b.offsetWidth; b.classList.add('bounce'); setTimeout(() => b.classList.remove('bounce'), 500); }
 function addToCart(p) { const e = cart.find(i => i.id === p.id); e ? e.quantity++ : cart.push({ ...p, quantity: 1 }); localStorage.setItem('cart', JSON.stringify(cart)); updateCartCount(); animateCartButton(); }
 function updateCartCount() { document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.quantity, 0) }

@@ -12,9 +12,9 @@
     <meta name="keywords" content="motorcycle accessories, PCX, NMAX, ABMOTOPARTS">
     <meta name="author" content="ABMOTOPARTS">
 
-    <!-- Mobile Theme Color (Tarayıcı çubuğu rengi) -->
+    <!-- Mobile Theme Color -->
     <meta name="theme-color" content="#ffffff">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
     <!-- Open Graph Meta Tags -->
@@ -26,108 +26,223 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Fonts & Bootstrap -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com ">
     <link rel="preconnect" href="https://fonts.gstatic.com " crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300 ;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css " rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-accent: #ff6b35;
+            --color-accent-light: #ff8c42;
+            --color-accent-dark: #e55a2b;
+            --font-sans: 'Inter', sans-serif;
+            --background-image-accent-gradient: linear-gradient(135deg, #ff6b35, #ff8c42);
+        }
+        @layer base {
+            body {
+                @apply bg-white font-sans text-gray-800 antialiased pt-[60px] md:pt-[64px];
+            }
+        }
+        @layer components {
+            .nav-link {
+                @apply text-[1.5rem] p-4 text-center border-b border-gray-200 bg-transparent w-full text-gray-900 transition-all font-semibold uppercase tracking-wide whitespace-nowrap lg:text-[0.85rem] lg:px-4 lg:py-2 lg:rounded-full lg:border-none lg:w-auto lg:text-gray-700 hover:bg-gray-100 hover:text-accent lg:hover:text-white lg:hover:bg-accent-gradient lg:hover:shadow-[0_4px_12px_rgba(255,107,53,0.3)];
+            }
+            .nav-link.active {
+                @apply text-accent bg-gray-100 lg:text-white lg:bg-accent-gradient lg:shadow-[0_4px_12px_rgba(255,107,53,0.3)];
+            }
+            .widget-title {
+                @apply text-white text-[1.1rem] font-bold mb-6 uppercase tracking-wide relative pb-3 after:absolute after:left-0 after:bottom-0 after:w-10 after:h-[2px] after:bg-accent after:transition-all hover:after:w-[60px];
+            }
+        }
+        /* Mobile Menu Styles */
+        @media (max-width: 1023px) {
+            .navbar-collapse-mobile {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: #ffffff;
+                padding: 1.5rem;
+                flex-direction: column;
+                gap: 0.5rem;
+                z-index: 9999;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                animation: menuSlideDown 0.3s ease-out;
+                box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            }
+            .navbar-collapse-mobile.show {
+                display: flex;
+            }
+        }
+        @media (max-width: 1023px) and (min-width: 768px) {
+            .navbar-collapse-mobile {
+                top: 64px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .navbar-collapse-mobile {
+                display: flex;
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+                padding: 0;
+                flex-direction: row;
+                align-items: center;
+                margin-left: auto;
+                margin-right: auto;
+                width: auto;
+                gap: 0;
+                overflow: visible;
+                animation: none;
+            }
+        }
+        @keyframes menuSlideDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hamburger to X animation */
+        .hamburger-line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .menu-open .hamburger-line:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .menu-open .hamburger-line:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .menu-open .hamburger-line:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        /* Cart Bounce Animation */
+        @keyframes cartBounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3) rotate(-5deg); color: #ff6b35; border-color: #ff6b35; }
+            100% { transform: scale(1) rotate(0); }
+        }
+        .bounce .cart-icon {
+            animation: cartBounce 0.5s ease;
+        }
+        .bounce .cart-count {
+            transform: scale(1.2);
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Skip to main content for accessibility -->
-    <a href="#main-content" class="visually-hidden-focusable">Skip to main content</a>
+    <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
 
     <!-- HEADER -->
     <header>
-        <nav class="navbar navbar-expand-lg" role="navigation" aria-label="Main navigation">
-            <div class="container-fluid container">
-                <a class="navbar-brand d-flex align-items-center" href="index.html" aria-label="Moto 81 Home">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        aria-hidden="true" class="me-2">
+        <nav class="fixed top-0 left-0 right-0 z-[1030] h-[60px] md:h-[64px] bg-white/95 backdrop-blur-xl border-b border-gray-100 px-2 sm:px-4 shadow-sm flex items-center justify-between transition-all"
+            role="navigation" aria-label="Main navigation">
+            <div class="max-w-[1400px] w-full mx-auto flex items-center justify-between pr-0 lg:pr-[4.5rem]">
+
+                <!-- Logo -->
+                <a class="flex items-center gap-2 text-gray-900 font-black text-[1.1rem] sm:text-[1.2rem] z-[1050] hover:text-accent transition-colors tracking-tight"
+                    href="index.html" aria-label="ABMOTOPARTS Home">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        aria-hidden="true" class="text-accent w-6 h-6 sm:w-7 sm:h-7 drop-shadow-sm">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                     <span>ABMOTOPARTS</span>
                 </a>
 
-                <!-- Mobil Menü Butonu (Bootstrap data attribute'leri kaldırıldı, JS kontrol edecek) -->
-                <button class="navbar-toggler" type="button" aria-label="Toggle navigation" id="mobileMenuToggler">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="flex items-center">
+                    <!-- Desktop / Mobile Menu Container -->
+                    <div id="navbarNavAltMarkup" class="navbar-collapse-mobile lg:gap-1.5 lg:justify-end" style="padding-bottom: 300px;">
+                        <a href="index.html" class="nav-link active" data-category="all">Tüm Ürünler</a>
+                        <a href="index.html" class="nav-link" data-category="pcx">PCX</a>
+                        <a href="index.html" class="nav-link" data-category="nmax">NMAX</a>
+                        <a href="odeme.html" class="nav-link">Ödeme</a>
+                    </div>
 
-                <!-- Nav Links & Search -->
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <a class="nav-link active" aria-current="page" href="#" data-category="all">Tüm Ürünler</a>
-                        <a class="nav-link" href="#" data-category="pcx">PCX</a>
-                        <a class="nav-link" href="#" data-category="nmax">NMAX</a>
-                        <a class="nav-link" href="odeme.html">Ödeme</a>
-                    </div>
-                    <div class="d-flex w-100 w-lg-auto">
-                        <div class="search-container w-100">
-                            <div class="search-input-wrapper">
-                                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5" aria-hidden="true">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.35-4.35"></path>
-                                </svg>
-                                <input class="form-control" type="search" placeholder="Premium ürün ara..."
-                                    id="searchInput">
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Hamburger Button (Mobile Only) -->
+                    <button id="mobileMenuToggler"
+                        class="lg:hidden flex flex-col justify-center items-center w-10 h-10 border-none bg-transparent cursor-pointer z-[1050] group"
+                        aria-label="Toggle menu" aria-expanded="false">
+                        <span
+                            class="hamburger-line w-6 h-[2px] bg-gray-800 rounded-full mb-1 group-hover:bg-accent transition-colors"></span>
+                        <span
+                            class="hamburger-line w-5 h-[2px] bg-gray-800 rounded-full mb-1 group-hover:bg-accent transition-colors"></span>
+                        <span
+                            class="hamburger-line w-6 h-[2px] bg-gray-800 rounded-full group-hover:bg-accent transition-colors"></span>
+                    </button>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- MINI CART BUTTON (Fixed Position) -->
-    <div class="mini-cart dropdown">
-        <button class="cart-button" type="button" id="cartToggle" aria-label="Sepeti Aç">
-            <svg class="cart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" aria-hidden="true">
+    <!-- MINI CART BUTTON -->
+    <div class="fixed top-[8px] right-[4.5rem] lg:top-[10px] lg:right-4 z-[1040]">
+        <button
+            class="flex items-center justify-center bg-white text-gray-800 border border-gray-300 p-2 rounded-full cursor-pointer relative transition-all duration-300 w-[45px] h-[45px] hover:text-accent hover:border-accent hover:shadow-[0_4px_12px_rgba(255,107,53,0.15)] group"
+            type="button" id="cartToggle" aria-label="Sepeti Aç">
+            <svg class="cart-icon w-6 h-6 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M6 6h15l-1.5 9h-12z" stroke-linecap="round" stroke-linejoin="round" />
                 <circle cx="9" cy="20" r="1.5" />
                 <circle cx="18" cy="20" r="1.5" />
             </svg>
-            <span class="cart-count" id="cartCount">0</span>
+            <span
+                class="cart-count absolute -top-[5px] -right-[5px] bg-accent text-white w-5 h-5 rounded-full flex items-center justify-center text-[0.7rem] font-bold border-2 border-white shadow-[0_2px_5px_rgba(0,0,0,0.2)] transition-transform duration-300"
+                id="cartCount">0</span>
         </button>
     </div>
 
     <!-- NEW UNIQUE MOBILE CART CODE -->
-    <div id="mobileCart" class="mobile-cart">
-        <div class="cart-overlay" onclick="closeCart()"></div>
-        <div class="cart-content">
-            <div class="cart-header">
-                <h3>Sepetim</h3>
-                <button onclick="closeCart()" class="cart-close">×</button>
+    <div id="mobileCart"
+        class="fixed inset-0 z-[9999] opacity-0 invisible transition-all duration-300 [&.open]:visible [&.open]:opacity-100">
+        <div class="absolute inset-0 bg-black/50" onclick="closeCart()"></div>
+        <div
+            class="cart-content absolute top-0 -right-full w-[90%] max-w-[400px] h-full bg-white transition-[right] duration-300 flex flex-col z-[10000]">
+            <style>
+                #mobileCart.open .cart-content {
+                    right: 0;
+                }
+            </style>
+            <div class="p-5 border-b border-gray-200 flex justify-between items-center bg-white">
+                <h3 class="text-xl font-bold m-0 text-gray-900">Sepetim</h3>
+                <button onclick="closeCart()"
+                    class="text-[28px] bg-transparent border-none cursor-pointer p-0 text-gray-500 hover:text-gray-900">×</button>
             </div>
-            <div id="cartItems" class="cart-items"></div>
-            <div class="cart-footer">
-                <div class="cart-total">Toplam: <span id="cartTotal">0</span> ₺</div>
-                <button onclick="goToPayment()" class="btn-checkout">Satın Al</button>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-5 bg-white"></div>
+            <div class="p-5 border-t border-gray-200 bg-white">
+                <div class="mb-4 text-lg font-bold text-gray-900">Toplam: <span id="cartTotal">0</span> ₺</div>
+                <button onclick="goToPayment()"
+                    class="w-full p-4 bg-[#ff6b00] text-white border-none rounded-lg text-base cursor-pointer hover:bg-[#e55a00] transition-colors font-bold">Satın
+                    Al</button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="container my-5" id="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-background"></div>
-            <div class="hero-content">
-                <img src="logo.png" alt="Moto 81 Logo" class="hero-logo">
-                <h1>ABMOTOPARTS</h1>
-                <p>Motor aksesuarları ve yedek parçalarda aradığınız her şey</p>
-                <button class="hero-cta" id="heroCTA">
+    <main class="container mx-auto my-8 lg:my-12 px-2 sm:px-4 max-w-[1400px]" id="main-content">
+        <section
+            class="relative min-h-[300px] lg:min-h-[400px] flex items-center justify-center rounded-b-[2rem] overflow-hidden mb-8 bg-gradient-to-br from-gray-800 to-gray-900 p-4 lg:p-0">
+            <div class="text-center flex flex-col items-center">
+                <img src="logo.png" alt="Moto 81 Logo"
+                    class="w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] mb-4 lg:mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]">
+                <h1 class="text-[clamp(2rem,5vw,3rem)] font-extrabold mb-4 text-white">ABMOTOPARTS</h1>
+                <p class="text-white/90 mb-8 max-w-lg mx-auto">Motor aksesuarları ve yedek parçalarda aradığınız her şey
+                </p>
+                <button
+                    class="inline-flex items-center gap-2 bg-accent-gradient text-white px-8 py-3.5 rounded-full font-bold cursor-pointer shadow-[0_8px_20px_rgba(255,107,53,0.4)] transition-transform hover:-translate-y-1 border-none"
+                    id="heroCTA">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
@@ -137,59 +252,85 @@
         </section>
 
         <!-- Product Grid -->
-        <section class="product-grid" id="productGrid">
+        <section class="grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-3 md:gap-4 lg:gap-6"
+            id="productGrid">
             <!-- JS ile yüklenecek -->
         </section>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="modern-footer">
-        <div class="container footer-content">
-            <div class="footer-grid">
+    <footer class="bg-[#111] text-[#e0e0e0] pt-16 border-t border-[#222] font-sans">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 mb-12">
                 <!-- BRAND SECTION -->
-                <div class="footer-widget brand-widget">
-                    <h2 class="footer-logo">ABMOTOPARTS</h2>
-                    <p class="footer-tagline">Motor aksesuarları ve yedek parçalarında aradığınız her şey.</p>
-                    <div class="footer-socials">
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp"><i
+                <div>
+                    <h2 class="text-white text-[1.5rem] font-extrabold mb-4 tracking-[1px] m-0">ABMOTOPARTS</h2>
+                    <p class="text-[0.95rem] leading-[1.6] text-[#aaa] mb-6 mt-0">Motor aksesuarları ve yedek
+                        parçalarında aradığınız her şey.</p>
+                    <div class="flex gap-4">
+                        <a href="#" target="_blank" aria-label="Instagram"
+                            class="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-[#222] text-white text-[1.1rem] transition-all hover:bg-accent hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(255,107,53,0.3)] no-underline"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/905312672081" target="_blank" aria-label="WhatsApp"
+                            class="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-[#222] text-white text-[1.1rem] transition-all hover:bg-accent hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(255,107,53,0.3)] no-underline"><i
                                 class="fa-brands fa-whatsapp"></i></a>
-                        <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" target="_blank" aria-label="Facebook"
+                            class="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-[#222] text-white text-[1.1rem] transition-all hover:bg-accent hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(255,107,53,0.3)] no-underline"><i
+                                class="fa-brands fa-facebook-f"></i></a>
                     </div>
                 </div>
 
                 <!-- QUICK LINKS SECTION -->
-                <div class="footer-widget links-widget">
-                    <h3 class="widget-title">Hızlı Linkler</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" data-category="all">Tüm Ürünler</a></li>
-                        <li><a href="#" data-category="pcx">PCX</a></li>
-                        <li><a href="#" data-category="nmax">NMAX</a></li>
-                        <li><a href="odeme.html">Ödeme</a></li>
-                        <li><a href="#">Hakkımızda</a></li>
-                        <li><a href="#">İletişim</a></li>
+                <div>
+                    <h3 class="widget-title mt-0">Hızlı Linkler</h3>
+                    <ul class="space-y-3 p-0 m-0 list-none">
+                        <li><a href="#" data-category="all"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">Tüm
+                                Ürünler</a></li>
+                        <li><a href="#" data-category="pcx"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">PCX</a>
+                        </li>
+                        <li><a href="#" data-category="nmax"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">NMAX</a>
+                        </li>
+                        <li><a href="odeme.html"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">Ödeme</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">Hakkımızda</a>
+                        </li>
+                        <li><a href="#"
+                                class="text-[#aaa] text-[0.95rem] transition-all inline-block hover:text-accent hover:pl-1 no-underline">İletişim</a>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- CONTACT SECTION -->
-                <div class="footer-widget contact-widget">
-                    <h3 class="widget-title">İletişim</h3>
-                    <ul class="contact-info">
-                        <li><i class="fa-solid fa-phone"></i> +90 531 267 2081</li>
-                        <li><i class="fa-solid fa-envelope"></i> info@abmotoparts.com</li>
-                        <li><i class="fa-solid fa-clock"></i> Pzt - Cmt: 09:00 - 18:00</li>
-                        <li><i class="fa-solid fa-location-dot"></i> İstanbul / Türkiye</li>
+                <div>
+                    <h3 class="widget-title mt-0">İletişim</h3>
+                    <ul class="space-y-4 p-0 m-0 list-none">
+                        <li class="flex items-start gap-3 text-[#aaa] text-[0.95rem] leading-[1.5]"><i
+                                class="fa-solid fa-phone text-accent mt-1"></i> +90 531 267 2081</li>
+                        <li class="flex items-start gap-3 text-[#aaa] text-[0.95rem] leading-[1.5]"><i
+                                class="fa-solid fa-envelope text-accent mt-1"></i> info@abmotoparts.com</li>
+                        <li class="flex items-start gap-3 text-[#aaa] text-[0.95rem] leading-[1.5]"><i
+                                class="fa-solid fa-clock text-accent mt-1"></i> Pzt - Cmt: 09:00 - 18:00</li>
+                        <li class="flex items-start gap-3 text-[#aaa] text-[0.95rem] leading-[1.5]"><i
+                                class="fa-solid fa-location-dot text-accent mt-1"></i> İstanbul / Türkiye</li>
                     </ul>
                 </div>
 
                 <!-- NEWSLETTER SECTION -->
-                <div class="footer-widget newsletter-widget">
-                    <h3 class="widget-title">Bülten</h3>
-                    <p>Yeni ürünler ve kampanyalar için abone olun.</p>
-                    <form class="footer-newsletter-form" onsubmit="event.preventDefault();">
-                        <div class="newsletter-input-group">
-                            <input type="email" placeholder="E-posta adresiniz" required>
-                            <button type="submit" aria-label="Abone Ol"><i class="fa-solid fa-paper-plane"></i></button>
+                <div>
+                    <h3 class="widget-title mt-0">Bülten</h3>
+                    <p class="text-[#aaa] text-[0.95rem] mb-4 mt-0">Yeni ürünler ve kampanyalar için abone olun.</p>
+                    <form onsubmit="event.preventDefault();" class="m-0">
+                        <div
+                            class="flex bg-[#222] rounded-[4px] overflow-hidden border border-[#333] transition-colors focus-within:border-accent">
+                            <input type="email" placeholder="E-posta adresiniz" required
+                                class="flex-1 bg-transparent border-none py-3 px-4 text-white outline-none text-[0.9rem] placeholder:text-[#666]">
+                            <button type="submit" aria-label="Abone Ol"
+                                class="bg-accent text-white px-5 cursor-pointer border-none transition-colors hover:bg-accent-dark"><i
+                                    class="fa-solid fa-paper-plane"></i></button>
                         </div>
                     </form>
                 </div>
@@ -197,16 +338,19 @@
         </div>
 
         <!-- BOTTOM FOOTER -->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="footer-bottom-inner">
-                    <p class="copyright">&copy; 2025 ABMOTOPARTS - Tüm Hakları Saklıdır.</p>
-                    <div class="footer-badges">
-                        <span class="security-badge"><i class="fa-solid fa-lock"></i> Güvenli Alışveriş & SSL</span>
-                        <div class="payment-methods">
-                            <i class="fa-brands fa-cc-visa"></i>
-                            <i class="fa-brands fa-cc-mastercard"></i>
-                            <i class="fa-brands fa-cc-paypal"></i>
+        <div class="bg-[#0a0a0a] py-6 border-t border-[#1a1a1a]">
+            <div class="max-w-[1200px] mx-auto px-6">
+                <div
+                    class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 text-center md:text-left">
+                    <p class="text-[#777] text-[0.85rem] m-0">&copy; 2025 ABMOTOPARTS - Tüm Hakları Saklıdır.</p>
+                    <div class="flex flex-wrap justify-center items-center gap-6">
+                        <span class="text-[#4caf50] text-[0.85rem] flex items-center gap-1.5 font-semibold"><i
+                                class="fa-solid fa-lock"></i> Güvenli Alışveriş & SSL</span>
+                        <div class="flex gap-3 text-[#666] text-[1.5rem]">
+                            <i class="fa-brands fa-cc-visa transition-colors hover:text-[#ddd] cursor-pointer"></i>
+                            <i
+                                class="fa-brands fa-cc-mastercard transition-colors hover:text-[#ddd] cursor-pointer"></i>
+                            <i class="fa-brands fa-cc-paypal transition-colors hover:text-[#ddd] cursor-pointer"></i>
                         </div>
                     </div>
                 </div>
@@ -215,7 +359,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js "></script>
     <script src="js/script.js"></script>
 </body>
 
