@@ -363,7 +363,7 @@ const renderCart = () => {
     let total = 0;
 
     cart.forEach((item) => {
-        if (!item.hasPrice || !isValidPrice(item.price)) return;
+        if (!isValidPrice(item.price)) return;
 
         const lineTotal = item.price * item.quantity;
         total += lineTotal;
@@ -431,13 +431,15 @@ const addToCart = (product) => {
 
     if (existingItem) {
         existingItem.quantity = Math.min(existingItem.quantity + 1, CONFIG.MAX_QUANTITY);
+        existingItem.hasPrice = true;
     } else {
         cart.push({
             id: product.id,
             name: product.name,
             price: product.price,
             image: product.image,
-            quantity: 1
+            quantity: 1,
+            hasPrice: true
         });
     }
 
