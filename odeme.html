@@ -863,35 +863,35 @@
                         <div class="row g-3">
                             <div class="col-sm-6">
                                 <label for="firstName" class="form-label">Adınız</label>
-                                <input type="text" class="form-control" id="firstName" required aria-label="Adınız">
+                                <input type="text" class="form-control" id="firstName" name="firstName" required aria-label="Adınız">
                                 <div class="invalid-feedback">Lütfen geçerli bir ad girin.</div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Soyadınız</label>
-                                <input type="text" class="form-control" id="lastName" required aria-label="Soyadınız">
+                                <input type="text" class="form-control" id="lastName" name="lastName" required aria-label="Soyadınız">
                                 <div class="invalid-feedback">Lütfen geçerli bir soyad girin.</div>
                             </div>
                             <div class="col-12">
                                 <label for="email" class="form-label">E-posta <span class="text-muted">(İsteğe
                                         Bağlı)</span></label>
-                                <input type="email" class="form-control" id="email" placeholder="siz@example.com"
+<input type="email" class="form-control" id="email" name="email" placeholder="siz@example.com"
                                     aria-label="E-posta adresiniz">
                                 <div class="invalid-feedback">Lütfen geçerli e-posta girin.</div>
                             </div>
                             <div class="col-12">
                                 <label for="phone" class="form-label">Telefon</label>
-                                <input type="tel" class="form-control" id="phone" required
+<input type="tel" class="form-control" id="phone" name="phone" required
                                     aria-label="Telefon numaranız">
                                 <div class="invalid-feedback">Geçerli telefon girin.</div>
                             </div>
                             <div class="col-12">
                                 <label for="address" class="form-label">Adres</label>
-                                <input type="text" class="form-control" id="address" required aria-label="Adresiniz">
+                                <input type="text" class="form-control" id="address" name="address" required aria-label="Adresiniz">
                                 <div class="invalid-feedback">Adres girin.</div>
                             </div>
                             <div class="col-md-5">
                                 <label for="country" class="form-label">Ülke</label>
-                                <select class="form-select" id="country" required aria-label="Ülke seçimi">
+                                <select class="form-select" id="country" name="country" required aria-label="Ülke seçimi">
                                     <option value="">Seçin...</option>
                                     <option>Türkiye</option>
                                     <!-- Diğer ülkeler eklenebilir -->
@@ -900,12 +900,12 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="city" class="form-label">Şehir</label>
-                                <input type="text" class="form-control" id="city" required aria-label="Şehir adınız">
+                                <input type="text" class="form-control" id="city" name="city" required aria-label="Şehir adınız">
                                 <div class="invalid-feedback">Şehir girin.</div>
                             </div>
                             <div class="col-md-3">
                                 <label for="zip" class="form-label">Posta Kodu</label>
-                                <input type="text" class="form-control" id="zip" required aria-label="Posta kodunuz">
+                                <input type="text" class="form-control" id="zip" name="zip" required aria-label="Posta kodunuz">
                                 <div class="invalid-feedback">Posta kodu girin.</div>
                             </div>
                         </div>
@@ -1063,8 +1063,52 @@
             })
         })();
 
-        const CART_KEY = 'cart';
-        let cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+        const CONFIG = {
+            CART_KEY: 'moto81_cart_v3',
+            LEGACY_CART_KEY: 'cart',
+            MAX_QUANTITY: 999
+        };
+
+        const migrateLegacyCart = () => {
+            try {
+                const modernCart = localStorage.getItem(CONFIG.CART_KEY);
+                if (modernCart !== null) return;
+
+                const legacyCart = localStorage.getItem(CONFIG.LEGACY_CART_KEY);
+                if (legacyCart !== null) {
+                    localStorage.setItem(CONFIG.CART_KEY, legacyCart);
+                    localStorage.removeItem(CONFIG.LEGACY_CART_KEY);
+                }
+            } catch (e) {
+                console.warn('Cart migration failed:', e);
+            }
+        };
+
+        migrateLegacyCart();
+
+        const isValidPrice = (price) => typeof price === 'number' && Number.isFinite(price) && price >= 0;
+
+        const escapeHtml = (str) => {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
+
+        let cart = [];
+        try {
+            const rawCart = JSON.parse(localStorage.getItem(CONFIG.CART_KEY) || '[]');
+            cart = Array.isArray(rawCart) ? rawCart.filter(item => {
+                const id = Number(item.id);
+                const price = Number(item.price);
+                return Number.isInteger(id) && id > 0 && isValidPrice(price);
+            }) : [];
+        } catch (e) {
+            console.error('Failed to load cart:', e);
+            cart = [];
+        }
         const summaryCartCount = document.getElementById('summaryCartCount');
         const cartSummaryItems = document.getElementById('cartSummaryItems');
         const summaryCartTotal = document.getElementById('summaryCartTotal');
@@ -1092,31 +1136,87 @@
 
             whatsappPayButton.disabled = false;
 
+            const getImagePath = (imgName) => {
+                return imgName ? encodeURIComponent(imgName) : '';
+            };
+
             cart.forEach(item => {
+                if (!isValidPrice(item.price) || !item.name) return;
+
                 const li = document.createElement('li');
                 li.className = 'list-group-item';
-                li.innerHTML = `
-                <div class="d-flex w-100 align-items-center gap-3">
-                    <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px;">
-                    <div class="product-info flex-grow-1">
-                        <h6 class="mb-1">${item.name}</h6>
-                        <span class="item-price d-block mb-2 text-start">${money(item.price)}</span>
-                        
-                        <div class="d-flex align-items-center justify-content-between mt-auto">
-                            <div class="d-flex align-items-center gap-2">
-                                <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, -1)">−</button>
-                                <span class="fw-semibold mx-1">${item.quantity}</span>
-                                <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-2 fw-bold" onclick="updateQty(${item.id}, 1)">+</button>
-                            </div>
-                            <button type="button" class="btn btn-sm text-danger p-0" onclick="removeItem(${item.id})" aria-label="Sil">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>`;
+
+                const container = document.createElement('div');
+                container.className = 'd-flex w-100 align-items-center gap-3';
+
+                const img = document.createElement('img');
+                img.src = getImagePath(item.image || item.img);
+                img.alt = escapeHtml(item.name);
+                img.style.cssText = 'width: 80px; height: 80px; object-fit: contain;';
+
+
+                const productInfo = document.createElement('div');
+                productInfo.className = 'product-info flex-grow-1';
+
+                const h6 = document.createElement('h6');
+                h6.className = 'mb-1';
+                h6.textContent = item.name;
+
+                const priceSpan = document.createElement('span');
+                priceSpan.className = 'item-price d-block mb-2 text-start';
+                priceSpan.textContent = money(item.price);
+
+                const controlsDiv = document.createElement('div');
+                controlsDiv.className = 'd-flex align-items-center justify-content-between mt-auto';
+
+                const qtyDiv = document.createElement('div');
+                qtyDiv.className = 'd-flex align-items-center gap-2';
+
+                const decBtn = document.createElement('button');
+                decBtn.type = 'button';
+                decBtn.className = 'btn btn-sm btn-outline-secondary py-0 px-2 fw-bold';
+                decBtn.textContent = '−';
+                decBtn.onclick = () => window.updateQty(item.id, -1);
+
+                const qtySpan = document.createElement('span');
+                qtySpan.className = 'fw-semibold mx-1';
+                qtySpan.textContent = item.quantity;
+
+                const incBtn = document.createElement('button');
+                incBtn.type = 'button';
+                incBtn.className = 'btn btn-sm btn-outline-secondary py-0 px-2 fw-bold';
+                incBtn.textContent = '+';
+                incBtn.onclick = () => window.updateQty(item.id, 1);
+
+                qtyDiv.appendChild(decBtn);
+                qtyDiv.appendChild(qtySpan);
+                qtyDiv.appendChild(incBtn);
+
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'btn btn-sm text-danger p-0';
+                delBtn.setAttribute('aria-label', 'Sil');
+                delBtn.onclick = () => window.removeItem(item.id);
+
+                const trashIcon = document.createElement('i');
+                trashIcon.className = 'fa-solid fa-trash';
+                delBtn.appendChild(trashIcon);
+
+                controlsDiv.appendChild(qtyDiv);
+                controlsDiv.appendChild(delBtn);
+
+                productInfo.appendChild(h6);
+                productInfo.appendChild(priceSpan);
+                productInfo.appendChild(controlsDiv);
+
+                container.appendChild(img);
+                container.appendChild(productInfo);
+                li.appendChild(container);
                 cartSummaryItems.appendChild(li);
             });
-            summaryCartTotal.textContent = money(cart.reduce((s, i) => s + (i.price * i.quantity), 0));
+
+            const total = cart.reduce((s, i) => s + (isValidPrice(i.price) ? i.price * i.quantity : 0), 0);
+            summaryCartTotal.textContent = money(total);
         }
 
         window.updateQty = function (id, delta) {
@@ -1130,13 +1230,13 @@
                 item.quantity = 999;
             }
 
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            localStorage.setItem(CONFIG.CART_KEY, JSON.stringify(cart));
             renderCartSummary();
         };
 
         window.removeItem = function (id) {
             cart = cart.filter(i => i.id !== id);
-            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+            localStorage.setItem(CONFIG.CART_KEY, JSON.stringify(cart));
             renderCartSummary();
         };
 
@@ -1150,25 +1250,34 @@
                 return;
             }
 
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const country = document.getElementById('country').value;
-            const city = document.getElementById('city').value;
-            const zip = document.getElementById('zip').value;
+            const sanitizeInput = (str) => String(str ?? '').trim().replace(/[*_~`]/g, '');
+
+            const firstName = sanitizeInput(document.getElementById('firstName').value);
+            const lastName = sanitizeInput(document.getElementById('lastName').value);
+            const email = sanitizeInput(document.getElementById('email').value);
+            const phone = sanitizeInput(document.getElementById('phone').value);
+            const address = sanitizeInput(document.getElementById('address').value);
+            const country = sanitizeInput(document.getElementById('country').value);
+            const city = sanitizeInput(document.getElementById('city').value);
+            const zip = sanitizeInput(document.getElementById('zip').value);
+
+            const formatPriceForMessage = (num) => {
+                return Number(num).toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' TL';
+            };
 
             let cartDetails = '';
             if (cart.length > 0) {
                 cart.forEach(item => {
-                    cartDetails += `- ${item.name} (${item.brand || 'Moto 81'}) - Adet: ${item.quantity} - Fiyat: ${money(item.price * item.quantity)}\n`;
+                    if (isValidPrice(item.price) && item.name) {
+                        const lineTotal = item.price * item.quantity;
+                        cartDetails += `- ${item.name} (${item.brand || 'Moto 81'}) - Adet: ${item.quantity} - Fiyat: ${formatPriceForMessage(lineTotal)}\n`;
+                    }
                 });
             } else {
-                cartDetails = "Sepette ürün bulunmamaktadır (veya JavaScript kapalı olduğu için sepet bilgisi alınamamıştır).\n";
+                cartDetails = "Sepette ürün bulunmamaktadır.\n";
             }
 
-            const totalAmount = summaryCartTotal.textContent;
+            const totalAmount = formatPriceForMessage(cart.reduce((s, i) => s + (isValidPrice(i.price) ? i.price * i.quantity : 0), 0));
 
             const message = `Merhaba Moto 81,\n\nYeni bir sipariş talebim var:\n\n*Teslimat Bilgileri:*\nAdı Soyadı: ${firstName} ${lastName}\nTelefon: ${phone}\nE-posta: ${email ? email : 'Belirtilmedi'}\nAdres: ${address}\nÜlke: ${country}\nŞehir: ${city}\nPosta Kodu: ${zip}\n\n*Sepet İçeriği:*\n${cartDetails}\n*Toplam Tutar: ${totalAmount}*\n\nÖdeme seçenekleri hakkında bilgi almak istiyorum. Teşekkürler.`;
 
@@ -1176,7 +1285,7 @@
             window.open(whatsappURL, '_blank');
 
             // Clear cart from local storage after order placed
-            localStorage.setItem(CART_KEY, JSON.stringify([]));
+            localStorage.setItem(CONFIG.CART_KEY, JSON.stringify([]));
             cart = [];
             renderCartSummary();
         });
